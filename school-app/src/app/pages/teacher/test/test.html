@@ -1,0 +1,42 @@
+<div
+  ba-panel
+  ba-panel-class="horizontal-tabs tabs-panel tab-purchase">
+  <uib-tabset active="$tabSetStatus.activeTab">
+    <div class="panel-heading" style="float: right; height: 40px; box-shadow: none; border-left: 1px solid #ffffff; border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-edit"></i></div>
+    <div class="panel-heading" style="float: right; height: 40px; box-shadow: none; border-left: 1px solid #ffffff; border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-checkmark-outline"></i></div>
+    <div class="panel-heading" style="float: right; height: 40px; box-shadow: none; border-left: 1px solid #ffffff; border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-close-outline"></i></div>
+  </uib-tabset>
+  <div">
+    <div style="padding: 10px; float: left; width: 100%;">
+      <div class="form-group col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12" style="margin-bottom: 0px;">
+        <label for="inputFirstName">{{'class' | translate}}:</label>
+        <select class="form-control" ng-options="class as class.name for class in listClass" ng-model="class" ng-required="true"></select>
+      </div>
+      <div class="form-group col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12" style="margin-bottom: 0px;">
+        <label for="inputFirstName">{{'subject' | translate}}:</label>
+        <select class="form-control" ng-options="subject as subject.name for subject in listSubject" ng-model="subject" ng-required="true"></select>
+      </div>
+    </div>
+      <!-- <div class="col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12">
+        <button class="btn btn-primary" ng-click="goToCreateReceipt()" style="margin-bottom: 5px; float: right">{{"button.create" | translate}}</button>
+      </div> -->
+    <div style=" float: left; width: 100%;" class="horizontal-scroll">
+      <div class="w100 fl black-muted-bg" >
+        <div class="fl w30 title-test ">Học sinh</div>
+        <div class="fl w30 title-test text-center">Điểm hệ số 1</div>
+        <div class="fl w30 title-test text-center">Điểm hệ số 2</div>
+        <div class="fl w10 text-center" style="padding: 10px 15px;">Điểm HK</div>
+      </div>
+    </div>
+    <div style=" float: left; width: 100%;" class="horizontal-scroll">
+      <table class="table table-hover">
+        <tbody>
+        <tr ng-repeat="group in listGroup" class="no-top-border">
+          <td>{{group.name}}</td>
+          <td style="cursor: pointer" ng-click="editGroup(group)"><i class="ion-edit"></i></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

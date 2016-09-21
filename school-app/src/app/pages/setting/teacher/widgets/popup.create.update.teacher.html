@@ -1,0 +1,56 @@
+<div class="modal-content" style="margin-top: 10%;">
+  <div class="modal-header bg-warning">
+    <span>Phụ huynh</span>
+  </div>
+  <div class="modal-body text-center">
+  	<div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Họ</label>
+          <input ng-model="teacher.last_name" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Tên</label>
+          <input ng-model="teacher.name" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Số điện thoại</label>
+          <input ng-model="teacher.work_phone" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Email</label>
+          <input ng-model="teacher.work_email" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="inputLastName" style="font-weight: bold;">Ngày sinh</label>
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="teacher.birthday" is-open="popup1.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Tên đăng nhập</label>
+          <input ng-model="teacher.username" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="acceptTeacher()">{{"button.accept" | translate}}</button>
+  </div>
+</div>
