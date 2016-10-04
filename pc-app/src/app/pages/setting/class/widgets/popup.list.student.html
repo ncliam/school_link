@@ -1,0 +1,29 @@
+<div class="modal-content" style="margin-top: 10%;">
+  <div class="modal-header bg-warning">
+    <span>Danh sách học sinh</span>
+  </div>
+  <div class="modal-body text-center">
+    <div class="horizontal-scroll">
+      <table class="table table-hover">
+        <thead>
+        <tr class="black-muted-bg">
+          <th style="text-align: left">Tên</th>
+          <th>Ngày sinh</th>
+          <th>Địa chỉ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-click="addStudent(student)" ng-repeat="student in listStudentSeach">
+          <td style="text-align: left">{{student.last_name}} {{student.name}}</td>
+          <td>{{student.birthday}}</td>
+          <td>{{student.address_home}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+   <!--  <button type="button" class="btn btn-primary" ng-click="changePassword()">{{"button.accept" | translate}}</button> -->
+  </div>
+</div>

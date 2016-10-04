@@ -1,0 +1,29 @@
+<div
+  ba-panel
+  ba-panel-class="horizontal-tabs tabs-panel tab-purchase">
+  <uib-tabset active="$tabSetStatus.activeTab">
+    <div class="panel-heading" ng-click="gotoDetailSchedule()" style="float: right; height: 40px; box-shadow: none; border-bottom: none; border-left: 1px solid #fffffff;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-plus-outline"></i></div>
+  </uib-tabset>
+  <div">
+    <div style=" float: left; width: 100%;" class="horizontal-scroll">
+      <table class="table table-hover">
+        <thead>
+        <tr class="black-muted-bg">
+          <th style="font-weight: 600">Ghi chú</th>
+          <th style="font-weight: 600">Lớp</th>
+          <th style="font-weight: 600">Học kì</th>
+          <th style="font-weight: 600"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="schedule in listSchedule" class="no-top-border">
+          <td>{{schedule.name}}</td>
+          <td>{{schedule.class_id[1]}}</td>
+          <td>{{schedule.semester}}</td>
+           <td style="cursor: pointer; text-align: right;" ng-click="gotoDetailSchedule(schedule)"><i class="ion-edit"></i></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

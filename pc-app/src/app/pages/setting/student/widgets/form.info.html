@@ -1,0 +1,42 @@
+<div style="text-align: center;">
+  <img style="border: 1px solid #ddd; padding: 10px; max-width: 80px;" ngf-select ng-model="image.src" accept="image/*" ngf-src="image.src">
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="inputFirstName" style="font-weight: bold;">Họ</label>
+      <input ng-model="student.last_name" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="inputLastName" style="font-weight: bold;">Tên</label>
+      <input ng-model="student.name" type="text" class="form-control">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label for="inputFirstName" style="font-weight: bold;">Quê quán</label>
+      <input ng-model="student.home_town" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label for="inputLastName" style="font-weight: bold;">Nơi ở hiện tại</label>
+      <input ng-model="student.home_address" type="text" class="form-control">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <label for="inputLastName" style="font-weight: bold;">Ngày sinh</label>
+    <p class="input-group">
+      <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="student.birthday" is-open="popup1.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+  </div>
+</div>

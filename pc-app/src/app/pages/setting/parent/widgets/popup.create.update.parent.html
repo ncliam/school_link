@@ -1,0 +1,58 @@
+<div class="modal-content" style="margin-top: 10%;">
+  <div class="modal-header bg-warning">
+    <span>Phụ huynh</span>
+  </div>
+  <div class="modal-body text-center">
+  	<div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">{{'name' | translate}}</label>
+          <input ng-model="parent.name" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Số điện thoại</label>
+          <input ng-model="parent.mobile" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Email</label>
+          <input ng-model="parent.email" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Địa chỉ</label>
+          <input ng-model="parent.street" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label style="margin-top: 15px;" for="inputFirstName">Vai trò</label>
+          <tags-input class="tag-parent" style="float: right; width: 90%" ng-model="listCategoryOfParner" 
+            display-property="complete_name" 
+            placeholder="Thêm vai trò" 
+            replace-spaces-with-dashes="false"
+            template="tag-template">
+            <auto-complete source="listCategoryForSearch"
+               min-length="0"
+               load-on-focus="true"
+               load-on-empty="true"
+               max-results-to-show="32"
+               template="autocomplete-template"></auto-complete>
+          </tags-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="acceptParent()">{{"button.accept" | translate}}</button>
+  </div>
+</div>

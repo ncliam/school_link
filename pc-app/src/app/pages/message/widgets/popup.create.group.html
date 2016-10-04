@@ -1,0 +1,83 @@
+<div class="modal-content" style="margin-top: 10%;">
+  <div class="modal-header bg-warning">
+    <span>Tin nhắn mới</span>
+  </div>
+  <div class="modal-body text-center">
+      <div style="float: left; width: 100%; margin-bottom: 10px;">
+        <label style="float: left;">Chọn lớp</label>
+        <select style="float: right; width: 80%" ng-change="changeClass()" class="form-control" ng-options="class.id as class.name for class in listClass" ng-model="chooseClass.id" ng-required="true"></select>
+      </div>
+  	<div class="row">
+      <div class="col-sm-12">
+        <tags-input ng-model="listUserAddNewChannel" 
+          display-property="name" 
+          placeholder="Thêm thành viên" 
+          replace-spaces-with-dashes="false"
+          template="tag-template">
+          <auto-complete source="listUserForSearch"
+             min-length="0"
+             load-on-focus="true"
+             load-on-empty="true"
+             max-results-to-show="32"
+             template="autocomplete-template"></auto-complete>
+        </tags-input>
+      </div>
+    </div>
+    <div class="checkbox" style="overflow: hidden; ">
+      <div class="col-sm-4">
+        <label class="custom-checkbox">
+          <input type="checkbox" ng-model="searchForm.teacher">
+          <span>Giáo viên</span>
+        </label>
+      </div>
+      <div class="col-sm-4">
+        <label class="custom-checkbox">
+          <input type="checkbox" ng-model="searchForm.parent">
+          <span>Phụ huynh</span>
+        </label>
+      </div>
+      <div class="col-sm-4">
+        <label class="custom-checkbox">
+          <input type="checkbox" ng-model="searchForm.groupParent">
+          <span>Ban phụ huynh</span>
+        </label>
+      </div>
+    </div>
+    <div class="horizontal-scroll w100" style="float: left; margin-bottom: 10px">
+      <table class="table table-hover">
+        <thead>
+        <tr class="black-muted-bg">
+          <th style="text-align: left">Tên</th>
+          <th>Số điện thoại</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-if="searchForm.teacher" ng-click="adduserForChannel(teacher)" ng-repeat="teacher in listTeacher">
+          <td style="text-align: left">{{teacher.last_name}} {{teacher.name}}</td>
+          <td style="text-align: left">{{teacher.work_phone}}</td>
+          <td style="text-align: left"></td>
+        </tr>
+        <tr ng-if="searchForm.parent" ng-click="adduserForChannel(parent)" ng-repeat="parent in listParent">
+          <td style="text-align: left">{{parent.name}}</td>
+          <td style="text-align: left">{{parent.mobile}}</td>
+          <td style="text-align: left">{{listStudent[parent.children[0]][0].name}}</td>
+        </tr>
+        <tr ng-if="searchForm.groupParent" ng-click="adduserForChannel(parent)" ng-repeat="parent in listParentGroup">
+          <td style="text-align: left">{{parent.name}}</td>
+          <td style="text-align: left">{{parent.mobile}}</td>
+          <td style="text-align: left">{{listStudent[parent.children[0]][0].name}}</td>
+        </tr>
+        <!-- <tr ng-click="addUser(user)" ng-repeat="user in listParentGroup">
+          <td style="text-align: left">{{user.last_name}} {{user.name}}</td>
+          <td style="text-align: left">{{user.work_phone}} {{user.mobile}}</td>
+        </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="createChannel()">{{"button.accept" | translate}}</button>
+  </div>
+</div>

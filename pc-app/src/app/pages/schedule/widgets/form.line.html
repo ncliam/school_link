@@ -1,0 +1,22 @@
+<div style="padding-left: 5px; padding-right: 5px; margin-top: 10px; float: left; width: 100%;">
+	<div class="w100 fl black-muted-bg table-line" style="border-bottom: 1px solid gray; border-top: 1px solid gray">
+    <div class="fl w1428 title-line text-center" ng-click="openPopupCreateLine(day)" ng-repeat="day in weekDay">{{day.name}} <i style="font-size: 18px; color: #4db1a7;" class="ion-ios-plus-outline"></i></div>
+  </div>
+  <div class="w100 fl table-line">
+    <div class="fl w1428 title-line-detail text-center" ng-repeat="day in weekDay">
+    	<div class="horizontal-scroll">
+			  <table class="table table-hover">
+			    <tbody>
+				    <tr ng-click="openPopupCreateLine(day, line)" style="border-top: 1px solid gray;" ng-repeat="line in scheduleLineShow[day.value]">
+				      <td ng-hide="line.delete" style="padding: none !important; border-top:none;">
+				      	<div class="w100 fl"><strong>{{line.subjectShow}}</strong></div>
+				      	<div class="w100 fl">{{line.beginShow}} - {{line.endShow}}</div>
+				      	<div class="w100 fl">{{line.teacherShow}}</div>
+				      </td>
+				    </tr>
+			    </tbody>
+			  </table>
+			</div>
+    </div>
+  </div>
+</div>

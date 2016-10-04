@@ -1,0 +1,24 @@
+{
+  "name": "School-Link",
+  "main": "./index.html",
+  "version": "1.0.0",
+  "single-instance": true,
+  "window": {
+    "title": "School-Link application",
+    "width": 650,
+    "height": 650,
+    "min_width": 650,
+    "min_height": 650,
+    "toolbar": false,
+    "icon": "./ic_odoo.png"
+  },
+  "chromium-args": "--child-clean-exit",
+  "dependencies": {
+    "app-root-path": "^1.3.0",
+    "jayson": "^2.0.1",
+    "odoo": "^0.4.0",
+    "xlsx-template": "0.0.3",
+    "elementtree": "0.1.5",
+    "moment": "2.7.0"
+  }
+}

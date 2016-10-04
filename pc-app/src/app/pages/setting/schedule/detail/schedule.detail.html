@@ -1,0 +1,32 @@
+
+<div class="panel panel-primary bootstrap-panel">
+  <div class="panel-heading" style="height: auto;">
+    <a style="color: #ffffff; margin-right: 8px;" href="#/setting/schedule/list"><i style="font-size: 20px;" class="ion-ios-undo"></i></a>
+    <a style="color: #ffffff; margin-right: 8px; float: right; cursor: pointer;" ng-click="saveSchedule()"><i style="font-size: 20px;" class="ion-ios-checkmark-outline"></i></a>
+  </div>
+  <div class="panel-body" style="min-height: 600px;">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="inputFirstName" style="font-weight: bold;">Ghi chú</label>
+          <input ng-model="schedule.name" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="inputLastName" style="font-weight: bold;">Lớp</label>
+          <select style="float: left; width: 100%" class="form-control" ng-options="class.id as class.name for class in listClass" ng-model="schedule.class_id" ng-required="true"></select>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="inputLastName" style="font-weight: bold;">Học kì</label>
+          <select style="float: left; width: 100%" class="form-control" ng-options="semester.id as semester.name for semester in listSemester" ng-model="schedule.semester_id" ng-required="true"></select>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="padding-right: 0px;">
+      <div ng-include="'app/pages/setting/schedule/widgets/form.line.html'"></div>
+    </div>
+  </div>
+</div>

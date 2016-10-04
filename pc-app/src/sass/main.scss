@@ -1,0 +1,389 @@
+@import 'common';
+
+// injector
+// endinjector
+.body_login{
+	content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #30453F;
+    background-size: cover;
+    will-change: transform;
+    z-index: -1;
+}
+.auth-main{
+	width: 75%;
+  margin: 10% auto;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 32px;
+  max-width: 450px;
+}
+
+.auth-block {
+  h1 {
+    font-weight: $font-light;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  p {
+    font-size: 16px;
+  }
+  a {
+    text-decoration: none;
+    outline: none;
+    transition: all 0.2s ease;
+    color: #209e91;
+    &:hover {
+      color: #1b867b;
+    }
+  }
+
+  .control-label {
+    padding-top: 11px;
+    color: #fff;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+}
+
+.auth-input {
+  width: 300px;
+  margin-bottom: 24px;
+  input {
+    display: block;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    padding: 4px 10px;
+    outline: none;
+  }
+}
+
+a.forgot-pass {
+  display: block;
+  text-align: right;
+  margin-bottom: -20px;
+  float: right;
+  z-index: 2;
+  position: relative;
+}
+
+.auth-link {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 33px;
+}
+
+.auth-sep {
+  margin-top: 36px;
+  margin-bottom: 24px;
+  line-height: 20px;
+  font-size: 16px;
+  text-align: center;
+  display: block;
+  position: relative;
+  & > span {
+    display: table-cell;
+    width: 30%;
+    white-space: nowrap;
+    padding: 0 24px;
+    color: #fff;
+    & > span {
+      margin-top: -12px;
+      display: block;
+    }
+  }
+  &:before, &:after {
+    border-top: solid 1px #fff;
+    content: "";
+    height: 1px;
+    width: 35%;
+    display: table-cell;
+  }
+}
+
+.al-share-auth {
+  text-align: center;
+  .al-share {
+    float: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    li {
+      margin-left: 24px;
+      &:first-child {
+        margin-left: 0;
+      }
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.btn-auth {
+  color: #ffffff!important;
+}
+.m0{
+  margin: 0px !important;
+}
+#loading-bar .bar {
+background: #33ba3a;
+height: 4px;
+}
+
+#loading-bar-spinner .spinner-icon {
+width: 18px;
+height: 18px;
+border: solid 4px transparent;
+border-top-color: #cadd22;
+border-left-color: #cadd22;
+border-radius: 10px;
+}
+.btnProduct{
+  width: calc((100% - 40px)/5) !important;
+  height: calc((100% - 160px)/5) !important;
+  float: left;
+  margin-right: 4px;
+  margin-left: 4px;
+  margin-bottom: 8px;
+}
+.css-m-button-blue{
+  background: -webkit-linear-gradient(#47A6B7, #128BA2);
+  background: -o-linear-gradient(#47A6B7, #128BA2);
+  background: -moz-linear-gradient(#47A6B7, #128BA2);
+  background: linear-gradient(#47A6B7, #128BA2);
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 10px 2px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  min-height: 30px;
+}
+.sale .panel-body{
+  padding: 8px 4px !important;
+}
+.form-control[disabled]{
+  color: #666666 !important;
+  border: none;
+}
+.tab-purchase .tab-content{
+  padding: 0px !important;
+}
+
+.angucomplete-holder {
+    position: relative;
+}
+
+.angucomplete-dropdown {
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    width: 100%;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 9999;
+    position: absolute;
+    top: 44px;
+    left: 0px;
+    margin-top: -6px;
+    background-color: #ffffff;
+     overflow: auto;
+    height: 200px;
+}
+
+.angucomplete-searching {
+    color: #acacac;
+    font-size: 14px;
+}
+
+.angucomplete-description {
+    font-size: 14px;
+    color: red;
+}
+
+.angucomplete-row {
+    padding: 5px;
+    color: #000000;
+    margin-bottom: 4px;
+    clear: both;
+}
+
+.angucomplete-selected-row {
+    background-color: lightblue;
+    color: #ffffff;
+}
+
+.angucomplete-image-holder {
+    padding-top: 2px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.angucomplete-image {
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    border-color: #ececec;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.angucomplete-image-default {
+    /* Add your own default image here
+     background-image: url('/assets/default.png');
+    */
+    background-position: center;
+    background-size: contain;
+    height: 34px;
+    width: 34px;
+}
+.highlight {
+  transition: all linear 1200ms;
+}
+.highlight.ng-enter {
+  opacity: 0;
+  color: red;
+}
+.highlight.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+li[disabled] {
+    pointer-events: none;
+}
+.w5{width: 5%;}
+.w10{width: 10%;}
+.w1428{width: 14.28%;}
+.w15{width: 15%;}
+.w20{width: 20%;}
+.w25{width: 25%;}
+.w30{width: 30%;}
+.w35{width: 35%;}
+.w40{width: 40%;}
+.w45{width: 45%;}
+.w50{width: 50%;}
+.w55{width: 55%;}
+.w60{width: 60%;}
+.w65{width: 65%;}
+.w70{width: 70%;}
+.w75{width: 75%;}
+.w80{width: 80%;}
+.w85{width: 85%;}
+.w90{width: 90%;}
+.w95{width: 95%;}
+.w100{width: 100%;}
+.fl{float: left;}
+.title-test {
+  padding: 10px 15px;
+  border-right: 2px solid #ddd;
+}
+.title-line {
+  padding: 10px 15px;
+  border-right: 1px solid #ddd;
+}
+.title-line-detail {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+.table-line .title-line-detail:first-child{
+  border-left: 1px solid #ddd;
+}
+.table-line .title-line:first-child{
+  border-left: 1px solid #ddd;
+}
+.oh{overflow: hidden;}
+.br2{border-right: 2px solid #ddd;}
+.br1{border-right: 1px solid #ddd;}
+.input-mark{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0px;
+  border-bottom: 1px solid #ddd;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+}
+.pb5{padding-bottom: 5px;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.online{
+  background: #90b900;
+}
+.offline{
+  background: #827f7f;
+}
+.away{
+  background: #dfb81c;
+}
+.active{
+  background: rgba(0, 0, 0, 0.1);
+}
+.textBold{
+  font-weight: bold;
+}
+.tag-template .left-panel {
+  float: left;
+}
+
+.tag-template .left-panel img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.tag-template .right-panel {
+  float: left;
+  margin-left: 5px;
+}
+
+.autocomplete-template .left-panel {
+  float: left;
+}
+
+.autocomplete-template .left-panel img {
+  width: 48px;
+  height: 48px;
+  vertical-align: middle;
+}
+
+.autocomplete-template .right-panel {
+  float: left;
+  margin-left: 5px;
+  margin-top: 7px;
+}
+
+.autocomplete-template .right-panel span:first-child {
+  font-size: 16px;
+}
+
+.autocomplete-template .right-panel span:nth-child(2) {
+  font-size: 14px;
+  color: gray;
+}
+
+.autocomplete-template .right-panel span:last-child {
+  display: block;
+  font-size: 14px;
+  font-style: italic;
+}
+
+tags-input .autocomplete .suggestion-item.selected{
+  background: #fff !important;
+}
