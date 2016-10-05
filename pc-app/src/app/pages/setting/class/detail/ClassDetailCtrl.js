@@ -26,6 +26,7 @@
       opened: false
     };
     var modalListStudent;
+    var modalListStudentFileCsv;
 
     $scope.serialNumber = {};
     var _init = function(){
@@ -42,6 +43,16 @@
       $SchoolClassGroup.getAllClassGroup({}, function(result){
         $scope.listGroup  = result.records;
       }, function(error){});
+    };
+    $scope.csv = {
+      content: null,
+      header: true,
+      headerVisible: true,
+      separator: ',',
+      separatorVisible: true,
+      result: null,
+      encoding: 'UTF-8',
+      encodingVisible: true,
     };
 
     $scope.open1 = function() {
@@ -120,6 +131,14 @@
         scope: $scope
       });
     };
+    $scope.openPopupListStudentFileCsv = function () {
+      modalListStudentFileCsv = $uibModal.open({
+        animation: true,
+        size: "lg",
+        templateUrl: "app/pages/setting/class/widgets/popup.csv.html",
+        scope: $scope
+      });
+    };
 
     $scope.addStudent = function(student){
       var existStudent = _.find($scope.listStudent, function(stu){
@@ -137,6 +156,15 @@
       $scope.listStudent = _.reject($scope.listStudent, function(stu){
         return stu.id === student.id;
       });
+    };
+
+    $scope.choosefile = function(){
+      console.log($scope.csvFile);    
+    };
+
+    var _lastGoodResult = '';
+    $scope.chooseFile = function () {
+      $scope.openPopupListStudentFileCsv();
     };
 
   }

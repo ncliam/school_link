@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function ClassCreateCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $translate, $Schoolarity, $SchoolClassGroup, $SchoolClass, 
-    $Student) {
+    $Student, $Parent) {
     $scope.class = {};
     $scope.listGroup = [];
     $scope.listSchoolarity =[];
@@ -33,6 +33,18 @@
     $scope.listStudent = [];
     $scope.listStudentSeach;
     var modalListStudent;
+    var modalListStudentFileCsv;
+    $scope.csv = {
+      content: null,
+      header: true,
+      headerVisible: true,
+      separator: ',',
+      separatorVisible: true,
+      result: null,
+      encoding: 'UTF-8',
+      encodingVisible: true,
+    };
+
     var _init = function(){
       $Schoolarity.getAllSchoolarity({}, function(result){
         $scope.listSchoolarity  = result.records;
@@ -98,6 +110,15 @@
       });
     };
 
+    $scope.openPopupListStudentFileCsv = function () {
+      modalListStudentFileCsv = $uibModal.open({
+        animation: true,
+        size: "lg",
+        templateUrl: "app/pages/setting/class/widgets/popup.csv.html",
+        scope: $scope
+      });
+    };
+
     $scope.addStudent = function(student){
       var existStudent = _.find($scope.listStudent, function(stu){
         return stu.id === student.id;
@@ -115,6 +136,53 @@
         return stu.id === student.id;
       });
     };
+
+    $scope.chooseFile = function () {
+      console.log($scope.csv.result);
+      $scope.openPopupListStudentFileCsv();
+    };
+
+    $scope.createListStudent = function(){
+      var listParent = [];
+      var listStudent = [];
+      $scope.csv.result.forEach(function(line){
+        if(line.parent_name && line.parent_name.length > 0){
+          listParent.push({
+            name: line.parent_name || false,
+            mobile: line.parent_mobile || false,
+            street: line.home_address || false,
+            active: true,
+            customer: true,
+            index: line.index,
+            email: false
+          });
+        }
+        listStudent.push({
+          index: line.index,
+          name: line.name || false,
+          last_name: line.last_name || false,
+          home_town: line.home_town || false,
+          home_address: line.home_address || false,
+          birthday: line.birthday.length > 0 ? moment(line.birthday, 'DD-MM-YYYY').format('YYYY-MM-DD'): false,
+          student: true/*,
+          parent_ids: [[6, false, info.parent_ids]]*/
+        });
+      });
+      $Parent.createListParent({listParent: listParent}, function(resultParent){
+        for(var i = 0; i< listParent.length; i++){
+          listParent[i].id = resultParent[i];
+          var existStudent = _.find(listStudent, function(student){
+            return student.index === listParent[i].index;
+          });
+          if(existStudent){
+            existStudent.parent_ids = [[6, false, [listParent[i].id]]];
+          }
+        };
+        $Student.createListStudent({listStudent: listStudent}, function(resultStudent){
+
+        }, function(error){});
+      }, function(error){});
+    }
   }
 
 })();

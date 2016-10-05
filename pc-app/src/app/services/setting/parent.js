@@ -156,6 +156,19 @@
         sid: _self.user.sid
       }
       $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
+    this.createListParent = function(info, callbackSuccess, callbackError){
+      var path ="/api/callKw";
+      var param = {
+        model: _self.model,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"create_multi",
+        args: [info.listParent]
+      };
+      $request.postRequest(path, param, callbackSuccess, callbackError);
     }
 
   }

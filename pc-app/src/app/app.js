@@ -23,6 +23,7 @@ angular.module('BlurAdmin', [
   'luegg.directives',
   'ngTagsInput',
   'angularSpinner',
+  'ngCsvImport',
 
   'BlurAdmin.theme',
   'BlurAdmin.pages',

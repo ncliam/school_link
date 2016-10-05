@@ -32,6 +32,7 @@
           }
           _self.poll();
         }, function(error){
+          _self.poll();
           console.log(error);
         });
       } else{

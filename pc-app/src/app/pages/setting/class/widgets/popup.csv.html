@@ -1,0 +1,37 @@
+<div class="modal-content" style="margin-top: 10%;">
+  <div class="modal-header bg-warning">
+    <span>Tạo danh sách học sinh từ file</span>
+  </div>
+  <div class="modal-body text-center">
+    <div class="horizontal-scroll">
+      <table class="table table-hover">
+        <thead>
+        <tr class="black-muted-bg">
+          <th style="text-align: left">Họ</th>
+          <th>Tên</th>
+          <th>Nơi sinh</th>
+          <th>Nơi ở</th>
+          <th>Ngày sinh</th>
+          <th>Phụ huynh</th>
+          <th>SĐT phụ huynh</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="student in csv.result">
+          <td style="text-align: left">{{student.last_name}}</td>
+          <td style="text-align: left">{{student.name}}</td>
+          <td style="text-align: left">{{student.home_town}}</td>
+          <td style="text-align: left">{{student.home_address}}</td>
+          <td style="text-align: left">{{student.birthday}}</td>
+          <td style="text-align: left">{{student.parent_name}}</td>
+          <td style="text-align: left">{{student.parent_mobile}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="createListStudent()">{{"button.accept" | translate}}</button>
+  </div>
+</div>
