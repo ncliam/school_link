@@ -20,7 +20,7 @@
         title: 'menu.teacher',
         sidebarMeta: {
           icon: 'ion-compose',
-          order: 150,
+          order: 100,
         },
       });
   }

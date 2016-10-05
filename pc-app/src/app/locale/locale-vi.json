@@ -38,5 +38,7 @@
 	"year.require": "Phải chọn năm học",
 	"menu.setting.parent": "Phụ huynh",
 	"menu.setting.teacher": "Giáo viên",
-	"menu.setting.schedule": "Lịch học"
+	"menu.setting.schedule": "Thời khóa biểu",
+	"first": "Học kì 1",
+	"second": "Học kì 2"
 }

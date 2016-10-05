@@ -1,11 +1,21 @@
 <div class="" style="padding-left: 5px; padding-right: 5px;" ng-show="!flagEdit">
-	<div class="search" style="margin: 0px; border-radius: 4px; background: #ffffff; padding: 2px; width: 100%; border: 1px solid gray;">
+	<div class="search" style="margin: 0px; border-radius: 4px; background: #ffffff; padding: 2px; width: 50%; border: 1px solid gray;">
 	  <i style="color: #000000;" class="ion-ios-search-strong" ng-click="startSearch()"></i>
 	  <input ng-model="keySearch.value" ng-keydown="$event.which === 13 && startSearch()" id="searchInput" type="text" placeholder="{{'search.student' | translate}}" style="width: 90%; color: #000000;">
 	</div>
-	<!-- <div class="" style="margin-left: 10px; float: left">
-	    <button type="button" class="btn btn-primary btn-sm" ng-click="openPopupCreateProduct()"><i class="ion-android-add" style="font-size: 14px;"></i></button>
-	</div> -->
+	<div>
+      <ng-csv-import 
+        class="import"
+        content="csv.content"
+        header="csv.header" 
+        header-visible="csv.headerVisible" 
+        separator="csv.separator"
+        separator-visible="csv.separatorVisible"
+        result="csv.result"
+        encoding="csv.encoding"
+        encoding-visible="csv.encodingVisible"
+        callback="chooseFile" style="margin-left: 20px; float: right"></ng-csv-import>
+    </div>
 </div>
 <div style="padding-left: 5px; padding-right: 5px; margin-top: 10px; float: left; width: 100%;">
 	<div class="horizontal-scroll">

@@ -17,7 +17,7 @@
         templateUrl: 'app/pages/schedule/schedule.html',
         title: 'menu.setting.schedule',
         sidebarMeta: {
-          order: 100,
+          order: 50,
           icon: 'ion-compose'
         },
         controller: "ScheduleCtrl"

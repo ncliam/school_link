@@ -1,8 +1,9 @@
 <div
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase" ng-init="editSave = false">
-  <uib-tabset active="$tabSetStatus.activeTab">
+  <uib-tabset active="$tabSetStatus.activeTab" class="tac">
     <div ng-show="!editSave" ng-click="editForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-edit"></i></div>
+    <label style="color: #fff;margin-top: 10px;">Bảng điểm</label>
     <div ng-show="editSave" ng-click="saveExam()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none; border-left: 1px solid #fff;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-checkmark-outline"></i></div>
     <div ng-show="editSave" ng-click="cancelEditForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-close-outline"></i></div>
   </uib-tabset>

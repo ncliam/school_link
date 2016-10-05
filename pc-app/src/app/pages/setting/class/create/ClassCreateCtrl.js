@@ -179,7 +179,11 @@
           }
         };
         $Student.createListStudent({listStudent: listStudent}, function(resultStudent){
-
+          for(var i =0; i< listStudent.length; i++){
+            listStudent[i].id = resultStudent[i];
+          };
+          $scope.listStudent = $scope.listStudent.concat(listStudent);
+          modalListStudentFileCsv.dismiss('cancel');
         }, function(error){});
       }, function(error){});
     }

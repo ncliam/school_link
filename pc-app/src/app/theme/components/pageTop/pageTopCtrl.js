@@ -10,8 +10,8 @@
 
   /** @ngInject */
   function PageTopCtrl($scope, $account, $state, localStorageService, $Imchat, $resUser) {
+    $scope.user = localStorageService.get("user");
     $scope.logout = function(){
-      $scope.user = localStorageService.get("user");
       $Imchat.updateStatusUser({id:$scope.user.presense_id ,status: "offline"}, function(result){
         $account.logout({}, function(success){
           $scope.user.login = false;

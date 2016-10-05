@@ -26,7 +26,7 @@
         title: 'menu.setting',
         sidebarMeta: {
           icon: 'ion-compose',
-          order: 100,
+          order: 150,
         },
       });
   }

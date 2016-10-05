@@ -48,14 +48,12 @@
         $rootScope.$pageLogin = false;
         $state.go("message");
         toastr.success($translate.instant('login.success'), "", {});
-
+        $Imchat.getPresenseByUserId({}, function(result){
+          info.presense_id = result.records[0].id;
+          localStorageService.set("user", info);
+          $Imchat.updateStatusUser({id:info.presense_id ,status: "online"}, function(result){}, function(error){});
+        }, function(error){})
         $Longpolling.poll();
-
-        /*$report.getReportSaleDetail({date_start: "07/22/2016", date_end: "07/26/2016"}, function(success){
-
-        }, function(error){
-
-        });*/
       }, function(error){
         toastr.error($translate.instant('login.error.body'), $translate.instant('login.error.title'), {})
       });
