@@ -2,10 +2,10 @@
   <a href="#/dashboard" class="al-logo clearfix">SchoolLink</a>
   <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
 
-  <div class="search">
+  <!-- <div class="search">
     <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
     <input id="searchInput" type="text" placeholder="Search for...">
-  </div>
+  </div> -->
 
   <div class="user-profile clearfix">
     <span style="color: #ffffff; float: right; margin: 15px 5px 0px 0px;">{{user.username}}</span>
@@ -15,9 +15,9 @@
       </a>
       <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
         <li><i class="dropdown-arr"></i></li>
-       <!--  <li><a href="#/profile"><i class="fa fa-user"></i>Profile</a></li>
-       <li><a href><i class="fa fa-cog"></i>Settings</a></li> -->
-        <li><a href ng-click="logout()" class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
+        <li><a href ng-click="openChangePassword()"><i class="fa fa-user"></i>Đổi mật khẩu</a></li>
+       <!-- <li><a href><i class="fa fa-cog"></i>Settings</a></li> -->
+        <li><a href ng-click="logout()" class="signout"><i class="fa fa-power-off"></i>Đăng xuất</a></li>
       </ul>
     </div>
     <!-- <msg-center></msg-center> -->

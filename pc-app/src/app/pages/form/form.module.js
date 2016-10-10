@@ -19,6 +19,7 @@
           sidebarMeta: {
             icon: 'ion-compose',
             order: 250,
+            permission: 1
           },
         })
         .state('form.inputs', {

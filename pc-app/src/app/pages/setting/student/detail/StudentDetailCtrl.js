@@ -9,7 +9,7 @@
     .controller('StudentDetailCtrl', StudentDetailCtrl);
 
   /** @ngInject */
-  function StudentDetailCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $Student, $Parent) {
+  function StudentDetailCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $Student, $Parent, $Error) {
     localStorageService.get("chooseStudent") ? $scope.student = localStorageService.get("chooseStudent") :  $scope.student = {};
     $scope.student.birthday? $scope.student.birthday =  new Date($scope.student.birthday) : $scope.student.birthday = "";
     $scope.listParent = [];
@@ -28,7 +28,7 @@
       if($scope.student.id && $scope.student.parent_ids.length > 0){
         $Parent.getListParentByIds($scope.student, function(result){
           $scope.listParent = result;
-        }, function(error){})
+        }, function(error){$Error.callbackError(error);})
       }
     };
 
@@ -70,7 +70,7 @@
             $scope.openPopupListParent();
           }
         }
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
     };
 
     $scope.openPopupListParent = function () {
@@ -124,7 +124,7 @@
         toastr.success("Tạo học sinh thành công", "", {});
         $state.go("setting.student.list");
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
 

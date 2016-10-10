@@ -30,7 +30,7 @@
           callbackSuccess(null);
         } else{
           if(data.result.error){
-            callbackError(data.error);
+            callbackError(data.result);
           } else{
             callbackSuccess(data.result);
           }

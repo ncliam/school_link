@@ -12,8 +12,8 @@
   function error($request, $http, localStorageService, toastr, $translate) {
     var _self = this;
     this.callbackError = function(error){
-      console.log(error);
-      //toastr.error($translate.instant('login.error.body'), $translate.instant('login.error.title'), {})
+      //console.log(error);
+        toastr.error(error.message, "Lỗi", {});
     }
   }
 })();

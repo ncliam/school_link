@@ -9,11 +9,13 @@
     .controller('BaSidebarCtrl', BaSidebarCtrl);
 
   /** @ngInject */
-  function BaSidebarCtrl($scope, baSidebarService) {
-
+  function BaSidebarCtrl($scope, baSidebarService, localStorageService, MultipleViewsManager) {
     $scope.menuItems = baSidebarService.getMenuItems();
+    $scope.user = localStorageService.get("user");
     $scope.defaultSidebarState = $scope.menuItems[0].stateRef;
-
+    MultipleViewsManager.updated('user', function (data) {
+      $scope.user = localStorageService.get("user");
+    });
     $scope.hoverItem = function ($event) {
       $scope.showHoverElem = true;
       $scope.hoverElemHeight =  $event.currentTarget.clientHeight;

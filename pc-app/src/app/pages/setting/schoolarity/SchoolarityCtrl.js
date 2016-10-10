@@ -9,7 +9,7 @@
     .controller('SchoolarityCtrl', SchoolarityCtrl);
 
   /** @ngInject */
-  function SchoolarityCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, $ResGroup, toastr, $resUser) {
+  function SchoolarityCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, $ResGroup, toastr, $resUser, $Error) {
     $scope.listSchoolarity = [];
     var allHistory;
     $scope.popup1 = {
@@ -39,7 +39,7 @@
           schoolarity.date_start = moment(schoolarity.date_start).format("DD-MM-YYYY");
           schoolarity.date_end = moment(schoolarity.date_end).format("DD-MM-YYYY");
         })
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
     };
     _init();
 
@@ -77,7 +77,7 @@
         existSchoolarity.mobile = $scope.schoolarity.mobile;
         $scope.schoolarity = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
     var _createSchoolarity = function(){
@@ -89,7 +89,7 @@
         $scope.listSchoolarity.unshift(newSchoolarity);
         $scope.schoolarity = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
 

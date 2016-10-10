@@ -31,6 +31,7 @@
           sidebarMeta: {
             icon: 'ion-android-laptop',
             order: 200,
+            permission: 1
           },
         });
   }

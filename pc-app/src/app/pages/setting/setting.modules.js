@@ -25,8 +25,9 @@
         abstract: true,
         title: 'menu.setting',
         sidebarMeta: {
-          icon: 'ion-compose',
+          icon: 'ion-gear-a',
           order: 150,
+          permission: 2
         },
       });
   }

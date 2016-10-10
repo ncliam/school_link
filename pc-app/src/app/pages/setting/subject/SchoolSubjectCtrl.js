@@ -9,7 +9,7 @@
     .controller('SchoolSubjectCtrl', SchoolSubjectCtrl);
 
   /** @ngInject */
-  function SchoolSubjectCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolSubject, $uibModal, toastr, $translate) {
+  function SchoolSubjectCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolSubject, $uibModal, toastr, $translate, $Error) {
     $scope.listSubject = [];
     var allHistory;
     $scope.subject = {};
@@ -24,7 +24,7 @@
     var _init = function(){
     	$SchoolSubject.getAllSchoolSubject({}, function(result){
         $scope.listSubject  = result.records;
-      }, function(error){})
+      }, function(error){$Error.callbackError(error);})
     };
     _init();
 
@@ -61,7 +61,7 @@
         existSubject.weight = $scope.subject.weight;
         $scope.subject = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
     var _createSubject = function(){
@@ -73,7 +73,7 @@
         $scope.listSubject.unshift(newSubject);
         $scope.subject = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
 

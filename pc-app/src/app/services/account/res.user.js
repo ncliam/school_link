@@ -65,31 +65,36 @@
         sid: _self.user.sid
       }
       $request.postRequest(path, param, callbackSuccess, callbackError);
-    }
+    };
+
+    this.checkGroupForUser = function(info, callbackSuccess, callbackError){
+      var path ="/api/callKw";
+      var param = {
+        model: _self.model,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"has_group",
+        args: [info.group_name],
+        kwargs: {}
+      };
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
 
     this.changePassword = function(info, callbackSuccess, callbackError){
       var path ="/api/callKw";
       var param = {
-        model: "change.password.wizard",
+        model: _self.model,
         session_id: _self.user.session_id ,
         context: _self.user.context,
         sid: _self.user.sid,
-        method:"create",
+        method:"change_password",
         kwargs:{
-          context: _self.user.context
+          context: _self.user.context,
+          old_passwd: info.old_passwd,
+          new_passwd: info.new_passwd
         },
-        args:[
-          {user_ids:[
-            [
-              0, false,
-              {
-                user_login: info.user_login,
-                user_id: info.user_id,
-                new_passwd: info.new_passwd
-              }
-            ]
-          ]}
-        ]
+        args:[]
       };
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
@@ -145,7 +150,7 @@
           }
         ]
       };
-    $request.postRequest(path, param, callbackSuccess, callbackError);
+      $request.postRequest(path, param, callbackSuccess, callbackError);
     };
 
     this.signup = function(info, callbackSuccess, callbackError){
@@ -162,6 +167,20 @@
         }]
       };
       $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
+    this.getChatNameByUserId = function(info, callbackSuccess, callbackError){
+      var path ="/api/callKw";
+      var param = {
+        model: _self.model,
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"get_chat_name",
+        args: [
+          info.user_ids
+        ]
+      };
+    $request.postRequest(path, param, callbackSuccess, callbackError);
     }
   }
 })();

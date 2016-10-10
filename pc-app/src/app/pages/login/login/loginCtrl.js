@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function LoginCtrl($scope, $rootScope, $state, localStorageService, toastr, $translate, $account, $pouchDb, $Schoolarity, $SchoolSubject, $SchoolClassGroup, $Parent, $SchoolClass,
-    $School, $Student, $Teacher, $resUser, $Longpolling, $ResGroup, $Schedule, $Exam, $Imchat) {
+    $School, $Student, $Teacher, $resUser, $Longpolling, $ResGroup, $Schedule, $Exam, $Imchat, $Error, MultipleViewsManager) {
     $rootScope.$pageLogin = true;
     $scope.user = {
       email: "school",
@@ -46,16 +46,27 @@
         _setUserForService(info);
         _initDatabaseLocalForUser();
         $rootScope.$pageLogin = false;
-        $state.go("message");
         toastr.success($translate.instant('login.success'), "", {});
         $Imchat.getPresenseByUserId({}, function(result){
           info.presense_id = result.records[0].id;
           localStorageService.set("user", info);
           $Imchat.updateStatusUser({id:info.presense_id ,status: "online"}, function(result){}, function(error){});
-        }, function(error){})
+        }, function(error){$Error.callbackError(error);})
         $Longpolling.poll();
+        $resUser.checkGroupForUser({group_name: "school_link.group_school_admin"}, function(result){
+          if(result){
+            info.permission = 2;
+          } else{
+            info.permission = 1;
+          }
+          localStorageService.set("user", info);
+          $state.go("message");
+          MultipleViewsManager.updateView("user");
+        }, function(error){});
+
       }, function(error){
-        toastr.error($translate.instant('login.error.body'), $translate.instant('login.error.title'), {})
+        toastr.error($translate.instant('login.error.body'), $translate.instant('login.error.title'), {});
+        //$Error.callbackError(error);
       });
     };
     

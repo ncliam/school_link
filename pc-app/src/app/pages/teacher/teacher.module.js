@@ -21,6 +21,7 @@
         sidebarMeta: {
           icon: 'ion-compose',
           order: 100,
+          permission: 1
         },
       });
   }

@@ -22,7 +22,7 @@
         <tr ng-repeat="parent in listParent" class="no-top-border">
           <td>{{parent.name}}</td>
           <td>{{parent.mobile}}</td>
-          <td>{{parent.email}}</td>
+          <td><span ng-if="parent.email">{{parent.email}}</span></td>
           <td>{{parent.street}}</td>
           <td><span ng-repeat="cate in parent.category_id"> {{listCategoryByGroup[cate][0].complete_name}}</span></td>
            <td style="cursor: pointer; text-align: right;" ng-click="editParent(parent)"><i class="ion-edit"></i></td>

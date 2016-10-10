@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  angular.module('SchoolLink.pages.teacher.test')
+  angular.module('SchoolLink.pages.test')
     .controller('TestCtrl', TestCtrl);
 
   /** @ngInject */
@@ -23,6 +23,7 @@
     var listExamUpdate = [];
     var listExamDelete = [];
     var teacher_id;
+    var listStudentLocal = [];
     var _init = function(){
       $SchoolClass.getAllClass({}, function(result){
         $scope.listClass = result.records;
@@ -45,12 +46,14 @@
       if(existClass.student_ids.length > 0){
         $Student.getListStudentByIds(existClass, function(result){
           $scope.listStudent =  result;
+          listStudentLocal = JSON.parse(JSON.stringify(result));
           _initMark();
         }, function(error){
           $Error.callbackError(error);
         });
       } else{
           $scope.listStudent = [];
+          listStudentLocal = [];
 
       }
     };
@@ -190,6 +193,35 @@
     }
     $scope.cancelEditForm = function(){
       $scope.editSave = false;
+    };
+    $scope.form ={
+      search: ""
+    };
+
+    $scope.searchStundent = function(){
+      if($scope.form.search.length > 0){
+        $scope.listStudent = _.filter(listStudentLocal, function(student) {
+          return _bodauTiengViet(student.last_name + student.name).toUpperCase().indexOf(_bodauTiengViet($scope.form.search).toUpperCase()) >=0
+        });
+      } else{
+        $scope.listStudent = listStudentLocal;
+      }
+    };
+
+    var  _bodauTiengViet = function(str) {  
+      if(str){
+        str= str.toLowerCase();  
+        str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");  
+        str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");  
+        str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");  
+        str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");  
+        str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");  
+        str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");  
+        str= str.replace(/đ/g,"d");  
+        return str;  
+      } else{
+        return "";
+      }
     }
   }
 

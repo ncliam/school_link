@@ -6,10 +6,10 @@
   'use strict';
 
   angular.module('SchoolLink.pages.schedule')
-    .controller('ScheduleCtrl', ScheduleListCtrl);
+    .controller('ScheduleCtrl', ScheduleCtrl);
 
   /** @ngInject */
-  function ScheduleListCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Schedule) {
+  function ScheduleCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Schedule, MultipleViewsManager) {
     $scope.listSchedule = [];
     $scope.dateOptionsReceipt = {
       dateDisabled: false,
@@ -26,6 +26,10 @@
       }, function(error){});
     };
     _init();
+
+    MultipleViewsManager.updated('reload_list_schedule', function (data) {
+      _init();
+    })
 
      $scope.gotoDetailSchedule = function(schedule){
       if(schedule){

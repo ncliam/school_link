@@ -9,7 +9,7 @@
     .controller('ParentCtrl', ParentCtrl);
 
   /** @ngInject */
-  function ParentCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, toastr) {
+  function ParentCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, toastr, $Error) {
     $scope.listParent = [];
     $scope.parent = {};
     var allHistory;
@@ -38,7 +38,7 @@
     var _init = function(){
     	$Parent.getAllParent({}, function(result){
         $scope.listParent = result.records;
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
       if($scope.listCategoryForSearch.length === 0){
         $Parent.getListCategoryForParent({}, function(result){
           $scope.listCategoryForSearch = result.records;
@@ -46,7 +46,7 @@
             return cate.id;
           })
         }, function(error){
-
+          $Error.callbackError(error);
         })
       }
     };
@@ -106,7 +106,7 @@
         _init();
         $scope.parent = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
     var _createParent = function(){
@@ -116,7 +116,7 @@
          _init();
         $scope.parent = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
 

@@ -9,7 +9,7 @@
     .controller('GroupCtrl', GroupCtrl);
 
   /** @ngInject */
-  function GroupCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClassGroup, $uibModal, toastr, $translate) {
+  function GroupCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClassGroup, $uibModal, toastr, $translate, $Error) {
     $scope.listGroup = [];
     var allHistory;
     $scope.group = {};
@@ -18,7 +18,7 @@
     var _init = function(){
     	$SchoolClassGroup.getAllClassGroup({}, function(result){
         $scope.listGroup  = result.records;
-      }, function(error){})
+      }, function(error){$Error.callbackError(error);})
     };
     _init();
 
@@ -54,6 +54,7 @@
         existGroup.name = $scope.group.name;
         $scope.group = {};
       }, function(error){
+        $Error.callbackError(error);
       });
     };
     var _createGroup = function(){
@@ -65,7 +66,7 @@
         $scope.listGroup.unshift(newGroup);
         $scope.group = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
 

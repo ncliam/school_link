@@ -38,7 +38,14 @@
     font-size: 13px;
     font-weight: bold;
     float: left;
+    margin-top: 7px;
+    width: 25%;
+    text-align:left;
   }
+}
+
+.form-group{
+  overflow:hidden;
 }
 
 .form-control {
@@ -48,6 +55,8 @@
   border-radius: 5px;
   background-color: $input-background;
   box-shadow: none;
+  float: right;
+  width: 75%;
   &:focus {
     box-shadow: none;
     border-color: $primary-bg;

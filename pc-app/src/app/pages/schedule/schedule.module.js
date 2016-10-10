@@ -18,7 +18,8 @@
         title: 'menu.setting.schedule',
         sidebarMeta: {
           order: 50,
-          icon: 'ion-compose'
+          icon: 'ion-calendar',
+          permission: 2
         },
         controller: "ScheduleCtrl"
       })/*.state('schedule.list', {

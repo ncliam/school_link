@@ -76,6 +76,7 @@
                   level: (s.name.match(/\./g) || []).length,
                   order: meta.order,
                   icon: meta.icon,
+                  permission: meta.permission,
                   stateRef: s.name,
                 };
               })

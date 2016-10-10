@@ -20,6 +20,7 @@
           sidebarMeta: {
             icon: 'ion-grid',
             order: 300,
+            permission: 1
           },
         }).state('tables.basic', {
           url: '/basic',

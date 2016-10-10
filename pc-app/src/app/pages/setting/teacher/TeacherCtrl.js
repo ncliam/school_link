@@ -9,7 +9,8 @@
     .controller('TeacherCtrl', TeacherCtrl);
 
   /** @ngInject */
-  function TeacherCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, toastr, $Teacher, $resUser, $ResGroup) {
+  function TeacherCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, toastr, $Teacher, $resUser,
+   $ResGroup, $Error) {
     $scope.listTeacher = [];
     $scope.teacher = {};
     var allHistory;
@@ -37,14 +38,14 @@
     var _init = function(){
     	$Teacher.getAllTeacher({}, function(result){
         $scope.listTeacher = result.records;
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
 
       $ResGroup.getAllGroup({}, function(result){
         accessTeacher = _.find(result.records, function(acce){
           return acce.name =="School Teacher";
         });
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
     _init();
@@ -52,6 +53,7 @@
     $scope.openPopupTeacher = function () {
       modalTeacher = $uibModal.open({
         animation: true,
+        size: "lg",
         templateUrl: "app/pages/setting/teacher/widgets/popup.create.update.teacher.html",
         scope: $scope
       });
@@ -84,7 +86,7 @@
         existTeacher.mobile = $scope.teacher.mobile;
         $scope.teacher = {};
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
     var _createTeacher = function(){
@@ -111,10 +113,10 @@
           $scope.listTeacher.unshift(newTeacher);
           $scope.teacher = {};
         }, function(error){
-
+          $Error.callbackError(error);
         });
       }, function(error){
-
+        $Error.callbackError(error);
       })
 
       

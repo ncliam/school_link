@@ -9,7 +9,7 @@
     'ui.router',
 
     /*'BlurAdmin.pages.dashboard',*/
-/*    'BlurAdmin.pages.ui',
+    /*'BlurAdmin.pages.ui',
     'BlurAdmin.pages.components',
     'BlurAdmin.pages.form',
     'BlurAdmin.pages.tables',
@@ -17,9 +17,9 @@
     'BlurAdmin.pages.profile',*/
     'SchoolLink.pages.login',
     'SchoolLink.pages.setting',
-    'SchoolLink.pages.teacher',
     'BlurAdmin.pages.message',
-    'SchoolLink.pages.schedule'
+    'SchoolLink.pages.schedule',
+    'SchoolLink.pages.test'
   ])
       .config(routeConfig);
   /** @ngInject */

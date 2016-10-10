@@ -9,7 +9,7 @@
     .controller('StudentListCtrl', StudentListCtrl);
 
   /** @ngInject */
-  function StudentListCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Student, $School) {
+  function StudentListCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Student, $School, $Error) {
     $scope.listStudent = [];
     var allHistory;
     $scope.subject = {};
@@ -27,9 +27,9 @@
         $scope.listStudent.forEach(function(stu){
           stu.birthday ? stu.birthdayFormat = moment(stu.birthday).format("DD-MM-YYYY") : stu.birthdayFormat = false;
         })
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
 
-      $School.selectSchool({}, function(result){}, function(error){})
+      $School.selectSchool({}, function(result){}, function(error){$Error.callbackError(error);})
     };
     _init();
 

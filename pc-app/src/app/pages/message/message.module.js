@@ -18,6 +18,7 @@
           sidebarMeta: {
             icon: 'ion-android-home',
             order: 0,
+            permission: 1
           },
           controller: "MessageCtrl",
         });

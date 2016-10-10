@@ -1,22 +1,57 @@
 <div style="padding-left: 5px; padding-right: 5px; margin-top: 10px; float: left; width: 100%;">
 	<div class="w100 fl black-muted-bg table-line" style="border-bottom: 1px solid gray; border-top: 1px solid gray">
-    <div class="fl w1428 title-line text-center" ng-click="openPopupCreateLine(day)" ng-repeat="day in weekDay">{{day.name}} <i style="font-size: 18px; color: #4db1a7;" class="ion-ios-plus-outline"></i></div>
-  </div>
+		<div class="fl w5 title-line text-center" style="padding: 10px 0px;">Tiết</div>
+	  <div class="fl w1428 title-line text-center" ng-repeat="day in weekDay">{{day.name}}</div>
+	</div>
   <div class="w100 fl table-line">
-    <div class="fl w1428 title-line-detail text-center" ng-repeat="day in weekDay">
-    	<div class="horizontal-scroll">
-			  <table class="table table-hover">
-			    <tbody>
-				    <tr ng-click="openPopupCreateLine(day, line)" style="border-top: 1px solid gray;" ng-repeat="line in scheduleLineShow[day.value]">
-				      <td ng-hide="line.delete" style="padding: none !important; border-top:none;">
-				      	<div class="w100 fl"><strong>{{line.subjectShow}}</strong></div>
-				      	<div class="w100 fl">{{line.beginShow}} - {{line.endShow}}</div>
-				      	<div class="w100 fl">{{line.teacherShow}}</div>
-				      </td>
-				    </tr>
-			    </tbody>
-			  </table>
-			</div>
-    </div>
+  	<div class="w100 fl" style="border-bottom: 1px solid #ddd;">
+  		<div class="fl w5 title-line text-center" style="padding: 10px 0px; ">&nbsp;</div>
+  		<div class="fl w95 title-line text-center" style="padding: 10px 0px;">
+  			Sáng
+  			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-show="form.first" ng-click="showHideForm('first')"><i style="font-size: 20px;" class="ion-arrow-down-b"></i></a>
+  			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-show="!form.first" ng-click="showHideForm('first')"><i style="font-size: 20px;" class="ion-arrow-up-b"></i></a>
+  		</div>
+  	</div>
+  	<div class="w100 fl"  ng-repeat="tiethoc in listTietHoc" ng-if="tiethoc.id <7 && form.first">
+  		<div class="fl w5 title-line text-center" style="padding: 10px 0px; border-bottom: 1px solid #ddd; min-height: 75px;">
+  			<div class="w100 fl" style="margin-top: 17px;">{{tiethoc.display_name}}</div>
+  			<div class="w100 fl" style="margin-top: 5px;">&nbsp;</div>
+  		</div>
+  		<div class="fl w1428 title-line text-center" style="border-bottom: 1px solid #ddd; min-height: 75px;" ng-repeat="day in weekDay" ng-click="openPopupCreateLine(tiethoc, day)">
+  			<div class="w100 fl" ng-if="tiethoc[day.value].subjectShow.length > 0 && !tiethoc[day.value].delete">
+  				<div class="w100 fl"><strong>{{tiethoc[day.value].subjectShow}}</strong></div>
+  				<div class="w100 fl" style="margin-top: 5px;">Gv: {{tiethoc[day.value].teacherShow}}</div>
+  			</div>
+  			<div class="w100 fl" ng-if="tiethoc[day.value].subjectShow.length === 0 || tiethoc[day.value].delete">
+  				<div class="w100 fl" style="padding-top: 17px;"><strong><i style="font-size: 15px; color: #dedada;" class="ion-ios-plus-outline"></i></strong></div>
+  				<div class="w100 fl" style="margin-top: 5px;">&nbsp;</div>
+  			</div>
+  		</div>
+  	</div>
+
+		<div class="w100 fl" style="border-bottom: 1px solid #ddd;">
+  		<div class="fl w5 title-line text-center" style="padding: 10px 0px;">&nbsp;</div>
+  		<div class="fl w95 title-line text-center" style="padding: 10px 0px;">
+  			Chiều
+  			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-show="form.second" ng-click="showHideForm('second')"><i style="font-size: 20px;" class="ion-arrow-down-b"></i></a>
+  			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-show="!form.second" ng-click="showHideForm('second')"><i style="font-size: 20px;" class="ion-arrow-up-b"></i></a>
+  		</div>
+  	</div>
+  	<div class="w100 fl"  ng-repeat="tiethoc in listTietHoc" ng-if="tiethoc.id > 6 && form.second">
+  		<div class="fl w5 title-line text-center" style="padding: 10px 0px; border-bottom: 1px solid #ddd; min-height: 75px;">
+  			<div class="w100 fl" style="margin-top: 17px;">{{tiethoc.display_name}}</div>
+  			<div class="w100 fl" style="margin-top: 5px;">&nbsp;</div>
+  		</div>
+  		<div class="fl w1428 title-line text-center" style="border-bottom: 1px solid #ddd; min-height: 75px;" ng-repeat="day in weekDay" ng-click="openPopupCreateLine(tiethoc, day)">
+  			<div class="w100 fl" ng-if="tiethoc[day.value].subjectShow.length > 0 && !tiethoc[day.value].delete">
+  				<div class="w100 fl"><strong>{{tiethoc[day.value].subjectShow}}</strong></div>
+  				<div class="w100 fl" style="margin-top: 5px;">Gv: {{tiethoc[day.value].teacherShow}}</div>
+  			</div>
+  			<div class="w100 fl" ng-if="tiethoc[day.value].subjectShow.length === 0 || tiethoc[day.value].delete">
+  				<div class="w100 fl" style="padding-top: 17px;"><strong><i style="font-size: 15px; color: #dedada;" class="ion-ios-plus-outline"></i></strong></div>
+  				<div class="w100 fl" style="margin-top: 5px;">&nbsp;</div>
+  			</div>
+  		</div>
+  	</div>
   </div>
 </div>

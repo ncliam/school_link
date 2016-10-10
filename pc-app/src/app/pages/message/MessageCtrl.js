@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function MessageCtrl($stateParams, $scope, $resUser, $Imchat, localStorageService, $time, $location, $anchorScroll, $uibModal, $SchoolClass, $Schedule, 
-    $Teacher, $Parent, $Student, MultipleViewsManager) {
+    $Teacher, $Parent, $Student, MultipleViewsManager, $Error) {
     $scope.user = localStorageService.get("user");
     $scope.listChannel = [];
   	$scope.listUser = [];
@@ -23,6 +23,7 @@
     $scope.listChannelLocal = {};
     $scope.listUserForSearch = [];
     $scope.listUserAddNewChannel = [];
+    $scope.listChatName = {};
     var currentDate = moment(new Date()).format("DD/MM/YYYY");
     var prevDate = moment($time.getPrevDate(new Date())).format("DD/MM/YYYY");
     $scope.listClass = [];
@@ -35,12 +36,25 @@
       }
     
       $Imchat.initImchat({}, function(result){
-        $scope.listChannel = result;
+        $scope.listChannel = _.reject(result, function(channel){
+          return channel[1].type;
+        });
         if($scope.listChannel.length > 0){
-          $scope.chooseChannel($scope.listChannel[0]);
+         
+          var listUserId = [];
+          $scope.listChannel.forEach(function(channel){
+            channel[1].users.forEach(function(user){
+              listUserId.push(user.id);
+            });
+          });
+          listUserId = _.uniq(listUserId);
+          $resUser.getChatNameByUserId({user_ids: listUserId}, function(resultChatName){
+            $scope.listChatName = resultChatName;
+            $scope.chooseChannel($scope.listChannel[0]);
+          }, function(error){$Error.callbackError(error);});
         }
       }, function(error){
-
+        $Error.callbackError(error);
       })
   	};
   	_init();
@@ -98,7 +112,7 @@
                 uuid: newMessage.uuid
               }
             ])
-          }, function(error){});
+          }, function(error){$Error.callbackError(error);});
         } else{
           var existChannel = _.find($scope.listChannel, function(channel){
             return channel[1].uuid === newMessage.uuid;
@@ -153,6 +167,7 @@
         }
         _saveChannelLocal($scope.listChannelLocal);
       }, function(error){
+        $Error.callbackError(error);
       });
   	};
 
@@ -161,11 +176,10 @@
     		message: $scope.form.message,
     		uuid: chooseChannel[1].uuid
     	};
+      $scope.form.message = "";
     	$Imchat.postMessage(info, function(result){
-        $scope.form.message = "";
       }, function(error){
-        $scope.form.message = "";
-        
+        $Error.callbackError(error);
       });
 
     };
@@ -194,7 +208,7 @@
               scope: $scope
             });
           }, function(error){
-            
+            $Error.callbackError(error);
           })
       } else{
         modalCreateGroup = $uibModal.open({
@@ -218,7 +232,7 @@
         $scope.searchForm.teacher = true;
         $scope.listTeacher = listTeacher;
         $scope.listUserForSearch = $scope.listUserForSearch.concat($scope.listTeacher);
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
       $Parent.getListParentByIds({parent_ids: existClass.parent_ids}, function(listParent){
         $Student.getListStudentByIds({student_ids: existClass.student_ids}, function(listStudent){
           $scope.listStudent = _.groupBy(listStudent, function(student){
@@ -233,10 +247,10 @@
           });
           $scope.listUserForSearch = $scope.listUserForSearch.concat($scope.listParent);
         }, function(error){
-          
+          $Error.callbackError(error);
         });
       }, function(error){
-        
+        $Error.callbackError(error);
       });
     };
 
@@ -259,17 +273,19 @@
           $Imchat.updateState({uuid: session.records[0].uuid}, function(update){
             $scope.listUserAddNewChannel.forEach(function(user){
               if(user.parent_user_id){
+                $scope.listChatName[user.parent_user_id[0]] = user.name;
                 $Imchat.addUserToChannel({uuid: session.records[0].uuid, user_id: user.parent_user_id[0]}, function(addUser){
-                }, function(error){});
+                }, function(error){$Error.callbackError(error);});
               } else{
+                $scope.listChatName[user.user_id[0]] = user.name;
                 $Imchat.addUserToChannel({uuid: session.records[0].uuid, user_id: user.user_id[0]}, function(addUser){
-                }, function(error){});
+                }, function(error){$Error.callbackError(error);});
               }
             });
             modalCreateGroup.dismiss('cancel');
-          }, function(error){});
-        }, function(error){});
-      }, function(error){});
+          }, function(error){$Error.callbackError(error);});
+        }, function(error){$Error.callbackError(error);});
+      }, function(error){$Error.callbackError(error);});
     }
 
 

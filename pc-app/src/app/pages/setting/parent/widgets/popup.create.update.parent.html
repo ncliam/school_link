@@ -1,18 +1,18 @@
 <div class="modal-content" style="margin-top: 10%;">
-  <div class="modal-header bg-warning">
+  <div class="modal-header bg-success">
     <span>Phụ huynh</span>
   </div>
   <div class="modal-body text-center">
   	<div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="inputFirstName">{{'name' | translate}}</label>
+          <label for="inputFirstName">{{'name' | translate}}:</label>
           <input ng-model="parent.name" type="text" class="form-control">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="inputFirstName">Số điện thoại</label>
+          <label for="inputFirstName">Mobile:</label>
           <input ng-model="parent.mobile" type="text" class="form-control">
         </div>
       </div>
@@ -20,13 +20,13 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="inputFirstName">Email</label>
+          <label for="inputFirstName">Email:</label>
           <input ng-model="parent.email" type="text" class="form-control">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="inputFirstName">Địa chỉ</label>
+          <label for="inputFirstName">Địa chỉ:</label>
           <input ng-model="parent.street" type="text" class="form-control">
         </div>
       </div>
@@ -34,8 +34,8 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label style="margin-top: 15px;" for="inputFirstName">Vai trò</label>
-          <tags-input class="tag-parent" style="float: right; width: 90%" ng-model="listCategoryOfParner" 
+          <label style="margin-top: 15px;" for="inputFirstName">Vai trò:</label>
+          <tags-input class="tag-parent" style="float: right; width: 75%" ng-model="listCategoryOfParner" 
             display-property="complete_name" 
             placeholder="Thêm vai trò" 
             replace-spaces-with-dashes="false"

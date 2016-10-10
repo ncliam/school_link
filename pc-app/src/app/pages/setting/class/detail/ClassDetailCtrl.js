@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function ClassDetailCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $SchoolClass, $Student, $Schoolarity,
-   $SchoolClassGroup, $Parent) {
+   $SchoolClassGroup, $Parent, $Error) {
     $scope.class = localStorageService.get("chooseClass");
     $scope.class.group_id = $scope.class.group_id[0];
     $scope.class.year_id = $scope.class.year_id[0];
@@ -35,15 +35,15 @@
         $Student.getListStudentByIds($scope.class, function(result){
           $scope.listStudent =  result;
         }, function(error){
-          
+          $Error.callbackError(error);
         });
       };
       $Schoolarity.getAllSchoolarity({}, function(result){
         $scope.listSchoolarity  = result.records;
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
       $SchoolClassGroup.getAllClassGroup({}, function(result){
         $scope.listGroup  = result.records;
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
     };
     $scope.csv = {
       content: null,
@@ -86,7 +86,7 @@
         $SchoolClass.updateClass($scope.class, function(result){
           toastr.success("Cập nhật lớp học thành công", "", {});
           $state.go("setting.class.list");
-        }, function(error){})
+        }, function(error){$Error.callbackError(error);})
       }
     };
 
@@ -122,7 +122,7 @@
             $scope.openPopupListStudent();
           }
         }
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
     };
 
     $scope.openPopupListStudent = function () {
@@ -210,8 +210,8 @@
           };
           $scope.listStudent = $scope.listStudent.concat(listStudent);
           modalListStudentFileCsv.dismiss('cancel');
-        }, function(error){});
-      }, function(error){});
+        }, function(error){$Error.callbackError(error);});
+      }, function(error){$Error.callbackError(error);});
     }
 
   }
