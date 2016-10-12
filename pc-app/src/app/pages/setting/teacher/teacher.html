@@ -2,7 +2,7 @@
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase">
   <uib-tabset active="$tabSetStatus.activeTab" class="tac">
-    <label style="color: #fff;margin-top: 10px;">Giáo viên</label>
+     <input ng-change="searchTeacher()" style="width: 40%; margin-left: 3px; margin-top: 3px; float: left;font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Tìm kiếm giáo viên">
     <div class="panel-heading" ng-click="openPopupTeacher()" style="float: right; height: 40px; box-shadow: none; border-bottom: none; border-left: 1px solid #fffffff;"><i style="font-size: 20px; margin-top: -2px; color: #ffffff; float: left" class="ion-ios-plus-outline"></i></div>
   </uib-tabset>
   <div">
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="teacher in listTeacher" class="no-top-border">
-          <td>{{teacher.last_name}} {{teacher.name}}</td>
+          <td>{{teacher.name}}</td>
           <td>{{teacher.work_phone}}</td>
           <td>{{teacher.work_email}}</td>
            <td style="cursor: pointer; text-align: right;" ng-click="editTeacher(teacher)"><i class="ion-edit"></i></td>

@@ -6,7 +6,7 @@
   'use strict';
 
   angular.module('SchoolLink.pages.setting', [
-      'SchoolLink.pages.setting.scholarity',
+      /*'SchoolLink.pages.setting.scholarity',*/
       'SchoolLink.pages.setting.schoolsubject',
       'SchoolLink.pages.setting.group',
       'SchoolLink.pages.setting.class',

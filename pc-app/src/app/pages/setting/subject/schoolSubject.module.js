@@ -16,7 +16,7 @@
           templateUrl: 'app/pages/setting/subject/schoolsubject.html',
           title: 'menu.setting.schoolsubject',
           sidebarMeta: {
-            order: 50,
+            order: 100,
           },
           controller: "SchoolSubjectCtrl"
         });

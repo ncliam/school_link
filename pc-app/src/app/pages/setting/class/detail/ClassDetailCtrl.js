@@ -28,12 +28,16 @@
     };
     var modalListStudent;
     var modalListStudentFileCsv;
+    var modalDetailStudent;
 
     $scope.serialNumber = {};
     var _init = function(){
       if($scope.class.student_ids.length > 0){
         $Student.getListStudentByIds($scope.class, function(result){
           $scope.listStudent =  result;
+          $scope.listStudent.forEach(function(student){
+            student.birthday? student.birthdayShow = moment(student.birthday).format("DD-MM-YYYY") : student.birthdayShow = "";
+          })
         }, function(error){
           $Error.callbackError(error);
         });
@@ -117,6 +121,7 @@
             stu.birthday = moment(stu.birthday).format("DD-MM-YYYY");
           });
           if($scope.listStudentSeach.length === 1){
+            $scope.listStudentSeach[0].birthday ? $scope.listStudentSeach[0].birthdayShow = moment($scope.listStudentSeach[0].birthday).format("DD-MM-YYYY") :$scope.listStudentSeach[0].birthdayShow = "";
             $scope.addStudent($scope.listStudentSeach[0]);
           } else{
             $scope.openPopupListStudent();
@@ -146,6 +151,7 @@
         return stu.id === student.id;
       });
       if(!existStudent){
+        student.birthday ? student.birthdayShow = moment(student.birthday).format("DD-MM-YYYY") :student.birthdayShow = "";
         $scope.listStudent.unshift(student);
       }
       if(modalListStudent){
@@ -168,7 +174,7 @@
       $scope.openPopupListStudentFileCsv();
     };
 
-     $scope.createListStudent = function(){
+    $scope.createListStudent = function(){
       var listParent = [];
       var listStudent = [];
       $scope.csv.result.forEach(function(line){
@@ -213,7 +219,36 @@
         }, function(error){$Error.callbackError(error);});
       }, function(error){$Error.callbackError(error);});
     }
+    $scope.openPopupStudent = function(student){
+      $scope.student = JSON.parse(JSON.stringify(student));
+      $scope.student.birthday = new Date($scope.student.birthday);
+      modalDetailStudent = $uibModal.open({
+        animation: true,
+        templateUrl: "app/pages/setting/class/widgets/popup.detail.student.html",
+        scope: $scope
+      });
+    };
 
-  }
+    $scope.updateStudent = function(){
+      if($scope.student.birthday && $scope.student.birthday.length > 0){
+        $scope.student.birthday = moment($scope.student.birthday).format("YYYY-MM-DD");
+      }
+      $Student.updateStudent($scope.student, function(result){
+        toastr.success("Cập nhật học sinh thành công", "", {});
+        var existStudent = _.find($scope.listStudent, function(student){
+          return student.id === $scope.student.id;
+        });
+        existStudent.last_name = $scope.student.last_name;
+        existStudent.name = $scope.student.name;
+        $scope.student.birthday ? existStudent.birthdayShow = moment($scope.student.birthday).format("DD-MM-YYYY") :existStudent.birthdayShow = "";
+        existStudent.home_address = $scope.student.home_address;
+        modalDetailStudent.dismiss('cancel');
+      }, function(error){
+
+      });
+    }
+
+  };
+
 
 })();

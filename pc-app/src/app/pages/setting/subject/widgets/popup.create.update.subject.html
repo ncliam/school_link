@@ -1,5 +1,5 @@
 <div class="modal-content" style="margin-top: 10%;">
-  <div class="modal-header bg-success">
+  <div class="modal-header bg-info">
     <span>{{'title.popup.subject' | translate}}</span>
   </div>
   <div class="modal-body text-center">
@@ -22,6 +22,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+     <button style="float:left; margin-left: 10px;" type="button" class="btn btn-danger" ng-show="subject.id" ng-click="removeRecords()">Xóa</button>
     <button type="button" class="btn btn-primary" ng-click="acceptSubject()">{{"button.accept" | translate}}</button>
   </div>
 </div>

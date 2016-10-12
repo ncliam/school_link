@@ -6,7 +6,8 @@
           <div class="col-xlg-7 col-lg-7  col-md-7 col-sm-7 col-xs-7 typography-widget" style="height: 100%; overflow: auto; border-right: 1px solid #ddd;">
             <div class="mail-messages-control" >
               <div class="w100" style="float: left;margin-bottom: 10px;">
-                <button style="background: #209e91;" type="button" class="btn btn-success btn-with-icon" ng-click="openPopupCreateGroup()"><i class="ion-ios-plus-outline"></i>Soạn</button>
+                <button style="background: #0FAFE4; border-color:#0FAFE4;" type="button" class="btn btn-success btn-with-icon" ng-click="openPopupCreateGroup()"><i class="ion-ios-plus-outline"></i>Soạn</button>
+                <input ng-change="searchUser()" style="width: 70%; margin-left: 0px; font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm ...">
               </div>
               <div class="messages w100" style="float: left;">
                 <table class="table-hover">

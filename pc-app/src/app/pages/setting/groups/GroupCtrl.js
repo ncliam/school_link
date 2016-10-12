@@ -22,7 +22,12 @@
     };
     _init();
 
-    $scope.openPopupGroup = function () {
+    $scope.openPopupGroup = function (group) {
+      if(group){
+       $scope.group = JSON.parse(JSON.stringify(group));
+      } else{
+        $scope.group ={};
+      }
       modalShoolGroup = $uibModal.open({
         animation: true,
         templateUrl: "app/pages/setting/groups/widgets/popup.create.update.group.html",
@@ -31,8 +36,7 @@
     };
 
     $scope.editGroup = function(group){
-      $scope.group = JSON.parse(JSON.stringify(group));
-      $scope.openPopupGroup();
+      $scope.openPopupGroup(group);
     };
     $scope.acceptGroup = function(){
       if(_validate()){
@@ -77,6 +81,15 @@
         toastr.error($translate.instant('classGroup.name.require'), "", {});
       }
       return flag;
+    };
+
+    $scope.removeRecords = function(){
+      $SchoolClassGroup.removeRecords($scope.group, function(result){
+        modalShoolGroup.dismiss('cancel');
+        _init();
+      }, function(error){
+        $Error.callbackError(error);
+      })
     }
   }
 

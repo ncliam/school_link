@@ -15,7 +15,7 @@
       </div>
       <div class="form-group col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12" style="margin-bottom: 0px;">
         <label for="inputFirstName">
-          Học kì
+          Học kì:
         </label>
         <select class="form-control" ng-change="searchExam()" ng-options="semester.id as semester.name for semester in listSemester" ng-model="formData.semester_id" ng-required="true"></select>
       </div>
@@ -48,8 +48,8 @@
           <tbody>
             <tr>
               <td style="padding: 0px !important;">
-                <div class="fl w20 pb5" style="text-align: left;">
-                  <input ng-change="searchStundent()" style="width: 100%; margin-left: 0px; margin-top: 5px;" ng-model="form.search" type="text" class="form-control">
+                <div class="fl w50 pb5" style="text-align: left; padding:10px;">
+                  <input ng-change="searchStundent()" style="width: 100%; margin-left: 0px; font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Tìm kiếm học sinh">
                 </div>
               </td>
             </tr>

@@ -16,7 +16,7 @@
           templateUrl: 'app/pages/setting/groups/group.html',
           title: 'menu.setting.group',
           sidebarMeta: {
-            order: 100,
+            order: 0,
           },
           controller: "GroupCtrl"
         });

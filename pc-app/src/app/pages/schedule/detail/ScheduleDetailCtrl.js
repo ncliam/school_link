@@ -59,18 +59,18 @@
       }
     ];
     $scope.listTietHoc = [
-      {id: 1, name: "tiet1", display_name: "Tiết 1", begin: "07:00:00", end: "07:45:00"},
-      {id: 2, name: "tiet2", display_name: "Tiết 2", begin: "07:50:00", end: "08:35:00"},
-      {id: 3, name: "tiet3", display_name: "Tiết 3", begin: "08:40:00", end: "09:25:00"},
-      {id: 4, name: "tiet4", display_name: "Tiết 4", begin: "09:30:00", end: "10:15:00"},
-      {id: 5, name: "tiet5", display_name: "Tiết 5", begin: "10:20:00", end: "11:05:00"},
-      {id: 6, name: "tiet6", display_name: "Tiết 6", begin: "11:10:00", end: "12:00:00"},
-      {id: 7, name: "tiet7", display_name: "Tiết 1", begin: "13:00:00", end: "13:45:00"},
-      {id: 8, name: "tiet8", display_name: "Tiết 2", begin: "13:50:00", end: "14:35:00"},
-      {id: 9, name: "tiet9", display_name: "Tiết 3", begin: "14:40:00", end: "15:25:00"},
-      {id: 10, name: "tiet10", display_name: "Tiết 4", begin: "15:30:00", end: "16:15:00"},
-      {id: 11, name: "tiet11", display_name: "Tiết 5", begin: "16:20:00", end: "17:05:00"},
-      {id: 12, name: "tiet12", display_name: "Tiết 6", begin: "17:10:00", end: "18:00:00"}
+      {id: 1, name: "tiet1", display_name: "1", begin: "07:00:00", end: "07:45:00"},
+      {id: 2, name: "tiet2", display_name: "2", begin: "07:50:00", end: "08:35:00"},
+      {id: 3, name: "tiet3", display_name: "3", begin: "08:40:00", end: "09:25:00"},
+      {id: 4, name: "tiet4", display_name: "4", begin: "09:30:00", end: "10:15:00"},
+      {id: 5, name: "tiet5", display_name: "5", begin: "10:20:00", end: "11:05:00"},
+      {id: 6, name: "tiet6", display_name: "6", begin: "11:10:00", end: "12:00:00"},
+      {id: 7, name: "tiet7", display_name: "1", begin: "13:00:00", end: "13:45:00"},
+      {id: 8, name: "tiet8", display_name: "2", begin: "13:50:00", end: "14:35:00"},
+      {id: 9, name: "tiet9", display_name: "3", begin: "14:40:00", end: "15:25:00"},
+      {id: 10, name: "tiet10", display_name: "4", begin: "15:30:00", end: "16:15:00"},
+      {id: 11, name: "tiet11", display_name: "5", begin: "16:20:00", end: "17:05:00"},
+      {id: 12, name: "tiet12", display_name: "6", begin: "17:10:00", end: "18:00:00"}
     ];
 
      var _getDateForLine = function(day){

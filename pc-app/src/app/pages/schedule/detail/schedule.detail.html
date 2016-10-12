@@ -16,13 +16,13 @@
       <div class="col-sm-4">
         <div class="form-group">
           <label for="inputLastName" style="font-weight: bold;">Lớp</label>
-          <select style="float: left; width: 100%" class="form-control" ng-options="class.id as class.name for class in listClass" ng-model="schedule.class_id" ng-required="true"></select>
+          <select style="float: right; width: 75%" class="form-control" ng-options="class.id as class.name for class in listClass" ng-model="schedule.class_id" ng-required="true"></select>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="form-group">
           <label for="inputLastName" style="font-weight: bold;">Học kì</label>
-          <select style="float: left; width: 100%" class="form-control" ng-options="semester.id as semester.name for semester in listSemester" ng-model="schedule.semester_id" ng-required="true"></select>
+          <select style="float: right; width: 75%" class="form-control" ng-options="semester.id as semester.name for semester in listSemester" ng-model="schedule.semester_id" ng-required="true"></select>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <div class="modal-content" style="margin-top: 10%;">
-  <div class="modal-header bg-success">
+  <div class="modal-header bg-info">
     <span>Năm học</span>
   </div>
   <div class="modal-body text-center">
@@ -12,10 +12,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-12">
         <div class="form-group" style="padding-left: 5px; padding-right: 5px;">
           <label for="inputFirstName">{{'date.start' | translate}}:</label>
-          <p class="input-group">
+          <p class="input-group" style="width: 75%; float: right; margin-bottom: 0px;">
             <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="schoolarity.date_start" is-open="popup1.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -23,10 +23,10 @@
           </p>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-12">
         <div class="form-group" style="padding-left: 5px; padding-right: 5px;">
           <label for="inputFirstName">{{'date.end' | translate}}:</label>
-          <p class="input-group">
+          <p class="input-group" style="width: 75%; float: right; margin-bottom: 0px;">
             <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="schoolarity.date_end" is-open="popup2.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>

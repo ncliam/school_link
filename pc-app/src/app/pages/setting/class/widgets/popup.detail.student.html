@@ -1,0 +1,12 @@
+<div class="modal-content" style="margin-top: 10%;">
+  <div class="modal-header bg-info">
+    <span>Chi tiết học sinh</span>
+  </div>
+  <div class="modal-body text-center">
+    <div class="popup-detail-student" ng-include="'app/pages/setting/student/widgets/form.info.html'"></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="updateStudent()">{{"button.accept" | translate}}</button>
+  </div>
+</div>

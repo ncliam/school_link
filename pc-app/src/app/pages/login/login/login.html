@@ -14,17 +14,18 @@
         </div>
       </div> -->
       <div class="form-group">
-        <label for="inputEmail3" style="color: #fff; margin: 0px;">{{'login.user' | translate}}:</label>
+        <label for="inputEmail3" style="margin: 0px;">{{'login.user' | translate}}:</label>
         <input type="text" class="form-control" ng-model="user.email" placeholder="Tên đăng nhập">
       </div>
       <div class="form-group">
-        <label for="inputPassword3" style="color: #fff; margin: 0px;">Password:</label>
+        <label for="inputPassword3" style=" margin: 0px;">Password:</label>
         <input type="password" class="form-control" ng-model="user.password" placeholder="Mật khẩu">
       </div>
       <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button ng-click="login()" class="btn btn-default btn-auth">Đăng nhập</button>
-          <a href class="forgot-pass">Quên mật khẩu?</a>
+        <div class="w25 fl">&nbsp;</div>
+        <div class="w75 fl">
+          <button ng-click="login()" class="btn btn-auth" style="background: #1BAFF0">Đăng nhập</button>
+          <a href class="forgot-pass" style="color: #1BAFF0">Quên mật khẩu?</a>
         </div>
       </div>
     </form>

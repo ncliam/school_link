@@ -2,7 +2,8 @@
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase">
   <uib-tabset active="$tabSetStatus.activeTab" class="tac">
-    <label style="color: #fff;margin-top: 10px;">Học sinh</label>
+     <input ng-change="searchStundent()" style="width: 40%; margin-left: 3px; margin-top: 3px; float: left;font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Tìm kiếm học sinh">
+    <!-- <label style="color: #fff;margin-top: 10px;">Học sinh</label> -->
     <div class="panel-heading" ng-click="gotoDetailStudent()" style="float: right; height: 40px; box-shadow: none; border-bottom: none; border-left: 1px solid #fffffff;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-plus-outline"></i></div>
   </uib-tabset>
   <div">
@@ -14,14 +15,27 @@
           <th style="font-weight: 600">Ngày sinh</th>
           <th style="font-weight: 600">Địa chỉ</th>
           <th style="font-weight: 600">Quê quán</th>
+          <th style="font-weight: 600"></th>
         </tr>
+       <!--  <tr>
+         <th><input placeholder="Tìm theo tên" class="input-sm form-control search-input w100"
+                    type="search"/></th>
+         <th><input placeholder="Tìm theo ngày sinh" class="input-sm form-control search-input w100"
+                    type="search"/></th>
+         <th><input placeholder="Tìm theo địa chỉ" class="input-sm form-control search-input w100"
+                    type="search"/></th>
+         <th><input  placeholder="Tìm theo quê quán" class="input-sm form-control search-input w100" type="search"/>
+         </th>
+         <th></th>
+       </tr> -->
         </thead>
         <tbody>
         <tr ng-click="gotoDetailStudent(student)" ng-repeat="student in listStudent" class="no-top-border">
-          <td style="text-align: left;">{{student.last_name}} {{student.name}}</td>
+          <td style="text-align: left;">{{student.name}}</td>
           <td><span ng-show="student.birthdayFormat">{{student.birthdayFormat}}</span></td>
           <td>{{student.home_address}}</td>
           <td>{{student.home_town}}</td>
+          <td ng-click="confirmRemove(student); $event.stopPropagation();" style="color: #7d7d7d; cursor: pointer;"><i class="ion-ios-trash-outline"></i></td>
         </tr>
         </tbody>
       </table>

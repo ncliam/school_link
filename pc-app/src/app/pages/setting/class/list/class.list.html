@@ -13,6 +13,7 @@
           <th style="font-weight: 600">{{'name' | translate}}</th>
           <th style="font-weight: 600">{{'menu.setting.group' | translate}}</th>
           <th style="font-weight: 600">{{'menu.setting.schoolarity' | translate}}</th>
+          <th style="font-weight: 600"></th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
           <td>{{chooseClass.name}}</td>
           <td>{{chooseClass.group_id[1]}}</td>
           <td>{{chooseClass.year_id[1]}}</td>
+          <td ng-click="confirmRemove(chooseClass); $event.stopPropagation();" style="color: #7d7d7d; cursor: pointer;"><i class="ion-ios-trash-outline"></i></td>
         </tr>
         </tbody>
       </table>

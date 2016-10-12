@@ -9,7 +9,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: #3e653d;
+    background: #1e3e58;
     background-size: cover;
     will-change: transform;
     z-index: -1;
@@ -18,10 +18,10 @@
 	width: 75%;
   margin: 10% auto;
   border-radius: 5px;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  padding: 32px;
-  max-width: 450px;
+  background: #ffffff;
+  color: #000000 !important;
+  padding: 32px 70px;;
+  max-width: 550px;
 }
 
 .auth-block {
@@ -264,7 +264,7 @@ li[disabled] {
 }
 .w5{width: 5%;}
 .w10{width: 10%;}
-.w1428{width: 15.8%;}
+.w1428{width: 15.8333%;}
 .w15{width: 15%;}
 .w20{width: 20%;}
 .w25{width: 25%;}
@@ -391,3 +391,15 @@ tags-input .autocomplete .suggestion-item.selected{
 .tac{
   text-align: center;
 }
+[uib-datepicker-popup-wrap]{
+  position: fixed;
+}
+.dotted {
+  background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  -webkit-background-size: 3px 3px;
+  -moz-background-size: 3px 3px;
+  background-size: 3px 3px;
+  }

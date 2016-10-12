@@ -31,12 +31,14 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <label for="inputLastName" style="font-weight: bold;">Ngày sinh:</label>
-    <p class="input-group" style="float: right;width: 75%;">
-      <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="student.birthday" is-open="popup1.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
-      <span class="input-group-btn">
-        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-      </span>
-    </p>
+    <div class="form-group">
+      <label for="inputLastName" style="font-weight: bold;">Ngày sinh:</label>
+      <p class="input-group" style="float: right;width: 75%;">
+        <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="student.birthday" is-open="popup1.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+    </div>
   </div>
 </div>

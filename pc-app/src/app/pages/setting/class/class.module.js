@@ -17,7 +17,7 @@
         template: '<ui-view></ui-view>',
         title: 'menu.setting.class',
         sidebarMeta: {
-          order: 150,
+          order: 50,
         }
       }).state('setting.class.list', {
         url: '/list',

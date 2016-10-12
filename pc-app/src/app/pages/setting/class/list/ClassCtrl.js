@@ -9,12 +9,14 @@
     .controller('ClassListCtrl', ClassListCtrl);
 
   /** @ngInject */
-  function ClassListCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass) {
+  function ClassListCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $uibModal, toastr, $Error) {
     $scope.listClass = [];
+    var tmpClass;
+    var modalConfirmRemove;
     var _init = function(){
       $SchoolClass.getAllClass({}, function(result){
         $scope.listClass = result.records;
-      }, function(error){})
+      }, function(error){$Error.callbackError(error);})
     };
     _init();
     
@@ -27,6 +29,23 @@
       localStorageService.remove("chooseReceipt");
       $state.go('setting.class.create');
     };
+
+    $scope.confirmRemove = function(chooseClass){
+      tmpClass = chooseClass;
+      modalConfirmRemove = $uibModal.open({
+        animation: true,
+        templateUrl: "app/pages/setting/class/widgets/popup.confrim.remove.html",
+        scope: $scope
+      });
+    };
+
+    $scope.removeRecords = function(){
+      $SchoolClass.removeRecords(tmpClass, function(result){
+        toastr.success("Xóa thành công", "", {});
+        _init();
+        modalConfirmRemove.dismiss('cancel');
+      }, function(error){$Error.callbackError(error);})
+    }
   }
 
 })();

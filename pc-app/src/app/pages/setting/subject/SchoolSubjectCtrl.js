@@ -28,7 +28,12 @@
     };
     _init();
 
-    $scope.openPopupSchoolarity = function () {
+    $scope.openPopupSchoolarity = function (subject) {
+      if(subject){
+        $scope.subject = JSON.parse(JSON.stringify(subject));
+      } else{
+        $scope.subject = {};
+      }
       modalShoolSubject = $uibModal.open({
         animation: true,
         templateUrl: "app/pages/setting/subject/widgets/popup.create.update.subject.html",
@@ -37,8 +42,7 @@
     };
 
     $scope.editSubject = function(subject){
-      $scope.subject = JSON.parse(JSON.stringify(subject));
-      $scope.openPopupSchoolarity();
+      $scope.openPopupSchoolarity(subject);
     };
     $scope.acceptSubject = function(){
       if(_validate()){
@@ -84,6 +88,16 @@
         toastr.error($translate.instant('schoolsubject.name.require'), "", {});
       }
       return flag;
+    };
+
+    $scope.removeRecords = function(){
+      $SchoolSubject.removeRecords($scope.subject, function(result){
+        modalShoolSubject.dismiss('cancel');
+        toastr.success("Xóa thành công", "", {});
+        _init();
+      }, function(error){
+        $Error.callbackError(error);
+      })
     }
   }
 

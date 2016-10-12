@@ -124,6 +124,7 @@
         return stu.id === student.id;
       });
       if(!existStudent){
+        student.birthday ? student.birthdayShow = student.birthday :student.birthdayShow = "";
         $scope.listStudent.unshift(student);
       }
       if(modalListStudent){

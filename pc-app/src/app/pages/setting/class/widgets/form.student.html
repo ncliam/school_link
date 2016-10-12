@@ -22,18 +22,18 @@
 	  <table class="table table-hover">
 	    <thead>
 	    <tr class="black-muted-bg">
-	      <th style="text-align: left">{{'name' | translate}}</th>
+	      <th style="text-align: left">Họ và tên</th>
 	      <th>{{'birthday' | translate}}</th>
 	      <th>Địa chỉ</th>
 	      <th></th>
 	    </tr>
 	    </thead>
 	    <tbody>
-	    <tr ng-repeat="student in listStudent">
+	    <tr ng-repeat="student in listStudent" ng-click="openPopupStudent(student)">
 	      <td style="text-align: left">{{student.last_name}} {{student.name}}</td>
-	      <td>{{student.birthday}}</td>
+	      <td>{{student.birthdayShow}}</td>
 	      <td>{{student.home_address}}</td>
-	      <td><i ng-click="removeLine(student)" style="color: red;" class="ion-ios-trash-outline"></i></td>
+	      <td><i ng-click="removeLine(student)" style="color: #7d7d7d;" class="ion-ios-trash-outline"></i></td>
 	    </tr>
 	    </tbody>
 	  </table>

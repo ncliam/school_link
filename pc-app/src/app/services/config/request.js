@@ -11,8 +11,8 @@
   /** @ngInject */
   function request($http, cfpLoadingBar, localStorageService, usSpinnerService) {
   	var _self = this;
-    //_self.host = "http://52.24.18.179";
-    _self.host = "http://127.0.0.1";
+    _self.host = "http://52.24.18.179";
+    //_self.host = "http://127.0.0.1";
     _self.port= "3003";
     _self.dbName = "thuong";
     this.postRequest = function(path, param, callbackSuccess, callbackError){

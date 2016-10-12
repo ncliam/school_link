@@ -82,7 +82,7 @@
     };
     var _createSchoolarity = function(){
       $Schoolarity.createSchoolarity($scope.schoolarity, function(result){
-        toastr.success("Tạo phụ huynh thành công", "", {});
+        toastr.success("Tạo năm học thành công", "", {});
         modalSchoolarity.dismiss('cancel');
         $scope.schoolarity.id = result;
         var newSchoolarity = JSON.parse(JSON.stringify($scope.schoolarity));
@@ -100,6 +100,15 @@
         toastr.error("Tên không được để trống", "", {});
       }
       return flag;
+    };
+
+    $scope.removeSchoolarity = function(){
+      $Schoolarity.removeRecords($scope.schoolarity, function(result){
+        _init();
+        toastr.success("Xóa thành công", "", {});
+      }, function(error){
+        $Error.callbackError(error);
+      })
     }
   }
 

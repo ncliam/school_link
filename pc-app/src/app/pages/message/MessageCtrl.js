@@ -21,6 +21,7 @@
     $scope.historyUser = {};
     $scope.disableForm = true;
     $scope.listChannelLocal = {};
+    var listChannelForSearch;
     $scope.listUserForSearch = [];
     $scope.listUserAddNewChannel = [];
     $scope.listChatName = {};
@@ -48,6 +49,7 @@
             });
           });
           listUserId = _.uniq(listUserId);
+          listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           $resUser.getChatNameByUserId({user_ids: listUserId}, function(resultChatName){
             $scope.listChatName = resultChatName;
             $scope.chooseChannel($scope.listChannel[0]);
@@ -111,7 +113,8 @@
                 users: newMessage.users,
                 uuid: newMessage.uuid
               }
-            ])
+            ]);
+            listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }, function(error){$Error.callbackError(error);});
         } else{
           var existChannel = _.find($scope.listChannel, function(channel){
@@ -128,6 +131,7 @@
                 uuid: newMessage.uuid
               }
             ]);
+            listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }
         }
       }
@@ -286,7 +290,41 @@
           }, function(error){$Error.callbackError(error);});
         }, function(error){$Error.callbackError(error);});
       }, function(error){$Error.callbackError(error);});
-    }
+    };
+   
+    $scope.searchUser = function(){
+      if($scope.form.search && $scope.form.search.length > 0){
+        var strSearch = _bodauTiengViet($scope.form.search);
+        var listChannel = [];
+        listChannelForSearch.forEach(function(channel){
+          var existUser = _.find(channel[1].users, function(user){
+            return _bodauTiengViet($scope.listChatName[user.id]).toUpperCase().indexOf(strSearch.toUpperCase()) >=0
+          });
+          if(existUser){
+            listChannel.push(channel);
+          }
+        });
+        $scope.listChannel = listChannel;
+      } else{
+        $scope.listChannel = listChannelForSearch;
+      }
+    };
+
+    var  _bodauTiengViet = function(str) {  
+      if(str){
+        str= str.toLowerCase();  
+        str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");  
+        str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");  
+        str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");  
+        str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");  
+        str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");  
+        str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");  
+        str= str.replace(/đ/g,"d");  
+        return str;  
+      } else{
+        return "";
+      }
+    };
 
 
     var _renderListTeacherByListScheduleLines = function(lines){

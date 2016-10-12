@@ -12,7 +12,9 @@
   function TeacherCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $Schoolarity, $uibModal, $Parent, toastr, $Teacher, $resUser,
    $ResGroup, $Error) {
     $scope.listTeacher = [];
+    var listTeacher = [];
     $scope.teacher = {};
+    $scope.form ={search: ""};
     var allHistory;
     $scope.popup1 = {
       opened: false
@@ -38,6 +40,7 @@
     var _init = function(){
     	$Teacher.getAllTeacher({}, function(result){
         $scope.listTeacher = result.records;
+        listTeacher = JSON.parse(JSON.stringify($scope.listTeacher));
       }, function(error){$Error.callbackError(error);});
 
       $ResGroup.getAllGroup({}, function(result){
@@ -50,7 +53,13 @@
     };
     _init();
 
-    $scope.openPopupTeacher = function () {
+    $scope.openPopupTeacher = function (teacher) {
+      if(teacher){
+        $scope.teacher = JSON.parse(JSON.stringify(teacher));
+        $scope.teacher.birthday = new Date($scope.teacher.birthday);
+      } else{
+        $scope.teacher = {};
+      }
       modalTeacher = $uibModal.open({
         animation: true,
         size: "lg",
@@ -60,9 +69,7 @@
     };
 
     $scope.editTeacher = function(teacher){
-      $scope.teacher = JSON.parse(JSON.stringify(teacher));
-      $scope.teacher.birthday = new Date($scope.teacher.birthday);
-      $scope.openPopupTeacher();
+      $scope.openPopupTeacher(teacher);
     };
 
     $scope.acceptTeacher = function(){
@@ -84,7 +91,9 @@
         });
         existTeacher.name = $scope.teacher.name;
         existTeacher.mobile = $scope.teacher.mobile;
+        existTeacher.email = $scope.teacher.email;
         $scope.teacher = {};
+        listTeacher = JSON.parse(JSON.stringify($scope.listTeacher));
       }, function(error){
         $Error.callbackError(error);
       });
@@ -112,6 +121,7 @@
           var newTeacher = JSON.parse(JSON.stringify($scope.teacher));
           $scope.listTeacher.unshift(newTeacher);
           $scope.teacher = {};
+          listTeacher = JSON.parse(JSON.stringify($scope.listTeacher));
         }, function(error){
           $Error.callbackError(error);
         });
@@ -133,7 +143,46 @@
         toastr.error("Số điện thoại không được để trống", "", {});
       }
       return flag;
+    };
+    $scope.removeRecords = function(){
+      $Teacher.removeRecords($scope.teacher, function(result){
+        modalTeacher.dismiss('cancel');
+        toastr.success("Xóa thành công", "", {});
+        _init();
+      }, function(error){
+        $Error.callbackError(error);
+      })
     }
+
+    $scope.searchTeacher = function(){
+      if($scope.form.search.length > 0){
+        var search = _bodauTiengViet($scope.form.search);
+        $scope.listTeacher = _.filter(listTeacher, function(teacher) {
+          return _bodauTiengViet(teacher.name).toUpperCase().indexOf(search.toUpperCase()) >=0 
+          || _bodauTiengViet(teacher.work_phone).toUpperCase().indexOf(search.toUpperCase()) >=0 
+          || _bodauTiengViet(teacher.work_email).toUpperCase().indexOf(search.toUpperCase()) >=0 
+        });
+      } else{
+        $scope.listTeacher = listTeacher;
+      }
+    };
+
+
+    var  _bodauTiengViet = function(str) {  
+      if(str){
+        str= str.toLowerCase();  
+        str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");  
+        str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");  
+        str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");  
+        str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");  
+        str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");  
+        str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");  
+        str= str.replace(/đ/g,"d");  
+        return str;  
+      } else{
+        return "";
+      }
+    };
   }
 
 })();

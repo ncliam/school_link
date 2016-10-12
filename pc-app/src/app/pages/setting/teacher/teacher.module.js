@@ -16,7 +16,7 @@
           templateUrl: 'app/pages/setting/teacher/teacher.html',
           title: 'menu.setting.teacher',
           sidebarMeta: {
-            order: 250,
+            order: 150,
           },
           controller: "TeacherCtrl"
         });

@@ -31,7 +31,7 @@
         title: 'Detail receipt',
         controller: "StudentDetailCtrl",
         controllerAs: "detailCtrl"
-      })
+      });
       $urlRouterProvider.when('/setting/student','/setting/student/list');
   }
 
