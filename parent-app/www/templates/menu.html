@@ -1,0 +1,115 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+            <!-- <ion-nav-back-button class="no-text">
+            </ion-nav-back-button> -->
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="fabContent"></ion-nav-view>
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
+        <div class="tabs tabs-icon-top" style="padding: 5px 0px 0px 0px;">
+          <a class="tab-item" ui-sref="app.message" ng-class="{active: isActiveTab('app.message')}" >
+            <i class="fa fa-comments fa-3x" ></i>
+            <p>Tin nhắn</p>
+
+          </a>
+          <a class="tab-item" ui-sref="app.contact" ng-class="{active: isActiveTab('app.contact')}">
+            <i class="fa fa-phone fa-3x" ></i>
+            <p>Liên hệ</p>
+          </a>
+          <a class="tab-item" ui-sref="app.schedule" ng-class="{active: isActiveTab('app.schedule')}">
+            <i class="fa fa-calendar fa-3x" ></i>
+            <p>Thời khóa biểu</p>
+          </a>
+          <a class="tab-item" ui-sref="app.goal" ng-class="{active: isActiveTab('app.goal')}">
+            <i class="fa fa-area-chart fa-3x" ></i>
+            <p>Kết quả học tập</p>
+          </a>
+        </div>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-header-bar class="dark-bg expanded">
+            <span class="avatar" style="background: url('img/logo.jpg'); background-size: cover;"></span>
+            <h2>School Link</h2>
+        </ion-header-bar>
+        <ion-content class="light-bg has-expanded-header">
+          <ul class="nav sidebar-nav">
+            <li>
+              <a ui-sref="app.message" menu-toggle="left" ng-class="{active: isActiveTab('app.tinnhan')}">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle red fa-stack-2x"></i>
+                  <i class="fa fa-comments fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Tin nhắn</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.schedule" menu-toggle="left" ng-class="{active: isActiveTab('app.tkb')}">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle violet fa-stack-2x"></i>
+                  <i class="fa fa-calendar fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Thời khóa biểu</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.goal" menu-toggle="left" ng-class="{active: isActiveTab('app.ketquahoc')}">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle blue fa-stack-2x"></i>
+                  <i class="fa fa-area-chart fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Kết quả học tập</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.contact" menu-toggle="left" ng-class="{active: isActiveTab('app.lienhe')}">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle green fa-stack-2x"></i>
+                  <i class="fa fa-phone fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Liên hệ</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.setting" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle pink fa-stack-2x"></i>
+                  <i class="fa fa-cog fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Cài đặt</span>
+              </a>
+            </li>
+            <li>
+              <a on-tap="logout()" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle violet fa-stack-2x"></i>
+                  <i class="fa fa-sign-out fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Đăng xuất</span>
+              </a>
+            </li>
+          </ul>
+            <!-- <ion-list>
+                <ion-item nav-clear menu-close ui-sref="app.activity">
+                    Activity
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.login">
+                    Login
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.profile">
+                    Profile
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.friends">
+                    Friends
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.gallery">
+                    Gallery
+                </ion-item>
+            </ion-list> -->
+
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

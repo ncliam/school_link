@@ -1,0 +1,30 @@
+<ion-view view-title="Tin nhắn">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in" style="margin-top: 10px; margin-bottom: 55px;">
+        <div class="item card-item" style="padding: 0px;" ng-repeat="channel in listChannel">
+            <div on-tap="chooseChannel(channel)" style="margin: 5px;" class="card stable-bg ink ink-dark">
+                <div ng-if="channel[1].users.length === 2" class="item item-avatar item-text-wrap" style="background: none; padding: 5px 5px 5px 88px; min-height: 65px;">
+                    <span class="avatar" style="background-image: url('img/sms-icon.png'); width: 45px; height: 45px;"></span>
+                    <strong><span ng-repeat="userChat in channel[1].users" ng-if="userChat.id !== user.uid"><span ng-show="listChatName[userChat.id]">{{listChatName[userChat.id]}}</span><span ng-show="!listChatName[userChat.id]">{{userChat.name}}</span></span></strong>
+                    <span style="color: gray; font-style: italic; font-size: 12px; float: right;">{{listChannelLocal[channel[1].uuid].last_message.date}}</span>
+                    <div class="card-footer text-right">
+                        <div class="pull-left" style="color: gray; font-style: italic; font-size: 12px;" ng-class="{textBold: listChannelLocal[channel[1].uuid].numberNotifi > 0}">
+                            {{listChannelLocal[channel[1].uuid].last_message.text}}
+                        </div>
+                    </div>
+                    <i ng-show="listChannelLocal[channel[1].uuid].numberNotifi && listChannelLocal[channel[1].uuid].numberNotifi > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 0px 7px; font-size: 12px; float: right;">{{listChannelLocal[channel[1].uuid].numberNotifi}}</i>
+                </div>
+                <div ng-if="channel[1].users.length > 2" class="item item-avatar item-text-wrap" style="background: none; padding: 5px 5px 5px 88px; min-height: 65px;">
+                  <span class="avatar" style="background-image: url('img/sms-icon.png'); width: 45px; height: 45px;"></span>
+                  <strong><span ng-repeat="userChat in channel[1].users" ng-if="userChat.id !== user.uid" class="name">{{listChatName[userChat.id]}} <span ng-hide="$last">, </span></span> </strong>
+                  <span style="color: gray; font-style: italic; font-size: 12px; float: right;">{{listChannelLocal[channel[1].uuid].last_message.date}}</span>
+                  <div class="card-footer text-right">
+                      <div class="pull-left" style="color: gray; font-style: italic; font-size: 12px;" ng-class="{textBold: listChannelLocal[channel[1].uuid].numberNotifi > 0}">
+                          {{listChannelLocal[channel[1].uuid].last_message.text}}
+                      </div>
+                  </div>
+                  <i ng-show="listChannelLocal[channel[1].uuid].numberNotifi && listChannelLocal[channel[1].uuid].numberNotifi > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 0px 7px; font-size: 12px; float: right;">{{listChannelLocal[channel[1].uuid].numberNotifi}}</i>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

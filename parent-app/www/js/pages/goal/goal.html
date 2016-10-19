@@ -1,0 +1,52 @@
+<ion-view view-title="">
+  <ion-nav-bar class="bar-positive" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+    <!-- <ion-nav-back-button class="no-text">
+    </ion-nav-back-button> -->
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+       <select class="form-control" style="width: 50%;height: 30px;border: none;background: #387ef5;color: white;font-size: 16px;" ng-change="changeSemester()" ng-options="semester.id as semester.name for semester in listSemester" ng-model="formData.semester_id" ng-required="true"></select>
+    </ion-nav-title>
+  </ion-nav-bar>
+  <div class="tabs-striped tabs-top">
+    <div class="tabs" style="background: #f8f8f8;margin-top: 5px;">
+      <a class="tab-item" ng-click="chooseTab('w1')" ng-class="{active: markType == 'w1'}">
+        Hệ số 1
+      </a>
+      <a class="tab-item" ng-click="chooseTab('w2')"  ng-class="{active: markType == 'w2'}">
+        Hệ số 2
+      </a>
+      <a class="tab-item" ng-click="chooseTab('final')"  ng-class="{active: markType == 'final'}">
+        Học kỳ
+      </a>
+      <a class="tab-item" ng-click="chooseTab('average')"  ng-class="{active: markType == 'average'}">
+        Tổng kết
+      </a>
+    </div>
+  </div>
+  <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in" style="padding-top: 60px; margin-bottom: 55px">
+    <div ng-repeat="(key, value) in markListByType | groupBy: 'date_exam_week'" class="test">
+      <p class="text-center instruction-text" style="margin: 10px;">{{key}}</p>
+      <div class="row row-kq header">
+        <div class="col col-kq">Môn</div>
+        <div class="col col-kq">Điểm tổng kết</div>
+      </div>
+      <div class="row row-kq" ng-repeat="item in value">
+        <div class="col col-kq">{{item.subjectName}}</div>
+        <div class="col col-kq">{{item.mark}}</div>
+      </div>
+    </div>
+    <div ng-show="markType ==='average'" style="padding: 10px;">
+      <div ng-show="markHL" style="padding: 5px 0px;">
+        <strong>Học lực: </strong>
+        <span>{{markHL.name | translate}}</span>
+      </div>
+      <div ng-show="markHK" style="padding: 5px 0px;">
+        <strong>Hạnh kiểm: </strong>
+        <span>{{markHK.name | translate}}</span>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
