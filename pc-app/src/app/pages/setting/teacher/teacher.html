@@ -19,8 +19,8 @@
         <tbody>
         <tr ng-repeat="teacher in listTeacher" class="no-top-border">
           <td>{{teacher.name}}</td>
-          <td>{{teacher.work_phone}}</td>
-          <td>{{teacher.work_email}}</td>
+          <td><span ng-show="teacher.work_phone">{{teacher.work_phone}}</span></td>
+          <td><span ng-show="teacher.work_phone">{{teacher.work_email}}</span></td>
            <td style="cursor: pointer; text-align: right;" ng-click="editTeacher(teacher)"><i class="ion-edit"></i></td>
         </tr>
         </tbody>

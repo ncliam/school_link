@@ -23,20 +23,21 @@
           last: _self.last,
           sid: user.sid
         };
+        localStorageService.set("doPoll", {poll: true});
         $request.pollRequest(path, param, function(data){
           console.log(data);
           if(data.length > 0 && data[0].id){
             _self.last = data[0].id;
-            localStorageService.set("new_message", data)
+            localStorageService.set("new_message", data);
             MultipleViewsManager.updateView("new_message");
           }
+          localStorageService.remove("doPoll");
           _self.poll();
         }, function(error){
+          localStorageService.remove("doPoll");
           _self.poll();
           console.log(error);
         });
-      } else{
-        _self.poll();
       }
       
     }

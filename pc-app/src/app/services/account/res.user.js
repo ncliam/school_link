@@ -180,7 +180,28 @@
           info.user_ids
         ]
       };
-    $request.postRequest(path, param, callbackSuccess, callbackError);
-    }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
+    this.forgetPassword = function(info, callbackSuccess, callbackError){
+      var path ="/api/forgot_password_request";
+      var param = {
+        model: "hr.employee",
+        mobile: info.mobile
+      }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+    
+    this.confirmForget = function(info, callbackSuccess, callbackError){
+      var path ="/api/forgot_password_verify";
+      var param = {
+        mobile: info.mobile,
+        token_id: info.token_id,
+        typing_code: info.typing_code,
+        password: info.password
+      }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
   }
 })();

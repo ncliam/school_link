@@ -93,13 +93,13 @@
         args: [{
           name: info.name,
           last_name: info.last_name,
-          home_town: info.home_town || false,
-          home_address: info.home_address || false,
+          home_town: info.home_town || "",
+          home_address: info.home_address || "",
           birthday: info.birthday || false,
           teacher: true,
           user_id: info.user_id || false,
-          work_email: info.work_email || false,
-          work_phone: info.work_phone || false
+          work_email: info.work_email || "",
+          work_phone: info.work_phone || ""
         }]
       };
       $request.postRequest(path, param, callbackSuccess, callbackError);
@@ -117,11 +117,11 @@
             {
               name: info.name,
               last_name: info.last_name,
-              home_town: info.home_town || false,
-              home_address: info.home_address || false,
+              home_town: info.home_town || "",
+              home_address: info.home_address || "",
               birthday: info.birthday || false,
-              work_email: info.work_email || false,
-              work_phone: info.work_phone || false
+              work_email: info.work_email || "",
+              work_phone: info.work_phone || ""
             }
           ]
         };

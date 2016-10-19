@@ -86,14 +86,9 @@
       $Teacher.updateTeacher($scope.teacher, function(result){
         toastr.success("Cập nhật giáo viên thành công", "", {});
         modalTeacher.dismiss('cancel');
-        var existTeacher = _.find($scope.listTeacher, function(teac){
-          return teac.id === $scope.teacher.id;
-        });
-        existTeacher.name = $scope.teacher.name;
-        existTeacher.mobile = $scope.teacher.mobile;
-        existTeacher.email = $scope.teacher.email;
+       
         $scope.teacher = {};
-        listTeacher = JSON.parse(JSON.stringify($scope.listTeacher));
+        _init();
       }, function(error){
         $Error.callbackError(error);
       });
@@ -117,11 +112,8 @@
         $Teacher.createTeacher($scope.teacher, function(result){
           toastr.success("Tạo giáo viên thành công", "", {});
           modalTeacher.dismiss('cancel');
-          $scope.teacher.id = result;
-          var newTeacher = JSON.parse(JSON.stringify($scope.teacher));
-          $scope.listTeacher.unshift(newTeacher);
+          _init();
           $scope.teacher = {};
-          listTeacher = JSON.parse(JSON.stringify($scope.listTeacher));
         }, function(error){
           $Error.callbackError(error);
         });
@@ -159,8 +151,6 @@
         var search = _bodauTiengViet($scope.form.search);
         $scope.listTeacher = _.filter(listTeacher, function(teacher) {
           return _bodauTiengViet(teacher.name).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(teacher.work_phone).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(teacher.work_email).toUpperCase().indexOf(search.toUpperCase()) >=0 
         });
       } else{
         $scope.listTeacher = listTeacher;

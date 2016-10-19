@@ -56,7 +56,7 @@
       var path ="/api/search";
       var param = {
         model: _self.model,
-        domain: [["student", "=", true], ["name", "ilike", info.value]],
+        domain: [["student", "=", true],["display_name", "ilike", info.value]],
         fields: info.fields || _self.fields,
         offset: info.offset || _self.offset,
         limit: info.limit || _self.limit,
@@ -91,8 +91,8 @@
         args: [{
           name: info.name,
           last_name: info.last_name,
-          home_town: info.home_town || false,
-          home_address: info.home_address || false,
+          home_town: info.home_town || "",
+          home_address: info.home_address || "",
           birthday: info.birthday || false,
           student: true,
           parent_ids: [[6, false, info.parent_ids]]
@@ -113,8 +113,8 @@
             {
               name: info.name,
               last_name: info.last_name,
-              home_town: info.home_town || false,
-              home_address: info.home_address || false,
+              home_town: info.home_town || "",
+              home_address: info.home_address || "",
               birthday: info.birthday || false,
               parent_ids: [[6, false, info.parent_ids]]
             }

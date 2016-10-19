@@ -7,25 +7,55 @@
     <!-- <a ng-click="gotoRegister()" class="auth-link">New to Medic Man? Sign up!</a> -->
 
     <form class="form-horizontal">
-      <!-- <div class="form-group" ng-show="showHost">
-        <label for="inputEmail3" class="col-sm-2 control-label">Host</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" ng-model="host" placeholder="Host">
+      <div ng-show="form ==='login'">
+        <div class="form-group">
+          <label for="inputEmail3" style="margin: 0px;">{{'login.user' | translate}}:</label>
+          <input type="text" class="form-control" ng-model="user.email" placeholder="Tên đăng nhập">
         </div>
-      </div> -->
-      <div class="form-group">
-        <label for="inputEmail3" style="margin: 0px;">{{'login.user' | translate}}:</label>
-        <input type="text" class="form-control" ng-model="user.email" placeholder="Tên đăng nhập">
+        <div class="form-group">
+          <label for="inputPassword3" style=" margin: 0px;">Password:</label>
+          <input type="password" class="form-control" ng-model="user.password" placeholder="Mật khẩu">
+        </div>
+        <div class="form-group" style="margin-top: 30px;">
+          <div class="w25 fl">&nbsp;</div>
+          <div class="w75 fl">
+            <button ng-click="login()" class="btn btn-auth" style="background: #1BAFF0">Đăng nhập</button>
+            <a ng-click="gotoForgetPass()" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quên mật khẩu?</a>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="inputPassword3" style=" margin: 0px;">Password:</label>
-        <input type="password" class="form-control" ng-model="user.password" placeholder="Mật khẩu">
+      <div ng-show="form ==='forget'">
+        <div class="form-group">
+          <label for="inputEmail3" style="margin: 0px;">Số điện thoại:</label>
+          <input type="text" class="form-control" ng-model="user.mobile" placeholder="Số điện thoại">
+        </div>
+        <div class="form-group" style="margin-top: 30px;">
+          <div class="w25 fl">&nbsp;</div>
+          <div class="w75 fl">
+            <button ng-click="forgetPass()" class="btn btn-auth" style="background: #1BAFF0">Xác nhận</button>
+            <a ng-click="form ='login'" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quay lại</a>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <div class="w25 fl">&nbsp;</div>
-        <div class="w75 fl">
-          <button ng-click="login()" class="btn btn-auth" style="background: #1BAFF0">Đăng nhập</button>
-          <a href class="forgot-pass" style="color: #1BAFF0">Quên mật khẩu?</a>
+      <div ng-show="form ==='confirm'">
+        <div class="form-group">
+          <label for="inputEmail3" style="margin: 0px;">Mật khẩu mới:</label>
+          <input type="password" class="form-control" ng-model="user.password_register" placeholder="Mật khẩu mới">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" style="margin: 0px;">Xác nhận:</label>
+          <input type="password" class="form-control" ng-model="user.passwordConfirm" placeholder="Xác nhận mật khẩu mới">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" style="margin: 0px;">Mã xác nhận:</label>
+          <input type="text" class="form-control" ng-model="user.code" placeholder="Mã xác nhận">
+        </div>
+        <div class="form-group" style="margin-top: 30px;">
+          <div class="w25 fl">&nbsp;</div>
+          <div class="w75 fl">
+            <button ng-click="confirmPass()" class="btn btn-auth" style="background: #1BAFF0">Xác nhận</button>
+            <!-- <a ng-click="doForgetPass()" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quên mật khẩu?</a> -->
+          </div>
         </div>
       </div>
     </form>

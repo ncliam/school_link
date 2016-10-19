@@ -9,19 +9,20 @@
     'ui.router',
 
     /*'BlurAdmin.pages.dashboard',*/
-    'BlurAdmin.pages.ui',
+    /*'BlurAdmin.pages.ui',
     'BlurAdmin.pages.components',
     'BlurAdmin.pages.form',
     'BlurAdmin.pages.tables',
     'BlurAdmin.pages.charts',
-    'BlurAdmin.pages.profile',
+    'BlurAdmin.pages.profile',*/
     'SchoolLink.pages.login',
     'SchoolLink.pages.setting',
     'BlurAdmin.pages.message',
     'SchoolLink.pages.schedule',
     'SchoolLink.pages.test'
   ])
-      .config(routeConfig);
+      .config(routeConfig)
+      .run(runConfig);
   /** @ngInject */
   function routeConfig($urlRouterProvider, baSidebarServiceProvider, cfpLoadingBarProvider, $translateProvider, usSpinnerConfigProvider) {
     $urlRouterProvider.otherwise('/login');
@@ -45,6 +46,10 @@
     cfpLoadingBarProvider.spinnerColor = '#bd2c00';
     cfpLoadingBarProvider.barColor = '#bd2c00';
     usSpinnerConfigProvider.setTheme('blue', {color: 'blue', radius: 10});
+  }
+
+  function runConfig(localStorageService){
+    localStorageService.remove("doPoll");
   }
 
 })();

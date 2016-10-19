@@ -313,7 +313,7 @@ li[disabled] {
   border-radius: 0px;
   border-bottom: 1px solid #ddd;
   width: 80%;
-  margin-left: 10%;
+  margin-right: 10%;
   text-align: center;
 }
 .pb5{padding-bottom: 5px;}
@@ -403,3 +403,11 @@ tags-input .autocomplete .suggestion-item.selected{
   -moz-background-size: 3px 3px;
   background-size: 3px 3px;
   }
+.colorBlue{
+  color: #0fafe4
+}
+.datetime-picker-dropdown{
+  position: fixed;
+  top: 155px;
+  left: 135px !important;
+}

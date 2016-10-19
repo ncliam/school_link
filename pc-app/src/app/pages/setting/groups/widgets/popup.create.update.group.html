@@ -1,6 +1,6 @@
 <div class="modal-content" style="margin-top: 10%;">
   <div class="modal-header bg-info">
-    <span>{{'menu.setting.group' | translate}}</span>
+    <span ng-show="!group.id">Thêm </span><span ng-show="group.id">Sửa </span><span>{{'menu.setting.group' | translate}}</span>
   </div>
   <div class="modal-body text-center">
   	<div class="row">

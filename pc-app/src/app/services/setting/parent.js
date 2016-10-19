@@ -110,8 +110,8 @@
         args: [{
           name: info.name,
           mobile: info.mobile,
-          email: info.email || false,
-          street: info.street || false,
+          email: info.email || "",
+          street: info.street || "",
           company_id: _self.user.company_id,
           active: true,
           customer: true,
@@ -134,8 +134,8 @@
             {
               name: info.name,
               mobile: info.mobile,
-              email: info.email || false,
-              street: info.street || false,
+              email: info.email || "",
+              street: info.street || "",
               category_id: info.category_id
             }
           ]

@@ -31,10 +31,10 @@
         </thead>
         <tbody>
         <tr ng-click="gotoDetailStudent(student)" ng-repeat="student in listStudent" class="no-top-border">
-          <td style="text-align: left;">{{student.name}}</td>
+          <td style="text-align: left;">{{student.display_name}}</td>
           <td><span ng-show="student.birthdayFormat">{{student.birthdayFormat}}</span></td>
-          <td>{{student.home_address}}</td>
-          <td>{{student.home_town}}</td>
+          <td  style="width: 350px;"><span ng-show="student.home_address">{{student.home_address}}</span></td>
+          <td  style="width: 150px;"><span ng-show="student.home_town">{{student.home_town}}</span></td>
           <td ng-click="confirmRemove(student); $event.stopPropagation();" style="color: #7d7d7d; cursor: pointer;"><i class="ion-ios-trash-outline"></i></td>
         </tr>
         </tbody>

@@ -113,6 +113,23 @@
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
 
+    this.updateStateToClose = function(info, callbackSuccess, callbackError) {
+      var path ="/api/callKw";
+      var param = {
+        model: _self.model,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"update_state",
+        args: [],
+        kwargs:{
+          state:"closed",
+          uuid: info.uuid
+        }
+      };
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
     this.getHistoryByUuid = function(info, callbackSuccess, callbackError){
       var path ="/api/history";
       var param = {
@@ -128,7 +145,22 @@
       var param = {
         uuid: info.uuid,
         message_content: info.message,
-        sid: _self.user.sid
+        sid: _self.user.sid,
+        to_users: info.to_users || [],
+        from_user: info.from_user
+      };
+      $request.pollRequest(path, param, callbackSuccess, callbackError);
+    };
+
+    this.postMessageDelay = function(info, callbackSuccess, callbackError){
+      var path ="/api/postDelay";
+      var param = {
+        uuid: info.uuid,
+        message_content: info.message,
+        sid: _self.user.sid,
+        to_users: info.to_users || [],
+        from_user: info.from_user,
+        delayTime: info.delayTime
       };
       $request.pollRequest(path, param, callbackSuccess, callbackError);
     };

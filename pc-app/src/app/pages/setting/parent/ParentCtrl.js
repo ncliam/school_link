@@ -73,16 +73,16 @@
       $scope.listCategoryOfParner = [];
       $scope.parent = JSON.parse(JSON.stringify(parent));
       if($scope.parent.category_id.length > 0){
-        $scope.parent.category_id = $scope.parent.category_id[0];
+        $scope.parent.categoryId = $scope.parent.category_id[0];
       }
       _openPopupParent();
     };
 
     $scope.acceptParent = function(){
-      if(!$scope.parent.category_id){
+      if(!$scope.parent.categoryId){
         $scope.parent.category_id = [[6, false, []]];
       } else{
-        $scope.parent.category_id = [[6, false, [$scope.parent.category_id]]];
+        $scope.parent.category_id = [[6, false, [$scope.parent.categoryId]]];
       }
       if(_validate()){
         if($scope.parent.id){
@@ -142,9 +142,6 @@
         var search = _bodauTiengViet($scope.form.search);
         $scope.listParent = _.filter(listParent, function(parent) {
           return _bodauTiengViet(parent.name).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(parent.mobile).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(parent.email).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(parent.street).toUpperCase().indexOf(search.toUpperCase()) >=0 
         });
       } else{
         $scope.listParent = listParent;

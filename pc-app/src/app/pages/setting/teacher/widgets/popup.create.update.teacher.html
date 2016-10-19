@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="row">
-      <!-- <div class="col-sm-12">
+      <div class="col-sm-12">
         <div class="form-group">
           <label for="inputLastName" style="font-weight: bold;">Ngày sinh:</label>
           <p class="input-group" style="float: right;width: 75%;">
@@ -36,8 +36,8 @@
             </span>
           </p>
         </div>
-      </div> -->
-      <div class="col-sm-12">
+      </div>
+      <div class="col-sm-12" ng-show="!teacher.id">
         <div class="form-group">
           <label for="inputFirstName">Tên đăng nhập:</label>
           <input ng-model="teacher.username" type="text" class="form-control">

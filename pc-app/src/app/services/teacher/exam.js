@@ -60,6 +60,20 @@
       }
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
+    this.getExamByTypes = function(info, callbackSuccess, callbackError){
+      var path ="/api/search";
+      var param = {
+        model: _self.model,
+        domain: [["semester", "=", info.semester], ["class_id", "=", info.class_id], ["type", "in", info.types]],
+        fields: info.fields || _self.fields,
+        offset: info.offset || _self.offset,
+        limit: info.limit || _self.limit,
+        session_id: _self.user.session_id,
+        context: _self.user.context,
+        sid: _self.user.sid
+      }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
       
     this.getDefault = function(info, callbackSuccess, callbackError){
       var path ="/api/callKw";

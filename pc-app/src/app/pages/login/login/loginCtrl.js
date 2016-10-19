@@ -21,6 +21,7 @@
       $scope.user.email = user.username;
       $scope.user.password = "";
     };
+    $scope.form = "login";
     
     $scope.host = "";
     $scope.login = function(){
@@ -52,7 +53,9 @@
           localStorageService.set("user", info);
           $Imchat.updateStatusUser({id:info.presense_id ,status: "online"}, function(result){}, function(error){});
         }, function(error){$Error.callbackError(error);})
-        $Longpolling.poll();
+        if(!localStorageService.get("doPoll")){
+          $Longpolling.poll();
+        }
         $resUser.checkGroupForUser({group_name: "school_link.group_school_admin"}, function(result){
           if(result){
             info.permission = 2;
@@ -117,6 +120,45 @@
       $Imchat.user = user;
       $Exam.user = user;
       $Longpolling.last = 0;
+    };
+
+    $scope.gotoForgetPass = function(){
+      $scope.form = "forget";
+    };
+    var token_id;
+    $scope.forgetPass = function(){
+      $resUser.forgetPassword({mobile: $scope.user.mobile}, function(result){
+        token_id = result;
+        $scope.form = "confirm";
+        toastr.success("Vui lòng đợi tin nhắn trong giây lát", "", {});
+      }, function(error){
+
+      })
+    };
+    $scope.confirmPass = function(){
+      if(_validate()){
+        var info = {
+          mobile: $scope.user.mobile,
+          token_id: token_id || 2,
+          typing_code: $scope.user.code,
+          password: $scope.user.password_register
+        };
+        $resUser.confirmForget(info, function(result){
+          toastr.success("Đổi mật khẩu thành công", "", {});
+          $scope.form= "login";
+        }, function(error){
+          toastr.error("Sai mã xác nhận", "", {});
+        });
+      }
+    };
+
+    var _validate = function(){
+      var flag = true;
+      if($scope.user.password_register !== $scope.user.passwordConfirm){
+        flag = false;
+        toastr.error("Mật khẩu phải giống nhau", "", {});
+      }
+      return flag;
     }
 
   }

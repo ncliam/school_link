@@ -19,7 +19,6 @@
         $scope.listStudent  = result.records;
         $scope.listStudent.forEach(function(stu){
           stu.birthday ? stu.birthdayFormat = moment(stu.birthday).format("DD-MM-YYYY") : stu.birthdayFormat = false;
-          stu.name = stu.last_name + stu.name;
         });
         listStudent = JSON.parse(JSON.stringify($scope.listStudent));
       }, function(error){$Error.callbackError(error);});
@@ -58,10 +57,7 @@
       if($scope.form.search.length > 0){
         var search = _bodauTiengViet($scope.form.search);
         $scope.listStudent = _.filter(listStudent, function(student) {
-          return _bodauTiengViet(student.name).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(student.birthdayFormat).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(student.home_address).toUpperCase().indexOf(search.toUpperCase()) >=0 
-          || _bodauTiengViet(student.home_town).toUpperCase().indexOf(search.toUpperCase()) >=0 
+          return _bodauTiengViet(student.display_name).toUpperCase().indexOf(search.toUpperCase()) >=0 
         });
       } else{
         $scope.listStudent = listStudent;

@@ -2,7 +2,8 @@
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase">
   <uib-tabset active="$tabSetStatus.activeTab" class="tac">
-    <label style="color: #fff;margin-top: 10px;">Thời khóa biểu</label>
+    <input ng-change="searchSchedule()" style="width: 40%; margin-left: 3px; margin-top: 3px; float: left;font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Tìm kiếm thời khóa biểu theo lớp">
+   <!--  <label style="color: #fff;margin-top: 10px;">Thời khóa biểu</label> -->
     <div class="panel-heading" ng-click="gotoDetailSchedule()" style="float: right; height: 40px; box-shadow: none; border-bottom: none; border-left: 1px solid #fffffff;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-plus-outline"></i></div>
   </uib-tabset>
   <div">
@@ -17,11 +18,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="schedule in listSchedule" class="no-top-border">
+        <tr ng-repeat="schedule in listSchedule" ng-click="gotoDetailSchedule(schedule)" class="no-top-border">
           <td>{{schedule.name}}</td>
           <td>{{schedule.class_id[1]}}</td>
           <td>{{schedule.semester | translate}}</td>
-           <td style="cursor: pointer; text-align: right;" ng-click="gotoDetailSchedule(schedule)"><i class="ion-edit"></i></td>
+           <td ng-click="confirmRemove(schedule); $event.stopPropagation();" style="cursor: pointer; text-align: right;" ng-click="gotoDetailSchedule(schedule)"><i class="ion-ios-trash-outline"></i></i></td>
         </tr>
         </tbody>
       </table>
