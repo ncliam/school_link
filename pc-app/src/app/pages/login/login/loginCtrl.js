@@ -45,7 +45,7 @@
         info.login = true;
         localStorageService.set("user", info);
         _setUserForService(info);
-        _initDatabaseLocalForUser();
+        _initDatabaseLocalForUser(info);
         $rootScope.$pageLogin = false;
         toastr.success($translate.instant('login.success'), "", {});
         $Imchat.getPresenseByUserId({}, function(result){
@@ -74,9 +74,12 @@
     };
     
     // init database local for user
-    var _initDatabaseLocalForUser = function(){
+    var _initDatabaseLocalForUser = function(userLogin){
       var user = $scope.user.email.split("@")[0];
       $pouchDb.initDB("res.user");
+      var channelDataName = "channel" + userLogin.uid;
+      $pouchDb.initDB(channelDataName);
+
       _initDatabaseUser();
     };
 

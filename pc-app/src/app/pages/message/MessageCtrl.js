@@ -10,13 +10,14 @@
 
   /** @ngInject */
   function MessageCtrl($stateParams, $scope, $resUser, $Imchat, localStorageService, $time, $location, $anchorScroll, $uibModal, $SchoolClass, $Schedule, 
-    $Teacher, $Parent, $Student, MultipleViewsManager, $Error, toastr) {
+    $Teacher, $Parent, $Student, MultipleViewsManager, $Error, toastr,$pouchDb) {
     $scope.user = localStorageService.get("user");
+    var channelDataName = "channel" + $scope.user.uid;
     $scope.listChannel = [];
   	$scope.listUser = [];
     var chooseChannel = {};
   	var dataSendMessage = {};
-  	$scope.form = {};
+  	$scope.form = {search:""};
   	$scope.listMessage = [];
     $scope.historyUser = {};
     $scope.disableForm = true;
@@ -24,6 +25,8 @@
     var listChannelForSearch;
     $scope.listUserForSearch = [];
     $scope.listUserAddNewChannel = [];
+    var listChannelLocalDatabase = [];
+    var chooseChannelLocalDatabase;
     $scope.listChatName = {};
     var currentDate = moment(new Date()).format("DD/MM/YYYY");
     var prevDate = moment($time.getPrevDate(new Date())).format("DD/MM/YYYY");
@@ -62,7 +65,7 @@
           return channel[1].type || channel[1].state === "folded";
         });
         if($scope.listChannel.length > 0){
-         
+          _initChannelToDb($scope.listChannel);
           var listUserId = [];
           $scope.listChannel.forEach(function(channel){
             channel[1].users.forEach(function(user){
@@ -78,9 +81,41 @@
         }
       }, function(error){
         $Error.callbackError(error);
-      })
+      });
+     
   	};
   	_init();
+
+    var _initChannelToDb = function(listChannel){
+      $pouchDb.getAllDocs(channelDataName).then(function(allChannelLc){
+        var newChannels = [];
+        listChannel.forEach(function(channel){
+          var existChannel = _.find(allChannelLc, function(channelLc){
+            return channelLc._id === channel[1].uuid;
+          });
+          if(!existChannel){
+            newChannels.push({
+              _id: channel[1].uuid,
+              channel: channel,
+              listMessage: []
+            })
+          }
+        });
+        $pouchDb.bulkDocs(channelDataName, newChannels).then(function(result){
+          $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
+            listChannelLocalDatabase = allChannelLcDb;
+          })
+        });
+      });
+    };
+
+    var _updateChannelToDb = function(){
+      if(chooseChannelLocalDatabase){
+        $pouchDb.updateDoc(channelDataName, chooseChannelLocalDatabase).then(function(result){
+          chooseChannelLocalDatabase._rev = result.rev;
+        });
+      }
+    }
 
     var _saveChannelLocal = function(listChannel){
       localStorageService.set("channels", listChannel)
@@ -108,6 +143,13 @@
                 message: newMessage.message
               });
             }
+          }
+          if(chooseChannelLocalDatabase){
+            chooseChannelLocalDatabase.listMessage.push(
+              {message: newMessage.message, from_id: newMessage.from_id, 
+                date: moment(newMessage.create_date).format("DD/MM/YYYY HH:mm A"), uuid: newMessage.to_id[1]}
+            );
+            _updateChannelToDb();
           }
           var existChannel = _.find($scope.listChannel, function(channel){
             return channel[1].uuid === newMessage.to_id[1];
@@ -147,7 +189,7 @@
             ]);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }, function(error){$Error.callbackError(error);});
-        } else{
+        } else if(newMessage.state === "open"){
           var existChannel = _.find($scope.listChannel, function(channel){
             return channel[1].uuid === newMessage.uuid;
           });
@@ -162,7 +204,7 @@
                 uuid: newMessage.uuid
               }
             ]);
-            listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
+            _initChannelToDb();
           }
         }
       }
@@ -173,6 +215,9 @@
       if(!$scope.listChannelLocal[channel[1].uuid]){
         $scope.listChannelLocal[channel[1].uuid] = {};
       }
+      chooseChannelLocalDatabase = _.find(listChannelLocalDatabase, function(chanLc){
+        return chanLc._id === channel[1].uuid;
+      });
       $scope.disableForm = false;
       channel.show = true;
   		chooseChannel  = channel;
@@ -359,24 +404,63 @@
       });
       return flag;
     }
-   
+    
+    $scope.listMessageToSeach = [];
     $scope.searchUser = function(){
+      $scope.listMessageToSeach = [];
       if($scope.form.search && $scope.form.search.length > 0){
         var strSearch = _bodauTiengViet($scope.form.search);
-        var listChannel = [];
-        listChannelForSearch.forEach(function(channel){
-          var existUser = _.find(channel[1].users, function(user){
-            return _bodauTiengViet($scope.listChatName[user.id]).toUpperCase().indexOf(strSearch.toUpperCase()) >=0
+        $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
+          listChannelLocalDatabase = allChannelLcDb;
+          listChannelLocalDatabase.forEach(function(channel){
+            channel.listMessage.forEach(function(message){
+              if(_bodauTiengViet($scope.listChatName[message.from_id[0]]).toUpperCase().indexOf(strSearch.toUpperCase()) >=0 ||
+                _bodauTiengViet(message.message).toUpperCase().indexOf(strSearch.toUpperCase()) >=0 ){
+                $scope.listMessageToSeach.push(message);
+              }
+            })
           });
-          if(existUser){
-            listChannel.push(channel);
+          if($scope.listMessageToSeach.length === 0){
+            toastr.warning("Không tìm thấy tin nhắn", "", {});
           }
         });
-        $scope.listChannel = listChannel;
-      } else{
-        $scope.listChannel = listChannelForSearch;
       }
     };
+    $scope.chooseChannelLc = function(message){
+      $scope.listMessageToSeach = [];
+      var existChannel = _.find($scope.listChannel, function(channel){
+        return channel[1].uuid === message.uuid;
+      });
+      if(existChannel){
+        $scope.chooseChannel(existChannel);
+      } else{
+         $Imchat.updateState({uuid: message.uuid}, function(update){
+            $scope.listChannel.push([
+              localStorageService.get("new_message")[0].channel,
+              {
+                state: "open",
+                users: newMessage.users,
+                uuid: newMessage.uuid
+              }
+            ]);
+          }, function(error){$Error.callbackError(error);});
+      }
+    };
+
+    $scope.changeSearch = function(){
+      if($scope.form.search.length === 0){
+          $scope.listMessageToSeach = [];
+         $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
+          listChannelLocalDatabase = allChannelLcDb;
+          if(chooseChannelLocalDatabase){
+            var existChannel = _.find(listChannelLocalDatabase, function(channel){
+              return channel._id === chooseChannelLocalDatabase._id;
+            });
+            chooseChannelLocalDatabase._rev =  existChannel._rev;
+          }
+        });
+      }
+    }
 
     var  _bodauTiengViet = function(str) {  
       if(str){
@@ -417,6 +501,9 @@
       $Imchat.updateStateToClose({uuid: chooseChannel[1].uuid}, function(result){
         $scope.listMessage = [];
         $scope.disableForm = true;
+        /*$scope.listChannel = _.reject($scope.listChannel, function(channel){
+          return channel[1].uuid === chooseChannel[1].uuid;
+        });*/
         _init();
       }, function(error){})
     }

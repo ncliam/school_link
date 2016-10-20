@@ -48,7 +48,7 @@
     usSpinnerConfigProvider.setTheme('blue', {color: 'blue', radius: 10});
   }
 
-  function runConfig(localStorageService){
+  function runConfig(localStorageService, $pouchDb){
     localStorageService.remove("doPoll");
   }
 

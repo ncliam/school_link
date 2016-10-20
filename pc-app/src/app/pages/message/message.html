@@ -3,12 +3,13 @@
     <div ba-panel ba-panel-class="viewport100 mail-panel">
       <div class="letter-layout" style="height: 100%;">
         <div style="height: 100%;" ng-class="{'expanded': tabCtrl.navigationCollapsed}">
-          <div class="col-xlg-7 col-lg-7  col-md-7 col-sm-7 col-xs-7 typography-widget" style="height: 100%; overflow: auto; border-right: 1px solid #ddd;">
-            <div class="mail-messages-control" >
-              <div class="w100" style="float: left;margin-bottom: 10px;">
-                <button style="background: #0FAFE4; border-color:#0FAFE4;" type="button" class="btn btn-success btn-with-icon" ng-click="openPopupCreateGroup()"><i class="ion-ios-plus-outline"></i>Soạn</button>
-                <input ng-change="searchUser()" style="width: 70%; margin-left: 0px; font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm ...">
-              </div>
+          <div  class="col-xlg-7 col-lg-7  col-md-7 col-sm-7 col-xs-7 typography-widget" style="height: 100%; overflow: auto; border-right: 1px solid #ddd;">
+            <div class="w100" style="float: left;padding: 10px;">
+              <button style="background: #0FAFE4; border-color:#0FAFE4;" type="button" class="btn btn-success btn-with-icon" ng-click="openPopupCreateGroup()"><i class="ion-ios-plus-outline"></i>Soạn</button>
+              <i ng-click="searchUser()" class="ion-ios-search" style="float: right; font-size: 24px; margin: 5px; cursor: pointer;"></i>
+              <input ng-change="changeSearch()" style="width: 70%; margin-left: 0px; font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm ...">
+            </div>
+            <div class="mail-messages-control" ng-show="listMessageToSeach.length === 0">
               <div class="messages w100" style="float: left;">
                 <table class="table-hover">
                   <tr ng-repeat="channel in listChannel"
@@ -17,21 +18,17 @@
                       <img src="assets/img/app/profile/user.jpg" class="little-human-picture">
                     </td>
                     <td style="border-right: 1px solid #ddd;">
-                      <div ng-if="channel[1].users.length === 2">
-                        <div class="name-container" ng-repeat="userChat in channel[1].users" ng-if="userChat.id !== user.uid">
+                      <div ng-show="channel[1].users.length === 2">
+                        <div class="name-container" ng-repeat="userChat in channel[1].users" ng-show="userChat.id !== user.uid">
                           <div><span class="name">{{listChatName[userChat.id]}}</span></div>
                           <div><span class="tag label label-primary {{userChat.im_status}}">{{userChat.im_status}}</span></div>
                         </div>
                       </div>
-                      <div ng-if="channel[1].users.length > 2">
+                      <div ng-show="channel[1].users.length > 2">
                         <div style="float: left;" class="name-container" ng-repeat="userChat in channel[1].users">
                           <div><span class="name">{{listChatName[userChat.id]}}</span> <span ng-hide="$last">, </span></div>
                         </div>
                       </div>
-                     <!--  <div class="name-container" ng-repeat="user in channel.users" ng-if="user.id !== user.uid">
-                       <div><span class="name">{{channel.name}}</span></div>
-                       <div><span class="tag label label-primary {{user.im_status}}">{{user.im_status}}</span></div>
-                     </div> -->
                     </td>
                     <td style="min-width: 200px;">
                       <div style="color: gray; font-style: italic; font-size: 12px;" ng-class="{textBold: listChannelLocal[channel[1].uuid].numberNotifi > 0}" class="mail-body-part">{{listChannelLocal[channel[1].uuid].last_message.text | plainText}}</div>
@@ -40,22 +37,52 @@
                       <span>{{listChannelLocal[channel[1].uuid].last_message.date}}</span>
                     </td>
                     <td>
-                      <i ng-show="listChannelLocal[channel[1].uuid].numberNotifi && listChannelLocal[channel[1].uuid].numberNotifi > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 0px 5px; font-size: 12px; float: left; margin-top:-25px;">{{listChannelLocal[channel[1].uuid].numberNotifi}}</i>
+                      <i ng-show="listChannelLocal[channel[1].uuid].numberNotifi && listChannelLocal[channel[1].uuid].numberNotifi > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 0px 5px; font-size: 12px; float: left; margin-top:10px;margin-left: -15px;">{{listChannelLocal[channel[1].uuid].numberNotifi}}</i>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="mail-messages-control" ng-show="listMessageToSeach.length > 0">
+              <div class="messages w100" style="float: left;">
+                <table class="table-hover">
+                  <tr ng-repeat="message in listMessageToSeach"
+                      class="side-message-navigation-item little-human shineHover {{m.tag}}" style="border-bottom: 1px solid #ddd;" ng-click="chooseChannelLc(message)">
+                    <td  class="photo-td">
+                      <img src="assets/img/app/profile/user.jpg" class="little-human-picture">
+                    </td>
+                    <td style="border-right: 1px solid #ddd;">
+                      <div>
+                        <div class="name-container">
+                          <div><span class="name">{{listChatName[message.from_id[0]]}}</span></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="min-width: 200px;">
+                      <div style="color: gray; font-style: italic; font-size: 12px;" ng-class="{textBold: listChannelLocal[channel[1].uuid].numberNotifi > 0}" class="mail-body-part">{{message.message | plainText}}</div>
+                    </td>
+                    <td class="date" style="color: gray; font-style: italic; font-size: 12px;">
+                      <span>{{message.create_date}}</span>
+                    </td>
+                    <td>
                     </td>
                   </tr>
                 </table>
               </div>
             </div>
           </div>
+          <!-- <div ng-show="form.search.length > 0" class="col-xlg-7 col-lg-7  col-md-7 col-sm-7 col-xs-7 typography-widget" style="height: 100%; overflow: auto; border-right: 1px solid #ddd;">
+            
+          </div> -->
           <div class="col-xlg-5 col-lg-5  col-md-5 col-sm-5 col-xs-5 typography-widget" style="padding: 0px 10px; height: 100%;background: #f9f8f8;">
             <div id="divScroll" style="height: calc(100% - 70px); overflow: auto; padding: 10px 0px;" scroll-glue>
               <div style="overflow:hidden;" ng-repeat="message in listMessage">
                 <div style="text-align: center; color: gray; font-style: italic; margin: 5px; font-size:12px;">{{message.showDate}}</div>
-                <div ng-if="message.from_id[0] !== user.uid">
+                <div ng-show="message.from_id[0] !== user.uid">
                   <label style="float: left; margin-top: 15px;">{{listChatName[message.from_id[0]]}}</label>
                   <div style="border: 1px solid gray; width: 80%; float: left; padding: 10px; margin: 5px 0px; border-radius: 25px; background: #ffffff; margin-left: 5px;"> {{message.message}}</div>
                 </div>
-                <div ng-if="message.from_id[0] === user.uid">
+                <div ng-show="message.from_id[0] === user.uid">
                   <div style="border: 1px solid gray; width: 80%; float: right; padding: 10px; margin: 5px 0px; border-radius: 25px; background: #0fafe4; color: #ffffff; margin-right: 5px;">{{message.message}}</div>
                 </div>
               </div>

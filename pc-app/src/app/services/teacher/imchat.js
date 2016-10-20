@@ -134,7 +134,7 @@
       var path ="/api/history";
       var param = {
         uuid: info.uuid,
-        limit: 20,
+        limit: 100,
         sid: _self.user.sid
       };
       $request.postRequest(path, param, callbackSuccess, callbackError);
