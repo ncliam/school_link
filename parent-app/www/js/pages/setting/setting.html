@@ -1,0 +1,71 @@
+<ion-view view-title="Cài đặt">
+    <div class="tabs-striped tabs-top">
+      <div class="tabs" style="background: #f8f8f8;margin-top: 5px;">
+          <a class="tab-item active" ng-class="{active: group == 'setting'}" ng-click="changeGroup('setting')">
+            Thiết lập
+          </a>
+          <a class="tab-item" ng-class="{active: group == 'changepassword'}" ng-click="changeGroup('changepassword')">
+            Đổi mật khẩu
+          </a>
+        </div>
+      </div>
+
+      <ion-content class="bp-content-wrap" style="padding-top:50px;">
+        <div ng-show="group === 'setting'">
+          <ul class="list">
+            <li class="item item-toggle">
+               Rung
+               <label class="toggle toggle-positive">
+                 <input type="checkbox" ng-model="setting.isVibration" ng-change="saveUserSetting()">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </li>
+            <li class="item item-toggle">
+               Chuông
+               <label class="toggle toggle-positive">
+                 <input type="checkbox" ng-model="setting.isSound" ng-change="saveUserSetting()">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </li>
+            <li class="item item-toggle">
+               Thông báo hệ thống
+               <label class="toggle toggle-positive">
+                 <input type="checkbox" ng-model="setting.isNotification" ng-change="changeNotification()">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </li>
+          </ul>
+         
+        </div>
+
+         <div ng-show="group === 'changepassword'">
+            <div class="row" style="padding-top:20px">
+                  <div class="col">
+                      <input type="text" placeholder="Mật khẩu cũ" ng-model="user.old_passwd">
+                  </div>
+              </div>
+              <div class="row" style="padding-top:20px">
+                  <div class="col">
+                      <input type="password" placeholder="Mật khẩu mới" ng-model="user.new_passwd">
+                  </div>
+              </div>
+              <div class="row" style="padding-top:20px">
+                  <div class="col">
+                      <input type="password" placeholder="Xác nhận mật khẩu mới" ng-model="user.confirm_new_passwd">
+                  </div>
+              </div>
+              <div class="row" style="padding-top:20px">
+                <div class="col">
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="changePassword()" >Xác nhận</button>
+                </div>
+              </div>
+          </div>
+      </ion-content>
+
+</ion-view>
