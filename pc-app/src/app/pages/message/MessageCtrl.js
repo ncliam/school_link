@@ -204,7 +204,7 @@
                 uuid: newMessage.uuid
               }
             ]);
-            _initChannelToDb();
+            _initChannelToDb($scope.listChannel);
           }
         }
       }
