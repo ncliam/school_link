@@ -13,7 +13,11 @@
     var _self = this;
     this.callbackError = function(error){
       //console.log(error);
+      if(error.message && error.message.indexOf("Duplicate") >= 0){
+        toastr.error("Trùng dữ liệu", "Lỗi", {});
+      } else{
         toastr.error(error.message, "Lỗi", {});
+      }
     }
   }
 })();

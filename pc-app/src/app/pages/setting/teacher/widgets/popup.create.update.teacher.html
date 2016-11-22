@@ -43,6 +43,12 @@
           <input ng-model="teacher.username" type="text" class="form-control">
         </div>
       </div>
+      <div class="col-sm-12" ng-show="teacher.id">
+        <div class="form-group">
+          <label for="inputFirstName">Tên đăng nhập:</label>
+          <span style="float: left; margin-top: 7px;">{{teacher.user_login}}</span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

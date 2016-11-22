@@ -57,6 +57,11 @@
       if(teacher){
         $scope.teacher = JSON.parse(JSON.stringify(teacher));
         $scope.teacher.birthday = new Date($scope.teacher.birthday);
+        if($scope.teacher.user_id && !$scope.teacher.user_login){
+          $resUser.getUserById({id: $scope.teacher.user_id[0]}, function(result){
+            $scope.teacher.user_login = result.records[0].login;
+          }, function(error){$Error.callbackError(error);})
+        }
       } else{
         $scope.teacher = {};
       }
@@ -83,6 +88,9 @@
     };
 
     var _updateTeacher = function(){
+      if($scope.teacher.birthday){
+        $scope.teacher.birthday = moment($scope.teacher.birthday).format("YYYY-MM-DD");
+      }
       $Teacher.updateTeacher($scope.teacher, function(result){
         toastr.success("Cập nhật giáo viên thành công", "", {});
         modalTeacher.dismiss('cancel');
@@ -107,7 +115,7 @@
       $resUser.createUser(info, function(result){
         $scope.teacher.user_id = result;
         if($scope.teacher.birthday){
-          $scope.teacher.birthday = moment($scope.teacher).format("YYYY-MM-DD");
+          $scope.teacher.birthday = moment($scope.teacher.birthday).format("YYYY-MM-DD");
         }
         $Teacher.createTeacher($scope.teacher, function(result){
           toastr.success("Tạo giáo viên thành công", "", {});

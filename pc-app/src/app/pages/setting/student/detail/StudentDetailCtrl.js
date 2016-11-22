@@ -116,7 +116,7 @@
         toastr.success("Cập nhật học sinh thành công", "", {});
         $state.go("setting.student.list");
       }, function(error){
-
+        $Error.callbackError(error);
       });
     };
     var _createStudent = function(info){

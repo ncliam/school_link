@@ -202,7 +202,7 @@
               });
             })
             
-          }, function(error){})
+          }, function(error){$Error.callbackError(error);})
         }
       } else if($scope.tab==="hk"){
         if($scope.formData.semester_id && $scope.formData.class_id){
@@ -236,7 +236,7 @@
               });
             })
             
-          }, function(error){})
+          }, function(error){$Error.callbackError(error);})
         }
       }
     };
@@ -263,20 +263,38 @@
               }
             }
           } else{
-            if(mark.mark || mark.id_level){
-              listExamCreate.push({
-                name: mark.id_level? _getLevelNameById(mark.id_level) : "/",
-                class_id: $scope.formData.class_id,
-                teacher_id: teacher_id,
-                student_id: key,
-                mark: mark.mark,
-                date_exam: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-                subject_id: mark.id_level ? null : $scope.formData.subject_id,
-                type: type,
-                semester: existSemester.value,
-                sequence: mark.sequence,
-                company_id: user.company_id
-              });
+            if(mark.mark !== null){
+              if(type === "conduct" || type==="overall"){
+                if(mark.id_level){
+                  listExamCreate.push({
+                    name: mark.id_level? _getLevelNameById(mark.id_level) : "/",
+                    class_id: $scope.formData.class_id,
+                    teacher_id: teacher_id,
+                    student_id: key,
+                    mark: mark.mark,
+                    date_exam: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+                    subject_id: mark.id_level ? null : $scope.formData.subject_id,
+                    type: type,
+                    semester: existSemester.value,
+                    sequence: mark.sequence,
+                    company_id: user.company_id
+                  });
+                }
+              } else{
+                listExamCreate.push({
+                  name: mark.id_level? _getLevelNameById(mark.id_level) : "/",
+                  class_id: $scope.formData.class_id,
+                  teacher_id: teacher_id,
+                  student_id: key,
+                  mark: mark.mark,
+                  date_exam: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+                  subject_id: mark.id_level ? null : $scope.formData.subject_id,
+                  type: type,
+                  semester: existSemester.value,
+                  sequence: mark.sequence,
+                  company_id: user.company_id
+                });
+              }
             }
           }
         });
@@ -296,12 +314,14 @@
         $Exam.createListExam({listExam: listExamCreate}, function(result){
           toastr.success("Cập nhật thành công", "", {});
           $scope.searchExam();
+          $scope.editSave = false;
         }, function(error){$Error.callbackError(error);});
       }
       if(listExamUpdate.length> 0){
         $Exam.updateListExam({listExam: listExamUpdate}, function(result){
           toastr.success("Cập nhật thành công", "", {});
           $scope.searchExam();
+          $scope.editSave = false;
         }, function(error){
           $Error.callbackError(error);
         });
@@ -309,6 +329,7 @@
       if(listExamDelete.length > 0){
         $Exam.removeExam({listId: listExamDelete}, function(result){
           $scope.searchExam();
+          $scope.editSave = false;
         }, function(error){
           $Error.callbackError(error);
         });

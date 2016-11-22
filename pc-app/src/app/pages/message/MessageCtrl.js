@@ -158,7 +158,7 @@
              $Imchat.updateState({uuid: newMessage.to_id[1]}, function(update){
               _init();
              }, function(error){
-
+                $Error.callbackError(error);
              });
           }
           _saveChannelLocal($scope.listChannelLocal);
@@ -219,12 +219,13 @@
         return chanLc._id === channel[1].uuid;
       });
       $scope.disableForm = false;
-      channel.show = true;
   		chooseChannel  = channel;
       $scope.listChannelLocal[channel[1].uuid].numberNotifi = 0;
       $scope.listChannel.forEach(function(chan){
         if(chan[1].uuid !== channel[1].uuid){
           chan.show = false;
+        } else{
+          chan.show = true;
         }
       });
       $Imchat.getHistoryByUuid({uuid:channel[1].uuid}, function(history){
@@ -274,11 +275,14 @@
         var info = {
           message: $scope.form.message,
           uuid: chooseChannel[1].uuid,
-          delayTime: moment($scope.time.delay).format("YYYY/MM/DD HH:mm")
+          delayTime: moment($scope.time.delay).format("YYYY-MM-DD HH:mm:ss")
         };
         $scope.form.message = "";
         $Imchat.postMessageDelay(info, function(result){
           $scope.chooseTimeDelay = false;
+         /* $Imchat.getMessageById({id: result}, function(message){
+            $Error.callbackError(error);
+          }, function(error){})*/
         }, function(error){
           $Error.callbackError(error);
         });
@@ -301,6 +305,16 @@
     $scope.listParentGroup = [];
 
     $scope.openPopupCreateGroup = function () {
+      $scope.listTeacher = [];
+      $scope.listParent = [];
+      $scope.listUserForSearch = [];
+      $scope.listParentGroup = [];
+      $scope.listUserAddNewChannel = [];
+      $scope.chooseClass.id = null;
+      $scope.searchForm.checkallteacher = false;
+      $scope.searchForm.checkallparent = false;
+      $scope.searchForm.checkallgroup = false;
+      $scope.tab = "teacher";
       if($scope.listClass.length === 0){
         $SchoolClass.getAllClass({}, function(result){
             $scope.listClass = result.records;
@@ -331,8 +345,10 @@
       $scope.listParentGroup = [];
       $Teacher.getListTeacherByIds({ids: existClass.teacher_ids}, function(listTeacher){
         listTeacherLocal = JSON.parse(JSON.stringify(listTeacher));
-        $scope.searchForm.teacher = true;
         $scope.listTeacher = listTeacher;
+        $scope.listTeacher = _.reject($scope.listTeacher, function(teacher){
+          return teacher.user_id[0] === $scope.user.uid;
+        })
         $scope.listUserForSearch = $scope.listUserForSearch.concat($scope.listTeacher);
       }, function(error){$Error.callbackError(error);});
       $Parent.getListParentByIds({parent_ids: existClass.parent_ids}, function(listParent){
@@ -341,8 +357,6 @@
             return student.id;
           })
           listParentLocal = JSON.parse(JSON.stringify(listParent));
-          $scope.searchForm.parent = true;
-          $scope.searchForm.groupParent = true;
           $scope.listParent = listParent;
           $scope.listParentGroup = _.filter(listParentLocal, function(parent) {
             return parent.category_id && parent.category_id.length > 0;
@@ -364,36 +378,93 @@
         $scope.listUserAddNewChannel.push(user);
       }
     };
+
+    $scope.chooseParent = function(parent){
+      if(!parent.parent_user_id){
+        toastr.warning("Phụ huynh "+parent.name+" chưa được đăng ký tài khoản", "", {});
+      } else{
+        parent.checked = !parent.checked;
+      }
+    }
+
     $scope.createChannel = function(){ 
       if(_validateUserAddChannel()){
         if($scope.listUserAddNewChannel.length > 0){
-          $Imchat.createChannel({user_ids: [$scope.user.uid]}, function(result){
-            console.log(result);
-            $Imchat.getSessionById({id: result}, function(session){
-              $Imchat.updateState({uuid: session.records[0].uuid}, function(update){
-                $scope.listUserAddNewChannel.forEach(function(user){
-                  if(user.parent_user_id){
-                    $scope.listChatName[user.parent_user_id[0]] = user.name;
-                    $Imchat.addUserToChannel({uuid: session.records[0].uuid, user_id: user.parent_user_id[0]}, function(addUser){
-                    }, function(error){$Error.callbackError(error);});
-                  } else if(user.user_id){
-                    $scope.listChatName[user.user_id[0]] = user.name;
-                    $Imchat.addUserToChannel({uuid: session.records[0].uuid, user_id: user.user_id[0]}, function(addUser){
-                    }, function(error){$Error.callbackError(error);});
-                  }
-                });
-                modalCreateGroup.dismiss('cancel');
+          if(!_checkChannelExist()){
+            $Imchat.createChannel({user_ids: [$scope.user.uid]}, function(result){
+              console.log(result);
+              $Imchat.getSessionById({id: result}, function(session){
+                $Imchat.updateState({uuid: session.records[0].uuid}, function(update){
+                  $scope.listUserAddNewChannel.forEach(function(user){
+                    if(user.parent_user_id){
+                      $scope.listChatName[user.parent_user_id[0]] = user.name;
+                      $Imchat.addUserToChannel({uuid: session.records[0].uuid, user_id: user.parent_user_id[0]}, function(addUser){
+                      }, function(error){$Error.callbackError(error);});
+                    } else if(user.user_id){
+                      $scope.listChatName[user.user_id[0]] = user.name;
+                      $Imchat.addUserToChannel({uuid: session.records[0].uuid, user_id: user.user_id[0]}, function(addUser){
+                      }, function(error){$Error.callbackError(error);});
+                    }
+                  });
+                  modalCreateGroup.dismiss('cancel');
+                }, function(error){$Error.callbackError(error);});
               }, function(error){$Error.callbackError(error);});
             }, function(error){$Error.callbackError(error);});
-          }, function(error){$Error.callbackError(error);});
+          }
         }
       } else{
         toastr.warning("Tài khoản phụ huynh chưa được đăng ký", "", {});
       }
     };
 
+    var _checkChannelExist = function(){
+      var flag = false;
+      if($scope.listUserAddNewChannel.length > 1){
+      } else{
+        var userTmp = $scope.listUserAddNewChannel[0];
+        if(userTmp.parent_user_id){
+          userTmp.user_id = userTmp.parent_user_id;
+        }
+        var listChannelTwoUser = _.filter($scope.listChannel, function(channel){
+          return channel[1].users.length == 2
+        });
+        listChannelTwoUser = JSON.parse(JSON.stringify(listChannelTwoUser));
+        listChannelTwoUser = _.forEach(listChannelTwoUser, function(channel){
+          var tmpUsers = _.reject(channel[1].users, function(tmp){
+            return tmp.id === $scope.user.uid;
+          });
+          channel.user = tmpUsers[0];
+        })
+        var existChannel = _.find(listChannelTwoUser, function(tmp){
+          return tmp.user.id === userTmp.user_id[0];
+        })
+        if(!existChannel){
+        } else{
+          $scope.chooseChannel(existChannel);
+          modalCreateGroup.dismiss('cancel');
+          flag =true;
+        }
+      }
+      return flag;
+    }
+
     var _validateUserAddChannel = function(){
       var flag = false;
+      $scope.listTeacher.forEach(function(teacher){
+        if(teacher.checked){
+          $scope.adduserForChannel(teacher);
+        }
+      });
+      $scope.listParent.forEach(function(parent){
+        if(parent.checked){
+          $scope.adduserForChannel(parent);
+        }
+      });
+      $scope.listParentGroup.forEach(function(parent){
+        if(parent.checked){
+          $scope.adduserForChannel(parent);
+        }
+      })
       $scope.listUserAddNewChannel.forEach(function(user){
         if(user.parent_user_id && user.parent_user_id[0] != $scope.user.uid){
           flag = true;
@@ -501,11 +572,53 @@
       $Imchat.updateStateToClose({uuid: chooseChannel[1].uuid}, function(result){
         $scope.listMessage = [];
         $scope.disableForm = true;
+        $pouchDb.getAllDocs(channelDataName).then(function(allChannelLc){
+          var existChannel = _.find(allChannelLc, function(channel){
+            return channel._id === chooseChannel[1].uuid;
+          });
+          if(existChannel){
+            $pouchDb.deleteDoc(channelDataName, existChannel).then(function(result){
+              $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
+                listChannelLocalDatabase = allChannelLcDb;
+              })
+            });
+          }
+        });
         /*$scope.listChannel = _.reject($scope.listChannel, function(channel){
           return channel[1].uuid === chooseChannel[1].uuid;
         });*/
         _init();
-      }, function(error){})
+      }, function(error){$Error.callbackError(error);})
+    };
+    $scope.tab = "teacher";
+    $scope.chooseTab = function(tab){
+      $scope.tab = tab;
+    }
+    $scope.changeCheckAll = function(){
+      if($scope.tab === "teacher"){
+        $scope.listTeacher.forEach(function(teacher){
+          teacher.checked = $scope.searchForm.checkallteacher;
+        })
+      } else if($scope.tab === "parent"){
+        $scope.listParent.forEach(function(parent){
+          if(parent.parent_user_id){
+            parent.checked = $scope.searchForm.checkallparent;
+          }
+        })
+      } else{
+         $scope.listParentGroup.forEach(function(parent){
+          parent.checked = $scope.searchForm.checkallgroup;
+        })
+      }
+    };
+    $scope.changeCheckUser = function(){
+      if($scope.tab === "teacher"){
+        $scope.searchForm.checkallteacher = false;
+      } else if($scope.tab === "parent"){
+        $scope.searchForm.checkallparent = false;
+      } else{
+        $scope.searchForm.checkallgroup = false;
+      }
     }
   }
 

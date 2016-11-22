@@ -2,71 +2,87 @@
   <div class="modal-header bg-info">
     <span>Tin nhắn mới</span>
   </div>
-  <div class="modal-body text-center">
+  <div class="modal-body text-center" style="float: left">
       <div style="float: left; width: 100%; margin-bottom: 10px;">
         <label style="float: left;">Chọn lớp</label>
         <select style="float: right; width: 80%" ng-change="changeClass()" class="form-control" ng-options="class.id as class.name for class in listClass" ng-model="chooseClass.id" ng-required="true"></select>
       </div>
-  	<div class="row">
-      <div class="col-sm-12">
-        <tags-input ng-model="listUserAddNewChannel" 
-          display-property="name" 
-          placeholder="Thêm thành viên" 
-          replace-spaces-with-dashes="false"
-          template="tag-template">
-          <auto-complete source="listUserForSearch"
-             min-length="0"
-             load-on-focus="true"
-             load-on-empty="true"
-             max-results-to-show="32"
-             template="autocomplete-template"></auto-complete>
-        </tags-input>
-      </div>
-    </div>
-    <div class="checkbox" style="overflow: hidden; ">
-      <div class="col-sm-4">
-        <label class="custom-checkbox">
-          <input type="checkbox" ng-model="searchForm.teacher">
-          <span>Giáo viên</span>
-        </label>
-      </div>
-      <div class="col-sm-4">
-        <label class="custom-checkbox">
-          <input type="checkbox" ng-model="searchForm.parent">
-          <span>Phụ huynh</span>
-        </label>
-      </div>
-      <div class="col-sm-4">
-        <label class="custom-checkbox">
-          <input type="checkbox" ng-model="searchForm.groupParent">
-          <span>Ban phụ huynh</span>
-        </label>
-      </div>
-    </div>
+  <!--   <div class="row">
+        <div class="col-sm-12">
+          <tags-input ng-model="listUserAddNewChannel" 
+            display-property="name" 
+            placeholder="Thêm thành viên" 
+            replace-spaces-with-dashes="false"
+            template="tag-template">
+            <auto-complete source="listUserForSearch"
+               min-length="0"
+               load-on-focus="true"
+               load-on-empty="true"
+               max-results-to-show="32"
+               template="autocomplete-template"></auto-complete>
+          </tags-input>
+        </div>
+      </div> -->
+    <uib-tabset active="$tabSetStatus.activeTab" style="float:left; width: 100%" class="tab-group-chat">
+      <uib-tab heading="Giáo viên" ng-click="chooseTab('teacher')" style="width: 33.33%">
+      </uib-tab>
+      <uib-tab heading="Phụ huynh" ng-click="chooseTab('parent')" style="width: 33.33%">
+      </uib-tab>
+      <uib-tab heading="Ban phụ huynh" ng-click="chooseTab('group')" style="width: 33.33%">
+      </uib-tab>
+    </uib-tabset>
+   <!--  <div class="checkbox" style="overflow: hidden; ">
+     <div class="col-sm-4">
+       <label class="custom-checkbox">
+         <input type="checkbox" ng-model="searchForm.teacher">
+         <span>Giáo viên</span>
+       </label>
+     </div>
+     <div class="col-sm-4">
+       <label class="custom-checkbox">
+         <input type="checkbox" ng-model="searchForm.parent">
+         <span>Phụ huynh</span>
+       </label>
+     </div>
+     <div class="col-sm-4">
+       <label class="custom-checkbox">
+         <input type="checkbox" ng-model="searchForm.groupParent">
+         <span>Ban phụ huynh</span>
+       </label>
+     </div>
+   </div> -->
     <div class="horizontal-scroll w100" style="float: left; margin-bottom: 10px">
       <table class="table table-hover">
         <thead>
         <tr class="black-muted-bg">
-          <th style="text-align: left">Tên</th>
-          <th>Số điện thoại</th>
-          <th></th>
+          <th>
+            <input ng-if="tab =='teacher'" type="checkbox" ng-change="changeCheckAll()" ng-model="searchForm.checkallteacher">
+            <input ng-if="tab =='parent'" type="checkbox" ng-change="changeCheckAll()" ng-model="searchForm.checkallparent">
+            <input ng-if="tab =='group'" type="checkbox" ng-change="changeCheckAll()" ng-model="searchForm.checkallgroup">
+          </th>
+          <th style="text-align: left; font-weight: bold;">Tên</th>
+          <th style="font-weight: bold;">Số điện thoại</th>
+          <th style="font-weight: bold;"><span ng-hide="tab =='teacher'">Tên con</span></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-if="searchForm.teacher" ng-click="adduserForChannel(teacher)" ng-repeat="teacher in listTeacher">
-          <td style="text-align: left">{{teacher.last_name}} {{teacher.name}}</td>
+        <tr ng-if="tab =='teacher'" ng-disabled="!teacher.user_id" ng-repeat="teacher in listTeacher">
+          <td><input ng-change="changeCheckUser()" type="checkbox" ng-model="teacher.checked"></td>
+          <td style="text-align: left"><span ng-show="teacher.last_name">{{teacher.last_name}}</span> {{teacher.name}}</td>
           <td style="text-align: left">{{teacher.work_phone}}</td>
           <td style="text-align: left"></td>
         </tr>
-        <tr ng-if="searchForm.parent" ng-click="adduserForChannel(parent)" ng-repeat="parent in listParent">
-          <td style="text-align: left">{{parent.name}}</td>
-          <td style="text-align: left">{{parent.mobile}}</td>
-          <td style="text-align: left">{{listStudent[parent.children[0]][0].name}}</td>
+        <tr ng-if="tab =='parent'" ng-disabled="!parent.parent_user_id" ng-repeat="parent in listParent">
+          <td><input  ng-change="changeCheckUser()" type="checkbox" ng-model="parent.checked" ng-disabled="!parent.parent_user_id"></td>
+          <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.name}}</td>
+          <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.mobile}}</td>
+          <td style="text-align: left" ng-click="chooseParent(parent)">{{listStudent[parent.children[0]][0].name}}</td>
         </tr>
-        <tr ng-if="searchForm.groupParent" ng-click="adduserForChannel(parent)" ng-repeat="parent in listParentGroup">
-          <td style="text-align: left">{{parent.name}}</td>
-          <td style="text-align: left">{{parent.mobile}}</td>
-          <td style="text-align: left">{{listStudent[parent.children[0]][0].name}}</td>
+        <tr ng-if="tab =='group'" ng-click="adduserForChannel(parent)" ng-repeat="parent in listParentGroup">
+          <td><input ng-change="changeCheckUser()" type="checkbox" ng-model="parent.checked"></td>
+          <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.name}}</td>
+          <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.mobile}}</td>
+          <td style="text-align: left" ng-click="chooseParent(parent)">{{listStudent[parent.children[0]][0].name}}</td>
         </tr>
         <!-- <tr ng-click="addUser(user)" ng-repeat="user in listParentGroup">
           <td style="text-align: left">{{user.last_name}} {{user.name}}</td>

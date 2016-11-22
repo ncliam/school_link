@@ -51,7 +51,7 @@
         modalConfirmRemove.dismiss('cancel');
         toastr.success("Xóa thành công", "", {});
         _init();
-      }, function(error){})
+      }, function(error){$Error.callbackError(error);})
     };
     $scope.searchStundent = function(){
       if($scope.form.search.length > 0){

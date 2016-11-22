@@ -51,7 +51,7 @@
         $Imchat.getPresenseByUserId({}, function(result){
           info.presense_id = result.records[0].id;
           localStorageService.set("user", info);
-          $Imchat.updateStatusUser({id:info.presense_id ,status: "online"}, function(result){}, function(error){});
+          $Imchat.updateStatusUser({id:info.presense_id ,status: "online"}, function(result){}, function(error){$Error.callbackError(error);});
         }, function(error){$Error.callbackError(error);})
         if(!localStorageService.get("doPoll")){
           $Longpolling.poll();
@@ -59,13 +59,25 @@
         $resUser.checkGroupForUser({group_name: "school_link.group_school_admin"}, function(result){
           if(result){
             info.permission = 2;
+            info.admin = true;
           } else{
+            info.admin = false;
             info.permission = 1;
           }
-          localStorageService.set("user", info);
-          $state.go("message");
-          MultipleViewsManager.updateView("user");
-        }, function(error){});
+          $resUser.checkGroupForUser({group_name: "school_link.group_school_teacher"}, function(result){
+            if(result){
+              info.teacher = true;
+            } else{
+              info.teacher = false;
+            }
+            localStorageService.set("user", info);
+            $state.go("message");
+            MultipleViewsManager.updateView("user");
+          },function(error){
+            $Error.callbackError(error);
+          })
+         
+        }, function(error){$Error.callbackError(error);});
 
       }, function(error){
         toastr.error($translate.instant('login.error.body'), $translate.instant('login.error.title'), {});
@@ -127,6 +139,10 @@
 
     $scope.gotoForgetPass = function(){
       $scope.form = "forget";
+      $scope.user.mobile = "";
+      $scope.user.password_register = "";
+      $scope.user.passwordConfirm = "";
+      $scope.user.code = "";
     };
     var token_id;
     $scope.forgetPass = function(){
@@ -135,7 +151,7 @@
         $scope.form = "confirm";
         toastr.success("Vui lòng đợi tin nhắn trong giây lát", "", {});
       }, function(error){
-
+        toastr.error("", error.message, {});
       })
     };
     $scope.confirmPass = function(){

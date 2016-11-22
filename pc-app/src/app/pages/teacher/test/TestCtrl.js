@@ -117,7 +117,7 @@
             });
           })
           
-        }, function(error){})
+        }, function(error){$Error.callbackError(error);})
       }
     };
     var _caculatorMark = function(listMark, type){

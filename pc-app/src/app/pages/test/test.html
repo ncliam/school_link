@@ -1,18 +1,12 @@
 <div
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase" ng-init="editSave = false">
- <!--  <uib-tabset active="$tabSetStatus.activeTab" class="tac">
-   <div ng-show="!editSave" ng-click="editForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-edit"></i></div>
-   <label style="color: #fff;margin-top: 10px;">Bảng điểm</label>
-   <div ng-show="editSave" ng-click="saveExam()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none; border-left: 1px solid #fff;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-checkmark-outline"></i></div>
-   <div ng-show="editSave" ng-click="cancelEditForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-close-outline"></i></div>
- </uib-tabset> -->
   <uib-tabset active="$tabSetStatus.activeTab">
     <uib-tab heading="Bảng điểm" ng-click="chooseTab('bd')">
     </uib-tab>
     <uib-tab heading="Đánh giá chung" ng-click="chooseTab('hk')">
     </uib-tab>
-    <div ng-show="!editSave && user.permission == 1" ng-click="editForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-edit"></i></div>
+    <div ng-show="!editSave && user.teacher" ng-click="editForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-edit"></i></div>
    <!--  <label style="color: #fff;margin-top: 10px;">Bảng điểm</label> -->
     <div ng-show="editSave" ng-click="saveExam()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none; border-left: 1px solid #fff;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-checkmark-outline"></i></div>
     <div ng-show="editSave" ng-click="cancelEditForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-ios-close-outline"></i></div>
@@ -34,29 +28,26 @@
         <select class="form-control" ng-change="searchExam()" ng-options="subject.id as subject.name for subject in listSubject" ng-model="formData.subject_id" ng-required="true"></select>
       </div>
     </div>
-      <!-- <div class="col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12">
-        <button class="btn btn-primary" ng-click="goToCreateReceipt()" style="margin-bottom: 5px; float: right">{{"button.create" | translate}}</button>
-      </div> -->
     <div style=" float: left; width: 100%;" class="horizontal-scroll">
       <div class="w100 fl black-muted-bg" ng-show="tab ==='bd'" >
-        <div class="fl w20 title-test ">Học sinh</div>
-        <div class="fl w30 title-test text-center">Điểm hệ số 1</div>
-        <div class="fl w30 title-test text-center">Điểm hệ số 2</div>
+        <div class="fl w20 title-test" style="font-weight: bold">Học sinh</div>
+        <div class="fl w30 title-test text-center" style="font-weight: bold">Điểm hệ số 1</div>
+        <div class="fl w30 title-test text-center" style="font-weight: bold">Điểm hệ số 2</div>
         <div class="fl w10 title-test text-center" style="padding: 10px 15px;">
-          <span ng-show="formData.semester_id == 1">{{listSemester[0].name}}</span>
-          <span ng-show="formData.semester_id == 2">{{listSemester[1].name}}</span>
-          <span ng-show="!formData.semester_id">Điềm HK</span>
+          <span ng-show="formData.semester_id == 1" style="font-weight: bold">{{listSemester[0].name}}</span>
+          <span ng-show="formData.semester_id == 2" style="font-weight: bold">{{listSemester[1].name}}</span>
+          <span ng-show="!formData.semester_id" style="font-weight: bold">Điềm HK</span>
         </div>
         <div class="fl w10 title-test text-center" style="padding: 10px 15px;">
           Điểm TB
         </div>
       </div>
       <div ng-show="tab ==='hk'"  class="w100 fl black-muted-bg" >
-        <div class="fl w20 title-test " style="">Học sinh</div>
-        <div class="fl w10 text-center" style="padding: 10px 15px;">
+        <div class="fl w20 title-test " style="font-weight: bold">Học sinh</div>
+        <div class="fl w10 text-center" style="padding: 10px 15px; font-weight: bold">
           Học lực
         </div>
-        <div class="fl w10 title-test text-center" style="padding: 10px 15px;">
+        <div class="fl w10 title-test text-center" style="padding: 10px 15px; font-weight: bold">
           Hạnh kiểm
         </div>
       </div>
@@ -77,16 +68,16 @@
                 <div class="fl w20 br2 pb5" style="text-align: left; padding-left: 5px;">{{student.display_name}}</div>
                 <div class="fl w30 text-center br1 ">
                   <div class="fl w20 text-center br1 pb5" ng-repeat="mark in listMarkOne[student.id]">
-                    <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" step="0.1" class="form-control input-mark">
+                    <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" class="form-control input-mark">
                   </div>
                 </div>
                 <div class="fl w30 text-center br1">
                   <div class="fl w20 text-center br1 pb5" ng-repeat="mark in listMarkTwo[student.id]">
-                    <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" step="0.1" class="form-control input-mark">
+                    <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" class="form-control input-mark">
                   </div>
                 </div>
                 <div class="fl w10 text-center br2 pb5">
-                  <input ng-disabled="!editSave" ng-change="listMarkHK[student.id][0].edit = true" ng-model="listMarkHK[student.id][0].mark" type="number" step="0.1" class="form-control input-mark">
+                  <input ng-disabled="!editSave" ng-change="listMarkHK[student.id][0].edit = true" ng-model="listMarkHK[student.id][0].mark" type="number" class="form-control input-mark">
                 </div>
                 <div class="fl w10 text-center br2 pb5">
                   <input ng-disabled="!editSave" ng-change="listMarkTB[student.id][0].edit = true" ng-model="listMarkTB[student.id][0].mark"  type="text" class="form-control input-mark">

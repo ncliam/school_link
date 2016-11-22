@@ -25,7 +25,7 @@
       $Schedule.getAllSchedule({}, function(result){
         $scope.listSchedule = result.records;
         listSchedule = JSON.parse(JSON.stringify($scope.listSchedule));
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
     };
     _init();
 

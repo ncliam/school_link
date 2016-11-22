@@ -9,7 +9,7 @@ $angle-right: "\f101";
   z-index: 904;
   display: block;
   min-height: 100%;
-  background-color: #CFD8DC;
+  background-color: #8ca8b1;
   height: 100%;
   position: fixed;
 }
@@ -72,6 +72,7 @@ a.al-sidebar-list-link {
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
+  font-weight: bold;
   &:hover {
     color: #fff;
     b {
@@ -234,7 +235,7 @@ a.al-sidebar-list-link {
 @mixin sidebar-overlap() {
   .al-sidebar {
     width: $sidebar-width;
-    @include bg-translucent-dark(0.75);
+    background: #8ca8b1;
     transition: width 0.5s ease;
 
     .fa-angle-down, .fa-angle-up {

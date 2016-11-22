@@ -211,8 +211,8 @@
       }
       $request.postRequest(path, param, callbackSuccess, callbackError);
     }
-/*
-    this.getMessageByUuid = function(info, callbackSuccess, callbackError){
+
+   /* this.getMessageByUuid = function(info, callbackSuccess, callbackError){
       var path ="/api/callKw";
       var param = {
         model: _self.model,
@@ -224,6 +224,21 @@
       };
       $request.postRequest(path, param, callbackSuccess, callbackError);
     }*/
+
+    this.getMessageById = function(info, callbackSuccess, callbackError){
+      var path ="/api/search";
+      var param = {
+        model: "im_chat.message",
+        domain: [["id", "=", info.id]],
+        fields: ["create_date", "from_id", "to_id", "delay_time"],
+        offset: info.offset || _self.offset,
+        limit: info.limit || _self.limit,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid
+      }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    }
 
 
   }

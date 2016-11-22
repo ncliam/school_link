@@ -151,7 +151,7 @@
         return stu.id === student.id;
       });
       if(!existStudent){
-        student.birthday ? student.birthdayShow = moment(student.birthday).format("DD-MM-YYYY") :student.birthdayShow = "";
+        student.birthday ? student.birthdayShow = student.birthday :student.birthdayShow = "";
         $scope.listStudent.unshift(student);
       }
       if(modalListStudent){
@@ -244,7 +244,7 @@
         existStudent.home_address = $scope.student.home_address;
         modalDetailStudent.dismiss('cancel');
       }, function(error){
-
+        $Error.callbackError(error);
       });
     }
 

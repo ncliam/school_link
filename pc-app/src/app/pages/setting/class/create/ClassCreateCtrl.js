@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function ClassCreateCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $translate, $Schoolarity, $SchoolClassGroup, $SchoolClass, 
-    $Student, $Parent) {
+    $Student, $Parent, $Error) {
     $scope.class = {};
     $scope.listGroup = [];
     $scope.listSchoolarity =[];
@@ -48,10 +48,10 @@
     var _init = function(){
       $Schoolarity.getAllSchoolarity({}, function(result){
         $scope.listSchoolarity  = result.records;
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
       $SchoolClassGroup.getAllClassGroup({}, function(result){
         $scope.listGroup  = result.records;
-      }, function(error){})
+      }, function(error){$Error.callbackError(error);})
     };
     _init();
 
@@ -64,7 +64,7 @@
         $SchoolClass.createClass($scope.class, function(result){
           toastr.success("Tạo lớp học thành công", "", {});
           $state.go("setting.class.list");
-        }, function(error){})
+        }, function(error){$Error.callbackError(error);})
       }
     };
     var _validate = function(){
@@ -99,7 +99,7 @@
             $scope.openPopupListStudent();
           }
         }
-      }, function(error){});
+      }, function(error){$Error.callbackError(error);});
     };
 
     $scope.openPopupListStudent = function () {
@@ -185,8 +185,8 @@
           };
           $scope.listStudent = $scope.listStudent.concat(listStudent);
           modalListStudentFileCsv.dismiss('cancel');
-        }, function(error){});
-      }, function(error){});
+        }, function(error){$Error.callbackError(error);});
+      }, function(error){$Error.callbackError(error);});
     }
   }
 
