@@ -22,7 +22,7 @@
         </div>
     </ion-content>
     <div>
-     <textarea id="inputMessage" ng-keydown="$event.which === 13 && sendMessage()" type="text" ng-model="form.message" class="form-control" style="position: absolute; height: 60px; border-radius: 0px; border-top: 1px solid #ddd; border-left: none; border-right: none; border-bottom: none;padding: 5px 8px; bottom: 0px;"></textarea>
+     <textarea placeholder="Nhập tin nhắn" id="inputMessage" ng-keydown="$event.which === 13 && sendMessage()" type="text" ng-model="form.message" class="form-control" style="position: absolute; height: 60px; border-radius: 0px; border-top: 1px solid #ddd; border-left: none; border-right: none; border-bottom: none;padding: 5px 8px; bottom: 0px;"></textarea>
      <i id="idIconSend" on-tap="sendMessage()" class="fa fa-paper-plane icon-send" ng-class="{iconfocus: form.message.length > 0}"></i>
    </div>
 </ion-view>

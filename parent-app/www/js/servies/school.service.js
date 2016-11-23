@@ -298,7 +298,7 @@
                     mark:resultMark.data.result.records[i].mark,
                     name:resultMark.data.result.records[i].name,
                     date_exam:resultMark.data.result.records[i].date_exam,
-                    date_exam_week:UtilService.getDayWeekTitle(resultMark.data.result.records[i].date_exam),
+                    date_exam_week:UtilService.getDayWeekTitle(moment(resultMark.data.result.records[i].date_exam).format("YYYY-MM-DD")),
                     type:resultMark.data.result.records[i].type,
                     subjectId:subjectId,
                     subjectName:subjectName,

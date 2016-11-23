@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('ChannelCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $Imchat, localStorageService, 
-  $time, MultipleViewsManager, $resUser, $rootScope, $ionicScrollDelegate, $ionicActionSheet, $state) {
+  $time, MultipleViewsManager, $resUser, $rootScope, $ionicScrollDelegate, $ionicActionSheet, $state, toaster) {
     $scope.$parent.hideHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -30,7 +30,7 @@ angular.module('starter.controllers')
     $scope.listUser = [];
     var chooseChannel = {};
     var dataSendMessage = {};
-    $scope.form = {};
+    $scope.form = {message:""};
     $scope.listMessage = [];
     $scope.historyUser = {};
     $scope.disableForm = true;
@@ -119,22 +119,26 @@ angular.module('starter.controllers')
 
     $scope.sendMessage = function(){
       var to_users = [];
-      $scope.chooseChannel[1].users.forEach(function(user){
-        if(user.id != $scope.user.uid){
-          to_users.push({id: user.id, name: $scope.listChatName[user.id]});
-        }
-      });
-      var info = {
-        message: $scope.form.message,
-        uuid: $scope.chooseChannel[1].uuid,
-        to_users: to_users,
-        from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.id] || $scope.user.username}
-      };
-      $scope.form.message = "";
-        $Imchat.postMessage(info, function(result){
-      }, function(error){
-        $Error.callbackError(error);
-      });
+      if($scope.form.message.length > 0){
+        $scope.chooseChannel[1].users.forEach(function(user){
+          if(user.id != $scope.user.uid){
+            to_users.push({id: user.id, name: $scope.listChatName[user.id]});
+          }
+        });
+        var info = {
+          message: $scope.form.message,
+          uuid: $scope.chooseChannel[1].uuid,
+          to_users: to_users,
+          from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.id] || $scope.user.username}
+        };
+        $scope.form.message = "";
+          $Imchat.postMessage(info, function(result){
+        }, function(error){
+          $Error.callbackError(error);
+        });
+      } else{
+        toaster.pop('warning', "Cảnh báo", "Bạn phải nhập tin nhắn");
+      }
 
     };
 
