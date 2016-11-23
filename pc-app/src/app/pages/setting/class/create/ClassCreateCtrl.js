@@ -34,6 +34,7 @@
     $scope.listStudentSeach;
     var modalListStudent;
     var modalListStudentFileCsv;
+    var modalConfirmSave;
     $scope.csv = {
       content: null,
       header: true,
@@ -55,16 +56,24 @@
     };
     _init();
 
+    $scope.actionSave = function(){
+      $scope.class.student_ids = [];
+      $scope.listStudent.forEach(function(stu){
+        $scope.class.student_ids.push(stu.id);
+      })
+      $SchoolClass.createClass($scope.class, function(result){
+        toastr.success("Tạo lớp học thành công", "", {});
+        $state.go("setting.class.list");
+      }, function(error){$Error.callbackError(error);})
+    }
+
     $scope.createClass = function(){
       if(_validate()){
-        $scope.class.student_ids = [];
-        $scope.listStudent.forEach(function(stu){
-          $scope.class.student_ids.push(stu.id);
-        })
-        $SchoolClass.createClass($scope.class, function(result){
-          toastr.success("Tạo lớp học thành công", "", {});
-          $state.go("setting.class.list");
-        }, function(error){$Error.callbackError(error);})
+        modalConfirmSave = $uibModal.open({
+          animation: true,
+          templateUrl: "app/pages/setting/class/widgets/popup.confrim.save.html",
+          scope: $scope
+        });
       }
     };
     var _validate = function(){

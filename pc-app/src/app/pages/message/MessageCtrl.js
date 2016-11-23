@@ -17,7 +17,7 @@
   	$scope.listUser = [];
     var chooseChannel = {};
   	var dataSendMessage = {};
-  	$scope.form = {search:""};
+  	$scope.form = {search:"", message:""};
   	$scope.listMessage = [];
     $scope.historyUser = {};
     $scope.disableForm = true;
@@ -254,38 +254,42 @@
 
     $scope.sendMessage = function(){
       var to_users = [];
-      if(!$scope.chooseTimeDelay){
-        chooseChannel[1].users.forEach(function(user){
-          if(user.id != $scope.user.uid){
-            to_users.push({id: user.id, name: $scope.listChatName[user.id] || user.name});
-          }
-        })
-      	var info = {
-      		message: $scope.form.message,
-      		uuid: chooseChannel[1].uuid,
-          to_users: to_users,
-          from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.id] || $scope.user.username}
-      	};
-        $scope.form.message = "";
-      	$Imchat.postMessage(info, function(result){
-        }, function(error){
-          $Error.callbackError(error);
-        });
-      } else{
-        var info = {
-          message: $scope.form.message,
-          uuid: chooseChannel[1].uuid,
-          delayTime: moment($scope.time.delay).format("YYYY-MM-DD HH:mm:ss")
-        };
-        $scope.form.message = "";
-        $Imchat.postMessageDelay(info, function(result){
-          $scope.chooseTimeDelay = false;
-         /* $Imchat.getMessageById({id: result}, function(message){
+      if($scope.form.message.length >0){
+        if(!$scope.chooseTimeDelay){
+          chooseChannel[1].users.forEach(function(user){
+            if(user.id != $scope.user.uid){
+              to_users.push({id: user.id, name: $scope.listChatName[user.id] || user.name});
+            }
+          })
+        	var info = {
+        		message: $scope.form.message,
+        		uuid: chooseChannel[1].uuid,
+            to_users: to_users,
+            from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.id] || $scope.user.username}
+        	};
+          $scope.form.message = "";
+        	$Imchat.postMessage(info, function(result){
+          }, function(error){
             $Error.callbackError(error);
-          }, function(error){})*/
-        }, function(error){
-          $Error.callbackError(error);
-        });
+          });
+        } else{
+          var info = {
+            message: $scope.form.message,
+            uuid: chooseChannel[1].uuid,
+            delayTime: moment($scope.time.delay).format("YYYY-MM-DD HH:mm:ss")
+          };
+          $scope.form.message = "";
+          $Imchat.postMessageDelay(info, function(result){
+            $scope.chooseTimeDelay = false;
+           /* $Imchat.getMessageById({id: result}, function(message){
+              $Error.callbackError(error);
+            }, function(error){})*/
+          }, function(error){
+            $Error.callbackError(error);
+          });
+        }
+      } else{
+        toastr.warning("Bạn chưa nhập tin nhắn", "", {});
       }
 
     };
@@ -587,8 +591,17 @@
         /*$scope.listChannel = _.reject($scope.listChannel, function(channel){
           return channel[1].uuid === chooseChannel[1].uuid;
         });*/
+        modalConfirmRemove.dismiss('cancel');
         _init();
       }, function(error){$Error.callbackError(error);})
+    };
+    var modalConfirmRemove;
+    $scope.confirmRemove = function(chooseClass){
+      modalConfirmRemove = $uibModal.open({
+        animation: true,
+        templateUrl: "app/pages/message/widgets/popup.confrim.remove.html",
+        scope: $scope
+      });
     };
     $scope.tab = "teacher";
     $scope.chooseTab = function(tab){

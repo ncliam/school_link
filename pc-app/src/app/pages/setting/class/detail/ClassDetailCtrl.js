@@ -29,6 +29,7 @@
     var modalListStudent;
     var modalListStudentFileCsv;
     var modalDetailStudent;
+    var modalConfirmSave;
 
     $scope.serialNumber = {};
     var _init = function(){
@@ -81,16 +82,23 @@
 
     _init();
 
+    $scope.actionSave = function(){
+      $scope.class.student_ids = [];
+      $scope.listStudent.forEach(function(stu){
+        $scope.class.student_ids.push(stu.id);
+      })
+      $SchoolClass.updateClass($scope.class, function(result){
+        toastr.success("Cập nhật lớp học thành công", "", {});
+        $state.go("setting.class.list");
+      }, function(error){$Error.callbackError(error);})
+    }
     $scope.updateClass = function(){
       if(_validate()){
-        $scope.class.student_ids = [];
-        $scope.listStudent.forEach(function(stu){
-          $scope.class.student_ids.push(stu.id);
-        })
-        $SchoolClass.updateClass($scope.class, function(result){
-          toastr.success("Cập nhật lớp học thành công", "", {});
-          $state.go("setting.class.list");
-        }, function(error){$Error.callbackError(error);})
+        modalConfirmSave = $uibModal.open({
+          animation: true,
+          templateUrl: "app/pages/setting/class/widgets/popup.confrim.save.html",
+          scope: $scope
+        });
       }
     };
 
@@ -120,12 +128,13 @@
           $scope.listStudentSeach.forEach(function(stu){
             stu.birthday = moment(stu.birthday).format("DD-MM-YYYY");
           });
-          if($scope.listStudentSeach.length === 1){
+          $scope.openPopupListStudent();
+          /*if($scope.listStudentSeach.length === 1){
             $scope.listStudentSeach[0].birthday ? $scope.listStudentSeach[0].birthdayShow = moment($scope.listStudentSeach[0].birthday).format("DD-MM-YYYY") :$scope.listStudentSeach[0].birthdayShow = "";
             $scope.addStudent($scope.listStudentSeach[0]);
           } else{
             $scope.openPopupListStudent();
-          }
+          }*/
         }
       }, function(error){$Error.callbackError(error);});
     };
@@ -153,6 +162,9 @@
       if(!existStudent){
         student.birthday ? student.birthdayShow = student.birthday :student.birthdayShow = "";
         $scope.listStudent.unshift(student);
+        toastr.success("Thêm học sinh thành công", "", {});
+      } else{
+        toastr.warning("Học sinh đã có trong lớp", "", {});
       }
       if(modalListStudent){
         modalListStudent.dismiss('cancel');
@@ -163,6 +175,7 @@
       $scope.listStudent = _.reject($scope.listStudent, function(stu){
         return stu.id === student.id;
       });
+       toastr.success("Xóa học sinh thành công", "", {});
     };
 
     $scope.choosefile = function(){
