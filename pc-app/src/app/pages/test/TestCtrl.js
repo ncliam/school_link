@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function TestCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClassGroup, $uibModal, toastr, $translate, $SchoolClass, $SchoolSubject, 
-    $Student, $Exam, $Error) {
+    $Student, $Exam, $Error, $resUser) {
     $scope.listSemester = [{id: 1, value:"first", name:"Học kì 1"}, {id: 2, value:"second", name:"Học kì 2"}];
     var user = localStorageService.get("user");
     $scope.user = localStorageService.get("user");
@@ -34,9 +34,9 @@
         $scope.listClass = result.records;
       }, function(error){$Error.callbackError(error);});
      
-      $SchoolSubject.getAllSchoolSubject({}, function(result){
+      /*$SchoolSubject.getAllSchoolSubject({}, function(result){
         $scope.listSubject = result.records;
-      }, function(error){$Error.callbackError(error);});
+      }, function(error){$Error.callbackError(error);});*/
 
       $Exam.getDefault({}, function(result){
         teacher_id = result.teacher_id;
@@ -240,6 +240,32 @@
         }
       }
     };
+
+    $scope.searchSubject = function(){
+      if($scope.tab==="bd"){
+         $scope.listSubjectIds = [];
+        if($scope.formData.semester_id && $scope.formData.class_id){
+          var existSemester = _.find($scope.listSemester, function(sem){
+            return sem.id === $scope.formData.semester_id;
+          });
+          _initMark();
+          var info = {
+            class_id: $scope.formData.class_id,
+            semester: existSemester.value
+          };
+          $resUser.getScheduledSubjects(info, function(result){
+            $SchoolSubject.getSubjectByIds({subject_ids: result}, function(listSubject){
+              $scope.listSubject = listSubject;
+            }, function(error){
+              $Error.callbackError(error);
+            })
+          }, function(error){
+            $Error.callbackError(error);
+          })
+        }
+      }
+    }
+
     $scope.chooseTab = function(tab){
       $scope.tab = tab;
       $scope.searchExam();

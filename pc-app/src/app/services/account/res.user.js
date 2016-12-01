@@ -98,6 +98,22 @@
       };
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
+    this.getScheduledSubjects = function(info, callbackSuccess, callbackError){
+          var path ="/api/callKw";
+          var param = {
+            model: _self.model,
+            session_id: _self.user.session_id ,
+            context: _self.user.context,
+            sid: _self.user.sid,
+            method:"get_scheduled_subjects",
+            kwargs:{
+              class_id: info.class_id,
+              semester: info.semester
+            },
+            args:[]
+          };
+          $request.postRequest(path, param, callbackSuccess, callbackError);
+        };
 
     this.createUser = function(info, callbackSuccess, callbackError){
       var accessTeacher = info.accessTeacher;

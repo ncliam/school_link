@@ -75,6 +75,19 @@
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
 
+    this.getSubjectByIds = function(info, callbackSuccess, callbackError){
+      var path = "/api/callKw";
+      var param = {
+        model: _self.model,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"read",
+        args: [info.subject_ids, _self.fields]
+      };
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
     this.removeRecords = function(info, callbackSuccess, callbackError){
       var path ="/api/callKw";
       var param = {
