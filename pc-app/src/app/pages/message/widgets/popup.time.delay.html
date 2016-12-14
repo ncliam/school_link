@@ -1,12 +1,12 @@
 <div class="modal-content" style="margin-top: 10%;">
   <div class="modal-header bg-info">
-    <span>Thời gian gửi tin nhắn</span>
+    <span>{{'time_send_message' | translate}}</span>
   </div>
   <div class="modal-body text-center">
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="inputLastName" style="font-weight: bold;">Chọn thời gian:</label>
+          <label for="inputLastName" style="font-weight: bold;">{{'choose_time' | translate}}:</label>
           <p class="input-group" style="float: right;width: 75%;">
             <input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="time.delay" is-open="popup1.opened"/>
             <span class="input-group-btn">

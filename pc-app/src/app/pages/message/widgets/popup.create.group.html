@@ -1,10 +1,10 @@
 <div class="modal-content" style="margin-top: 10%;">
   <div class="modal-header bg-info">
-    <span>Tin nhắn mới</span>
+    <span>{{'new_message' | translate}}</span>
   </div>
   <div class="modal-body text-center" style="float: left">
       <div style="float: left; width: 100%; margin-bottom: 10px;">
-        <label style="float: left;">Chọn lớp</label>
+        <label style="float: left;">{{'choose_class' | translate}}</label>
         <select style="float: right; width: 80%" ng-change="changeClass()" class="form-control" ng-options="class.id as class.name for class in listClass" ng-model="chooseClass.id" ng-required="true"></select>
       </div>
   <!--   <div class="row">
@@ -24,11 +24,11 @@
         </div>
       </div> -->
     <uib-tabset active="$tabSetStatus.activeTab" style="float:left; width: 100%" class="tab-group-chat">
-      <uib-tab heading="Giáo viên" ng-click="chooseTab('teacher')" style="width: 33.33%">
+      <uib-tab heading="{{'teacher' | translate}}" ng-click="chooseTab('teacher')" style="width: 33.33%">
       </uib-tab>
-      <uib-tab heading="Phụ huynh" ng-click="chooseTab('parent')" style="width: 33.33%">
+      <uib-tab heading="{{'parent' | translate}}" ng-click="chooseTab('parent')" style="width: 33.33%">
       </uib-tab>
-      <uib-tab heading="Ban phụ huynh" ng-click="chooseTab('group')" style="width: 33.33%">
+      <uib-tab heading="{{'group_parent' | translate}}" ng-click="chooseTab('group')" style="width: 33.33%">
       </uib-tab>
     </uib-tabset>
    <!--  <div class="checkbox" style="overflow: hidden; ">
@@ -60,9 +60,9 @@
             <input ng-if="tab =='parent'" type="checkbox" ng-change="changeCheckAll()" ng-model="searchForm.checkallparent">
             <input ng-if="tab =='group'" type="checkbox" ng-change="changeCheckAll()" ng-model="searchForm.checkallgroup">
           </th>
-          <th style="text-align: left; font-weight: bold;">Tên</th>
-          <th style="font-weight: bold;">Số điện thoại</th>
-          <th style="font-weight: bold;"><span ng-hide="tab =='teacher'">Tên con</span></th>
+          <th style="text-align: left; font-weight: bold;">{{'name' | translate}}</th>
+          <th style="font-weight: bold;">{{'phone' | translate}}</th>
+          <th style="font-weight: bold;"><span ng-hide="tab =='teacher'">{{'name_child' | translate}}</span></th>
         </tr>
         </thead>
         <tbody>

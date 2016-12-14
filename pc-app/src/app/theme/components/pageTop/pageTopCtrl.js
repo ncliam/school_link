@@ -11,6 +11,11 @@
   /** @ngInject */
   function PageTopCtrl($scope, $account, $state, localStorageService, $Imchat, $resUser, $uibModal, $Error, toastr, $request) {
     $scope.user = localStorageService.get("user");
+    $account.getCompanyById({id: $scope.user.company_id}, function(company){
+      $scope.user.company = company.records[0];
+    }, function(error){
+      $Error.callbackError(error);
+    })
     $scope.logout = function(){
       $Imchat.updateStatusUser({id:$scope.user.presense_id ,status: "offline"}, function(result){
         $account.logout({}, function(success){

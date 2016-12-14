@@ -5,13 +5,13 @@
  </div> -->
   <div class="panel-heading tac" style="height: auto;overflow: hidden; padding: 5px 10px; ">
     <a style="color: #ffffff; margin-right: 8px;" href="#/setting/student/list"><i style="font-size: 20px; float: left; margin-top: 7px; margin-left: 5px;" class="ion-ios-undo"></i></a>
-    <label style="color: #fff;margin-top: 10px;">Học sinh</label>
-    <button ng-click="saveStudent()" type="button" class="btn btn-success btn-with-icon" style="margin-right: 8px; float: right;"><i class="ion-ios-checkmark"></i>Lưu lại</button>
+    <label style="color: #fff;margin-top: 10px;">{{'student' | translate}}</label>
+    <button ng-click="saveStudent()" type="button" class="btn btn-success btn-with-icon" style="margin-right: 8px; float: right;"><i class="ion-ios-checkmark"></i>{{'button_save' | translate}}</button>
   </div>
   <div class="panel-body" style="padding: 15px 0px;">
     <div class="col-xlg-4 col-lg-5  col-md-5 col-sm-5 col-xs-12 typography-widget" style="padding: 0px;">
       <div class="panel panel-default bootstrap-panel">
-        <div class="panel-heading">Thông tin học sinh</div>
+        <div class="panel-heading">{{'info_student' | translate}}</div>
         <div class="panel-body" style="min-height: 600px;padding: 15px 10px;">
           <div ng-include="'app/pages/setting/student/widgets/form.info.html'"></div>
         </div>
@@ -20,7 +20,7 @@
 
     <div class="col-xlg-8 col-lg-7  col-md-7 col-sm-7 col-xs-12 typography-widget" style="padding-right: 0px;">
       <div class="panel panel-default bootstrap-panel">
-        <div class="panel-heading">Danh sách phụ huynh</div>
+        <div class="panel-heading">{{'list_parent' | translate}}</div>
         <div class="panel-body" style="min-height: 600px; padding: 15px 10px;">
           <div ng-include="'app/pages/setting/student/widgets/form.parent.html'"></div>
         </div>

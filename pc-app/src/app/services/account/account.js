@@ -30,5 +30,19 @@
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
 
+    this.getCompanyById = function(info, callbackSuccess, callbackError){
+      var path ="/api/search";
+      var param = {
+        model: "res.company",
+        domain: [["id", "=", info.id]],
+        fields: ["name"],
+        offset: info.offset || _self.offset,
+        limit: info.limit || _self.limit,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid
+      }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    }
   }
 })();

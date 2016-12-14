@@ -418,3 +418,15 @@ tags-input .autocomplete .suggestion-item.selected{
 div[uib-datepicker-popup-wrap] { 
     z-index: 9999 !important;
 }
+p{margin: 0px !important;}
+#htmlcontent :first-child { 
+    width: 100% !important;
+}
+multiple-autocomplete input{
+  height: 27px;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+}

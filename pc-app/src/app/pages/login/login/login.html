@@ -13,14 +13,14 @@
           <input type="text" class="form-control" ng-model="user.email" placeholder="Tên đăng nhập">
         </div>
         <div class="form-group">
-          <label for="inputPassword3" style=" margin: 0px;">Password:</label>
+          <label for="inputPassword3" style=" margin: 0px;">{{'login.password' | translate}}:</label>
           <input type="password" class="form-control" ng-model="user.password" placeholder="Mật khẩu">
         </div>
         <div class="form-group" style="margin-top: 30px;">
           <div class="w25 fl">&nbsp;</div>
           <div class="w75 fl">
-            <button ng-click="login()" class="btn btn-auth" style="background: #1BAFF0">Đăng nhập</button>
-            <a ng-click="gotoForgetPass()" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quên mật khẩu?</a>
+            <button ng-click="login()" class="btn btn-auth" style="background: #1BAFF0">{{'login.login' | translate}}</button>
+            <a ng-click="gotoForgetPass()" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">{{'login.forget_password' | translate}}?</a>
           </div>
         </div>
       </div>
@@ -32,29 +32,29 @@
         <div class="form-group" style="margin-top: 30px;">
           <div class="w25 fl">&nbsp;</div>
           <div class="w75 fl">
-            <button ng-click="forgetPass()" class="btn btn-auth" style="background: #1BAFF0">Xác nhận</button>
-            <a ng-click="form ='login'" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quay lại</a>
+            <button ng-click="forgetPass()" class="btn btn-auth" style="background: #1BAFF0">{{'button_confirm' | translate}}</button>
+            <a ng-click="form ='login'" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">{{'button_back' | translate}}</a>
           </div>
         </div>
       </div>
       <div ng-show="form ==='confirm'">
         <div class="form-group">
-          <label for="inputEmail3" style="margin: 0px;">Mật khẩu mới:</label>
-          <input type="password" class="form-control" ng-model="user.password_register" placeholder="Mật khẩu mới">
+          <label for="inputEmail3" style="margin: 0px;">{{'new_password' | translate}}:</label>
+          <input type="password" class="form-control" ng-model="user.password_register">
         </div>
         <div class="form-group">
-          <label for="inputEmail3" style="margin: 0px;">Xác nhận:</label>
-          <input type="password" class="form-control" ng-model="user.passwordConfirm" placeholder="Xác nhận mật khẩu mới">
+          <label for="inputEmail3" style="margin: 0px;">{{'button_confirm' | translate}:</label>
+          <input type="password" class="form-control" ng-model="user.passwordConfirm">
         </div>
         <div class="form-group">
-          <label for="inputEmail3" style="margin: 0px;">Mã xác nhận:</label>
-          <input type="text" class="form-control" ng-model="user.code" placeholder="Mã xác nhận">
+          <label for="inputEmail3" style="margin: 0px;">{{'code_confirm' | translate}:</label>
+          <input type="text" class="form-control" ng-model="user.code">
         </div>
         <div class="form-group" style="margin-top: 30px;">
           <div class="w25 fl">&nbsp;</div>
           <div class="w75 fl">
-            <button ng-click="confirmPass()" class="btn btn-auth" style="background: #1BAFF0">Xác nhận</button>
-            <a ng-click="form ='login'" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quay lại</a>
+            <button ng-click="confirmPass()" class="btn btn-auth" style="background: #1BAFF0">{{'button_confirm' | translate}}</button>
+            <a ng-click="form ='login'" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">{{'button_back' | translate}}</a>
             <!-- <a ng-click="doForgetPass()" class="forgot-pass" style="color: #1BAFF0; cursor: pointer;">Quên mật khẩu?</a> -->
           </div>
         </div>

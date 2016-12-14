@@ -9,7 +9,7 @@
     .controller('ScheduleCtrl', ScheduleCtrl);
 
   /** @ngInject */
-  function ScheduleCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Schedule, MultipleViewsManager, $uibModal, toastr) {
+  function ScheduleCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Schedule, MultipleViewsManager, $uibModal, toastr, $Error) {
     $scope.listSchedule = [];
     var listSchedule = [];
     $scope.dateOptionsReceipt = {

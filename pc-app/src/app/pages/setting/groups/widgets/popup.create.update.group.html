@@ -1,12 +1,12 @@
 <div class="modal-content" style="margin-top: 10%;">
   <div class="modal-header bg-info">
-    <span ng-show="!group.id">Thêm </span><span ng-show="group.id">Sửa </span><span>{{'menu.setting.group' | translate}}</span>
+    <span ng-show="!group.id">{{'more' | translate}} </span><span ng-show="group.id">{{'edit' | translate}} </span><span>{{'menu.setting.group' | translate}}</span>
   </div>
   <div class="modal-body text-center">
   	<div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="inputFirstName">Tên khối:</label>
+          <label for="inputFirstName">{{'name_group' | translate}}:</label>
           <input ng-model="group.name" type="text" class="form-control">
         </div>
       </div>

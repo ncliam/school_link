@@ -9,55 +9,58 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
 .run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager) {
     $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-          cordova.plugins.Keyboard.disableScroll(true);
-      }
-      if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-      }
-      /*alert("get tags");*/
-      window.plugins.OneSignal
-        .startInit("3fcdf8f2-9523-4ca7-8489-fefb29cbecc4", "204984235412")
-        .handleNotificationReceived(function(jsonData) {
-          /*alert("Notification received:\n" + JSON.stringify(jsonData));
-          console.log('Did I receive a notification: ' + JSON.stringify(jsonData));*/
-        })
-        .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
-        .endInit();
-      $ionicPlatform.registerBackButtonAction(function (e) {
-        //ionic.Platform.exitApp();
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        e.stopPropagation();
-      }, 100);
+        $pouchDb.initDB("res.user");
+        //$pouchDb.destroyDatabase("res.user");
+        localStorageService.remove("doPoll");
+        $pouchDb.getAllDocs("res.user").then(function(allUser){
+          var existUser = _.find(allUser, function(user){
+            return user.data.login;
+          });
+          if(existUser){
+            localStorageService.set("user", existUser.data);
+            localStorageService.set("children", existUser.data.children);
+            localStorageService.set("listChildren", existUser.data.listChildren);
+            localStorageService.set("setting", existUser.data.setting);
+            localStorageService.set("class", existUser.data.class);
+            $Longpolling.user = existUser.data;
+            $Longpolling.last = 0;
+            $Longpolling.poll();
+            MultipleViewsManager.updateView("chooseChildren");
+            $state.go("app.message");
+            window.plugins.OneSignal.sendTag("user_id", existUser.data.uid);
+          } else{
+            $state.go("app.login");
+          }
+        });
+        cordova.plugins.notification.badge.clear();
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+        /*alert("get tags");*/
+        window.plugins.OneSignal
+          .startInit("3fcdf8f2-9523-4ca7-8489-fefb29cbecc4", "204984235412")
+          .handleNotificationReceived(function(jsonData) {
+             cordova.plugins.notification.badge.increase();
+            /*alert("Notification received:\n" + JSON.stringify(jsonData));
+            console.log('Did I receive a notification: ' + JSON.stringify(jsonData));*/
+          })
+          .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
+          .endInit();
+        $ionicPlatform.registerBackButtonAction(function (e) {
+          //ionic.Platform.exitApp();
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          e.stopPropagation();
+        }, 100);
     });
-    $pouchDb.initDB("res.user");
-    //$pouchDb.destroyDatabase("res.user");
-    localStorageService.remove("doPoll");
-    $pouchDb.getAllDocs("res.user").then(function(allUser){
-      var existUser = _.find(allUser, function(user){
-        return user.data.login;
-      });
-      if(existUser){
-        localStorageService.set("user", existUser.data);
-        localStorageService.set("children", existUser.data.children);
-        localStorageService.set("listChildren", existUser.data.listChildren);
-        localStorageService.set("setting", existUser.data.setting);
-        localStorageService.set("class", existUser.data.class);
-        $Longpolling.user = existUser.data;
-        $Longpolling.last = 0;
-        $Longpolling.poll();
-        MultipleViewsManager.updateView("chooseChildren");
-        $state.go("app.message");
-        window.plugins.OneSignal.sendTag("user_id", existUser.data.uid);
-      } else{
-        $state.go("app.login");
-      }
-    });
+    
 
 })
 
@@ -152,6 +155,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             'menuContent': {
                 templateUrl: 'js/pages/school/school.html',
                 controller: 'SchoolCtrl'
+            }
+        }
+    })
+    .state('app.notification', {
+        url: '/notification',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'js/pages/notification/notification.html',
+                controller: 'NotificationCtrl'
+            }
+        }
+    })
+
+    .state('app.detail_notification', {
+        url: '/detail_notification',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'js/pages/detail_notification/detail_notification.html',
+                controller: 'DetailNotificationCtrl'
             }
         }
     })

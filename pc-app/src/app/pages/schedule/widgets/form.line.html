@@ -1,13 +1,13 @@
 <div style="padding-left: 5px; padding-right: 5px; margin-top: 10px; float: left; width: 100%;">
 	<div class="w100 fl black-muted-bg table-line" style="border-bottom: 1px solid gray; border-top: 1px solid gray">
-		<div class="fl w5 title-line text-center" style="padding: 10px 0px;">Tiết</div>
+		<div class="fl w5 title-line text-center" style="padding: 10px 0px;">{{'tiet' | translate}}</div>
 	  <div class="fl w1428 title-line text-center" ng-repeat="day in weekDay">{{day.name}}</div>
 	</div>
   <div class="w100 fl table-line">
   	<div class="w100 fl" style="border-bottom: 1px solid #ddd;">
   		<div class="fl w5 title-line text-center" style="padding: 10px 0px; height: 41px; border-bottom: 1px solid ;border-right: none;">&nbsp;</div>
   		<div class="fl w95 title-line text-center" style="padding: 10px 0px; border-bottom: 1px solid;">
-  			Sáng
+  			{{'morning' | translate}}
   			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-if="form.first" ng-click="showHideForm('first')"><i style="font-size: 20px;" class="ion-ios-arrow-up"></i></a>
   			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-if="!form.first" ng-click="showHideForm('first')"><i style="font-size: 20px;" class="ion-ios-arrow-down"></i></a>
   		</div>
@@ -32,7 +32,7 @@
 		<div class="w100 fl" style="border-bottom: 1px solid #ddd;">
   		<div class="fl w5 title-line text-center" style="padding: 10px 0px; height: 42px; border-bottom: 1px solid; border-top: 1px solid; border-right: none;">&nbsp;</div>
   		<div class="fl w95 title-line text-center" style="padding: 10px 0px; border-bottom: 1px solid; border-top: 1px solid;">
-  			Chiều
+  			{{'afternoon' | translate}}
   			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-if="form.second" ng-click="showHideForm('second')"><i style="font-size: 20px;" class="ion-ios-arrow-up"></i></a>
   			<a style="color: #000000; margin-right: 8px; float: right; cursor: pointer;" ng-if="!form.second" ng-click="showHideForm('second')"><i style="font-size: 20px;" class="ion-ios-arrow-down"></i></a>
   		</div>

@@ -1,7 +1,7 @@
 <div class="" style="padding-left: 5px; padding-right: 5px;" ng-show="!flagEdit">
 	<div class="search" style="margin: 0px; border-radius: 4px; background: #ffffff; padding: 2px; width: 100%; border: 1px solid gray;">
 	  <i style="color: #000000;" class="ion-ios-search-strong" ng-click="startSearch()"></i>
-	  <input ng-model="keySearch.value" ng-keydown="$event.which === 13 && startSearch()" id="searchInput" type="text" placeholder="Tìm kiếm phụ huynh theo tên hoặc số điện thoại" style="width: 90%; color: #000000;">
+	  <input ng-model="keySearch.value" ng-keydown="$event.which === 13 && startSearch()" id="searchInput" type="text" placeholder="{{'search_parent_name_mobile' | translate}}" style="width: 90%; color: #000000;">
 	</div>
 </div>
 <div style="padding-left: 5px; padding-right: 5px; margin-top: 10px; float: left; width: 100%;">
@@ -10,7 +10,7 @@
 	    <thead>
 	    <tr class="black-muted-bg">
 	      <th style="text-align: left">{{'name' | translate}}</th>
-	      <th>Số điện thoại</th>
+	      <th>Mobile</th>
 	      <th></th>
 	    </tr>
 	    </thead>

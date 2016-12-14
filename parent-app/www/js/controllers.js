@@ -11,6 +11,7 @@ angular.module('starter.controllers', [])
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
     $scope.show = {menu:true};
+    $scope.numberMessage = 0;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -136,6 +137,13 @@ angular.module('starter.controllers', [])
         $scope.children = localStorageService.get("children")
         $scope.listChildren = localStorageService.get("listChildren");
     });
+    MultipleViewsManager.updated('notification_new_message', function (data) {
+        $scope.numberMessage++;
+    });
+    $scope.gotoMessage = function(){
+        $scope.numberMessage = 0;
+        $state.go("app.message");
+    }
     $scope.chooseChildren = function(student){
         $scope.user = localStorageService.get("user");
         $scope.show.menu = true;

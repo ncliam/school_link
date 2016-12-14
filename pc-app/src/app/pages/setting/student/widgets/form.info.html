@@ -4,13 +4,13 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
-      <label for="inputFirstName" style="font-weight: bold;">Họ:</label>
+      <label for="inputFirstName" style="font-weight: bold;">{{'first_name' | translate}}:</label>
       <input ng-model="student.last_name" type="text" class="form-control">
     </div>
   </div>
   <div class="col-sm-12">
     <div class="form-group">
-      <label for="inputLastName" style="font-weight: bold;">Tên:</label>
+      <label for="inputLastName" style="font-weight: bold;">{{'last_name' | translate}}:</label>
       <input ng-model="student.name" type="text" class="form-control">
     </div>
   </div>
@@ -18,13 +18,13 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
-      <label for="inputFirstName" style="font-weight: bold;">Quê quán:</label>
+      <label for="inputFirstName" style="font-weight: bold;">{{'born_address' | translate}}:</label>
       <input ng-model="student.home_town" type="text" class="form-control">
     </div>
   </div>
   <div class="col-sm-12">
     <div class="form-group">
-      <label for="inputLastName" style="font-weight: bold;">Nơi ở hiện tại:</label>
+      <label for="inputLastName" style="font-weight: bold;">{{'live_address' | translate}}:</label>
       <input ng-model="student.home_address" type="text" class="form-control">
     </div>
   </div>
@@ -32,7 +32,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
-      <label for="inputLastName" style="font-weight: bold;">Ngày sinh:</label>
+      <label for="inputLastName" style="font-weight: bold;">{{'birthday' | translate}}:</label>
       <p class="input-group" style="float: right;width: 75%;">
         <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="student.birthday" is-open="popup1.opened" datepicker-options="dateOptionsReceipt" ng-required="true" close-text="Close" />
         <span class="input-group-btn">

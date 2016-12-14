@@ -1,0 +1,17 @@
+<ion-view view-title="Thông báo">
+    <ion-content ng-class="{expanded:isExpanded}" style="margin-top: 10px; margin-bottom: 55px;">
+        <div class="item card-item" style="padding: 0px;" ng-repeat="notification in listNotification" on-tap="gotoDetailNotification(notification)">
+          <div style="margin: 5px;" class="card stable-bg ink ink-dark">
+            <div class="item item-avatar item-text-wrap" style="background: none; padding: 5px 5px 5px 88px; min-height: 65px;">
+              <span class="avatar" style="background-image: url('img/notification.png'); width: 45px; height: 45px;"></span>
+              <strong>{{notification.subject}}</strong>
+              <span style="color: gray; font-style: italic; font-size: 12px; float: right;">{{notification.showDate}}</span>
+              <div class="card-footer text-right">
+                  <div ng-bind-html="notification.body_short" class="pull-left" style="color: gray; font-style: italic; font-size: 12px;">
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </ion-content>
+</ion-view>

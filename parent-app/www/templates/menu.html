@@ -11,10 +11,10 @@
         <ion-nav-view name="fabContent"></ion-nav-view>
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
         <div class="tabs tabs-icon-top" style="padding: 5px 0px 0px 0px;">
-          <a class="tab-item" ui-sref="app.message" ng-class="{active: isActiveTab('app.message')}" >
+          <a class="tab-item" on-tap="gotoMessage()" ng-class="{active: isActiveTab('app.message')}" >
+            <i ng-show="numberMessage > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 2px 6px; font-size: 12px; position: absolute; right: 0px;">{{numberMessage}}</i>
             <i class="fa fa-comments fa-3x" ></i>
             <p>Tin nhắn</p>
-
           </a>
           <a class="tab-item" ui-sref="app.contact" ng-class="{active: isActiveTab('app.contact')}">
             <i class="fa fa-phone fa-3x" ></i>
@@ -39,8 +39,17 @@
         </ion-header-bar>
         <ion-content class="light-bg has-expanded-header">
           <ul class="nav sidebar-nav" ng-show="show.menu">
-            <li>
-              <a ui-sref="app.message" menu-toggle="left" ng-class="{active: isActiveTab('app.tinnhan')}">
+             <li ui-sref="app.notification" menu-toggle="left" ng-class="{active: isActiveTab('app.thongbao')}">
+              <a>
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle violet fa-stack-2x"></i>
+                  <i class="fa fa-bell fa-stack-1x"></i>
+                </span>
+                <span class="menu_name">Thông báo</span>
+              </a>
+            </li>
+            <li ui-sref="app.message" menu-toggle="left" ng-class="{active: isActiveTab('app.tinnhan')}">
+              <a>
                 <span class="fa-stack fa-2x">
                   <i class="fa fa-circle red fa-stack-2x"></i>
                   <i class="fa fa-comments fa-stack-1x"></i>
@@ -48,8 +57,8 @@
                 <span class="menu_name">Tin nhắn</span>
               </a>
             </li>
-            <li>
-              <a ui-sref="app.schedule" menu-toggle="left" ng-class="{active: isActiveTab('app.tkb')}">
+            <li ui-sref="app.schedule" menu-toggle="left" ng-class="{active: isActiveTab('app.tkb')}">
+              <a>
                 <span class="fa-stack fa-2x">
                   <i class="fa fa-circle violet fa-stack-2x"></i>
                   <i class="fa fa-calendar fa-stack-1x"></i>
@@ -57,8 +66,8 @@
                 <span class="menu_name">Thời khóa biểu</span>
               </a>
             </li>
-            <li>
-              <a ui-sref="app.goal" menu-toggle="left" ng-class="{active: isActiveTab('app.ketquahoc')}">
+            <li ui-sref="app.goal" menu-toggle="left" ng-class="{active: isActiveTab('app.ketquahoc')}">
+              <a>
                 <span class="fa-stack fa-2x">
                   <i class="fa fa-circle blue fa-stack-2x"></i>
                   <i class="fa fa-area-chart fa-stack-1x"></i>
@@ -66,8 +75,8 @@
                 <span class="menu_name">Kết quả học tập</span>
               </a>
             </li>
-            <li>
-              <a ui-sref="app.contact" menu-toggle="left" ng-class="{active: isActiveTab('app.lienhe')}">
+            <li ui-sref="app.contact" menu-toggle="left" ng-class="{active: isActiveTab('app.lienhe')}">
+              <a>
                 <span class="fa-stack fa-2x">
                   <i class="fa fa-circle green fa-stack-2x"></i>
                   <i class="fa fa-phone fa-stack-1x"></i>
@@ -75,8 +84,8 @@
                 <span class="menu_name">Liên hệ</span>
               </a>
             </li>
-            <li>
-              <a ui-sref="app.setting" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
+            <li ui-sref="app.setting" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
+              <a>
                 <span class="fa-stack fa-2x">
                   <i class="fa fa-circle pink fa-stack-2x"></i>
                   <i class="fa fa-cog fa-stack-1x"></i>
@@ -84,8 +93,8 @@
                 <span class="menu_name">Cài đặt</span>
               </a>
             </li>
-            <li>
-              <a on-tap="logout()" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
+            <li on-tap="logout()" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
+              <a>
                 <span class="fa-stack fa-2x">
                   <i class="fa fa-circle violet fa-stack-2x"></i>
                   <i class="fa fa-sign-out fa-stack-1x"></i>

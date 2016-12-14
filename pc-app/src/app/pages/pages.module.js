@@ -19,7 +19,8 @@
     'SchoolLink.pages.setting',
     'BlurAdmin.pages.message',
     'SchoolLink.pages.schedule',
-    'SchoolLink.pages.test'
+    'SchoolLink.pages.test',
+    'SchoolLink.pages.notification'
   ])
       .config(routeConfig)
       .run(runConfig);

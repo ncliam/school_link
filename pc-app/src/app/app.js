@@ -24,6 +24,7 @@ angular.module('BlurAdmin', [
   'ngTagsInput',
   'angularSpinner',
   'ngCsvImport',
+  'multipleSelect',
 
   'BlurAdmin.theme',
   'BlurAdmin.pages',
