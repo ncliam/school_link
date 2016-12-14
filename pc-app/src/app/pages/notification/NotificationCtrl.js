@@ -105,7 +105,7 @@
             });
           } else{
             listParentIds = _.union(listParentIds, obj.parent_ids);
-            $scope.newNotification.user_ids = _.union($scope.newNotification.user_ids, classOb.parent_ids);
+            $scope.newNotification.user_ids = _.union($scope.newNotification.user_ids, obj.parent_ids);
           }
         }
       });

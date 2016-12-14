@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="notification in listNotification" ng-click="gotoDetailNotification(notification)" class="no-top-border">
+        <tr ng-repeat="notification in listNotification" class="no-top-border">
           <td>{{notification.subject}}</td>
           <td><div ng-bind-html="notification.body_short"></div></td>
           <td>{{notification.showDate}}</td>
