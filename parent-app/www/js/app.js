@@ -7,7 +7,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'SchoolLink.service','LocalStorageModule', 
     'toaster', 'pascalprecht.translate', 'angular.filter'])
 
-.run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager) {
+.run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager, $translate) {
     $ionicPlatform.ready(function() {
         $pouchDb.initDB("res.user");
         //$pouchDb.destroyDatabase("res.user");
@@ -38,6 +38,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           cordova.plugins.notification.badge.clear();
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
           cordova.plugins.Keyboard.disableScroll(true);
+          navigator.globalization.getPreferredLanguage(
+              function (language) {
+                $translate.refresh();
+                if(language.value == "vi-VN"){
+                  $translate.use('vi')
+                } else if(language.value == "en-US"){
+                  $translate.use('en')
+                } else{
+                  $translate.use('vi')
+                }
+              },
+              function () {alert('Error getting language\n');}
+          );
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
@@ -277,5 +290,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
       })(),
       suffix: '.json'
     });
-    $translateProvider.preferredLanguage('vi');
+    
 });
