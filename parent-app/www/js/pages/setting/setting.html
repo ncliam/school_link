@@ -1,11 +1,11 @@
-<ion-view view-title="Cài đặt">
+<ion-view view-title="{{'setting' | translate}}">
     <div class="tabs-striped tabs-top">
       <div class="tabs" style="background: #f8f8f8;margin-top: 5px;">
           <a class="tab-item active" ng-class="{active: group == 'setting'}" ng-click="changeGroup('setting')">
-            Thiết lập
+            {{'setup' | translate}}
           </a>
           <a class="tab-item" ng-class="{active: group == 'changepassword'}" ng-click="changeGroup('changepassword')">
-            Đổi mật khẩu
+            {{'change_password' | translate}}
           </a>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <div ng-show="group === 'setting'">
           <ul class="list">
             <li class="item item-toggle">
-               Rung
+               {{'vibrate' | translate}}
                <label class="toggle toggle-positive">
                  <input type="checkbox" ng-model="setting.isVibration" ng-change="saveUserSetting()">
                  <div class="track">
@@ -23,7 +23,7 @@
                </label>
             </li>
             <li class="item item-toggle">
-               Chuông
+               {{'vibrate' | translate}}
                <label class="toggle toggle-positive">
                  <input type="checkbox" ng-model="setting.isSound" ng-change="saveUserSetting()">
                  <div class="track">
@@ -32,7 +32,7 @@
                </label>
             </li>
             <li class="item item-toggle">
-               Thông báo hệ thống
+               {{'notification_system' | translate}}
                <label class="toggle toggle-positive">
                  <input type="checkbox" ng-model="setting.isNotification" ng-change="changeNotification()">
                  <div class="track">
@@ -47,22 +47,22 @@
          <div ng-show="group === 'changepassword'">
             <div class="row" style="padding-top:20px">
                   <div class="col">
-                      <input type="text" placeholder="Mật khẩu cũ" ng-model="user.old_passwd">
+                      <input type="text" placeholder="{{'notification_system' | translate}}" ng-model="user.old_passwd">
                   </div>
               </div>
               <div class="row" style="padding-top:20px">
                   <div class="col">
-                      <input type="password" placeholder="Mật khẩu mới" ng-model="user.new_passwd">
+                      <input type="password" placeholder="{{'new_password' | translate}}" ng-model="user.new_passwd">
                   </div>
               </div>
               <div class="row" style="padding-top:20px">
                   <div class="col">
-                      <input type="password" placeholder="Xác nhận mật khẩu mới" ng-model="user.confirm_new_passwd">
+                      <input type="password" placeholder="{{'confirm_new_pass' | translate}}" ng-model="user.confirm_new_passwd">
                   </div>
               </div>
               <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="changePassword()" >Xác nhận</button>
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="changePassword()" >{{'Xác nhận' | translate}}</button>
                 </div>
               </div>
           </div>

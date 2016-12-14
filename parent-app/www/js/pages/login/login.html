@@ -32,15 +32,15 @@
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="doLogin()" >Đăng nhập</button>
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="doLogin()" >{{'title_login' | translate}}</button>
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
               <div class="col">
-                  <a class="login-href" on-tap="goToRegister()">Đăng ký mới</a>
+                  <a class="login-href" on-tap="goToRegister()">{{'new_register' | translate}}</a>
               </div>
               <div class="col text-right">
-                  <a class="login-href" on-tap="goToForget()">Quên mật khẩu</a>
+                  <a class="login-href" on-tap="goToForget()">{{'forgot_password' | translate}}</a>
               </div>
             </div>
         </div>
@@ -52,12 +52,12 @@
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="doRegister()">Đăng ký</button>
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="doRegister()">{{'button_register' | translate}}</button>
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
               <div class="col text-right">
-                  <a class="login-href" on-tap="form.value ='login'">Quay lại</a>
+                  <a class="login-href" on-tap="form.value ='login'">{{'button_back' | translate}}</a>
               </div>
             </div>
         </div>
@@ -79,12 +79,12 @@
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="confirmCode()">Xác nhận</button>
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="confirmCode()">{{'button_confirm' | translate}}</button>
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
               <div class="col text-right">
-                  <a class="login-href" on-tap="form.value ='login'">Quay lại</a>
+                  <a class="login-href" on-tap="form.value ='login'">{{'button_back' | translate}}</a>
               </div>
             </div>
         </div>
@@ -96,12 +96,12 @@
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="doForget()">Xác nhận</button>
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="doForget()">{{'button_confirm' | translate}}Xác nhận</button>
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
               <div class="col text-right">
-                  <a class="login-href" on-tap="form.value ='login'">Quay lại</a>
+                  <a class="login-href" on-tap="form.value ='login'">{{'button_back' | translate}}</a>
               </div>
             </div>
         </div>
@@ -109,22 +109,22 @@
         <div ng-show="form.value ==='confirmForget'">
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <input type="password" placeholder="Mật khẩu" ng-model="user.password_register">
+                    <input type="password" placeholder="{{'password' | translate}}" ng-model="user.password_register">
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <input type="password" placeholder="Xác nhận mật khẩu" ng-model="user.passwordConfirm">
+                    <input type="password" placeholder="{{'confirm_password' | translate}}" ng-model="user.passwordConfirm">
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <input type="text" placeholder="Mã xác nhận" ng-model="user.code">
+                    <input type="text" placeholder="{{'code_confirm' | translate}}" ng-model="user.code">
                 </div>
             </div>
             <div class="row" style="padding-top:20px">
                 <div class="col">
-                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="confirmForget()">Xác nhận</button>
+                    <button class="button bp-button bp-button-block bp-button-blue" ng-click="confirmForget()">{{'button_confirm' | translate}}</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<ion-view view-title="Tin nhắn">
+<ion-view view-title="{{'message' | translate}}">
     <ion-content ng-class="{expanded:isExpanded}" style="margin-top: 10px; margin-bottom: 55px;">
         <div class="item card-item" style="padding: 0px;" ng-repeat="channel in listChannel">
             <div on-tap="chooseChannel(channel)" style="margin: 5px;" class="card stable-bg ink ink-dark">

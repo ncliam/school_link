@@ -13,16 +13,16 @@
   <div class="tabs-striped tabs-top">
     <div class="tabs" style="background: #f8f8f8;margin-top: 5px;">
       <a class="tab-item" ng-click="chooseTab('w1')" ng-class="{active: markType == 'w1'}">
-        Hệ số 1
+        {{'hs1' | translate}}
       </a>
       <a class="tab-item" ng-click="chooseTab('w2')"  ng-class="{active: markType == 'w2'}">
-        Hệ số 2
+        {{'hs2' | translate}}
       </a>
       <a class="tab-item" ng-click="chooseTab('final')"  ng-class="{active: markType == 'final'}">
-        Học kỳ
+        {{'hk' | translate}}
       </a>
       <a class="tab-item" ng-click="chooseTab('average')"  ng-class="{active: markType == 'average'}">
-        Tổng kết
+        {{'tk' | translate}}
       </a>
     </div>
   </div>
@@ -30,8 +30,8 @@
     <div ng-repeat="(key, value) in markListByType | groupBy: 'date_exam_week'" class="test">
       <p class="text-center instruction-text" style="margin: 10px;">{{key}}</p>
       <div class="row row-kq header">
-        <div class="col col-kq">Môn</div>
-        <div class="col col-kq">Điểm</div>
+        <div class="col col-kq">{{'subject' | translate}}</div>
+        <div class="col col-kq">{{'goal' | translate}}</div>
       </div>
       <div class="row row-kq" ng-repeat="item in value">
         <div class="col col-kq">{{item.subjectName}}</div>
@@ -40,11 +40,11 @@
     </div>
     <div ng-show="markType ==='average'" style="padding: 10px;">
       <div style="padding: 5px 0px;">
-        <strong>Học lực: </strong>
+        <strong>{{'goal_hl' | translate}}: </strong>
         <span>{{markHL.name | translate}}</span>
       </div>
       <div style="padding: 5px 0px;">
-        <strong>Hạnh kiểm: </strong>
+        <strong>{{'goal_hk' | translate}}: </strong>
         <span>{{markHK.name | translate}}</span>
       </div>
     </div>
