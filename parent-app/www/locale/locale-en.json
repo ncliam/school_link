@@ -98,5 +98,7 @@
 	"old_password": "Old password",
 	"new_password": "New password",
 	"confirm_new_pass": "Re-type new password",
-	"button_confirm": "Confirm"
+	"button_confirm": "Confirm",
+	"morning": "Morning",
+	"afternoon": "Afternoon"
 }

@@ -24,11 +24,11 @@
                   ng-show="isGroupShown(item.name)">
                   <div class="row">
                   <div class="col col-50">
-                    <h3>Sáng</h3>
+                    <h3>{{'morning'| translate}}</h3>
                     <p ng-repeat="tiethoc in item.tietHocSang">{{tiethoc.tenTiet | translate}}: {{tiethoc.tenMonHoc}}</p>
                   </div>
                   <div class="col col-50">
-                    <h3>Chiều</h3>
+                    <h3>{{'Afternoon'| translate}}</h3>
                     <p ng-repeat="tiethoc in item.tietHocChieu">{{tiethoc.tenTiet |translate}}: {{tiethoc.tenMonHoc}}</p>
                   </div>
                 </div>

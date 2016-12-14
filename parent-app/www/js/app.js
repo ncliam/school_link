@@ -51,6 +51,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
               },
               function () {alert('Error getting language\n');}
           );
+        } else{
+            $translate.use('vi')
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required

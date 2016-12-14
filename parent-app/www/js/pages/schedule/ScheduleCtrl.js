@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('starter.controllers')
-.controller('ScheduleCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService) {
+.controller('ScheduleCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService, $translate) {
   $scope.$parent.hideHeader();
   $scope.$parent.clearFabs();
   $scope.isExpanded = false;
@@ -49,7 +49,7 @@ angular.module('starter.controllers')
     show: true
   };
 
-  $scope.listSemester = [{id: 1, value:"first", name:"Học kì 1"}, {id: 2, value:"second", name:"Học kì 2"}];
+  $scope.listSemester = [{id: 1, value:"first", name:$translate.instant('first')}, {id: 2, value:"second", name:$translate.instant('second')}];
   $scope.formData = {
     semester_id: 1
   }
