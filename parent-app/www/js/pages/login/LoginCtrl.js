@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('LoginCtrl', function($scope,$state, $timeout, $stateParams, ionicMaterialInk, $LoginService, $Imchat, $Longpolling, localStorageService, 
-  $resUser, toaster, $pouchDb, $Error, $ionicSideMenuDelegate) {
+  $resUser, toaster, $pouchDb, $Error, $ionicSideMenuDelegate, $translate) {
     $scope.$parent.clearFabs();
     $scope.$parent.hideMenuRightButton();
     $scope.$parent.hideTabs();
@@ -18,6 +18,23 @@ angular.module('starter.controllers')
       password: ""
     };
     $scope.form = {value:"login"};
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      navigator.globalization.getPreferredLanguage(
+          function (language) {
+            $translate.refresh();
+            if(language.value == "vi-VN"){
+              $translate.use('vi')
+            } else if(language.value == "en-US"){
+              $translate.use('en')
+            } else{
+              $translate.use('vi')
+            }
+          },
+          function () {alert('Error getting language\n');}
+      );
+    } else{
+       $translate.use('en')
+    }
 
     $scope.doLogin = function(){
     	localStorageService.remove("user");

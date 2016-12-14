@@ -14,19 +14,19 @@
           <a class="tab-item" on-tap="gotoMessage()" ng-class="{active: isActiveTab('app.message')}" >
             <i ng-show="numberMessage > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 2px 6px; font-size: 12px; position: absolute; right: 0px;">{{numberMessage}}</i>
             <i class="fa fa-comments fa-3x" ></i>
-            <p>Tin nhắn</p>
+            <p>{{'message' | translate}}</p>
           </a>
           <a class="tab-item" ui-sref="app.contact" ng-class="{active: isActiveTab('app.contact')}">
             <i class="fa fa-phone fa-3x" ></i>
-            <p>Liên hệ</p>
+            <p>{{'contact' | translate}}</p>
           </a>
           <a class="tab-item" ui-sref="app.schedule" ng-class="{active: isActiveTab('app.schedule')}">
             <i class="fa fa-calendar fa-3x" ></i>
-            <p>Thời khóa biểu</p>
+            <p>{{'schedule' | translate}}</p>
           </a>
           <a class="tab-item" ui-sref="app.goal" ng-class="{active: isActiveTab('app.goal')}">
             <i class="fa fa-area-chart fa-3x" ></i>
-            <p>Kết quả học tập</p>
+            <p>{{'goal' | translate}}</p>
           </a>
         </div>
     </ion-side-menu-content>
@@ -45,7 +45,7 @@
                   <i class="fa fa-circle violet fa-stack-2x"></i>
                   <i class="fa fa-bell fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Thông báo</span>
+                <span class="menu_name">{{'notification' | translate}}</span>
               </a>
             </li>
             <li ui-sref="app.message" menu-toggle="left" ng-class="{active: isActiveTab('app.tinnhan')}">
@@ -54,7 +54,7 @@
                   <i class="fa fa-circle red fa-stack-2x"></i>
                   <i class="fa fa-comments fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Tin nhắn</span>
+                <span class="menu_name">{{'message' | translate}}</span>
               </a>
             </li>
             <li ui-sref="app.schedule" menu-toggle="left" ng-class="{active: isActiveTab('app.tkb')}">
@@ -63,7 +63,7 @@
                   <i class="fa fa-circle violet fa-stack-2x"></i>
                   <i class="fa fa-calendar fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Thời khóa biểu</span>
+                <span class="menu_name">{{'schedule' | translate}}</span>
               </a>
             </li>
             <li ui-sref="app.goal" menu-toggle="left" ng-class="{active: isActiveTab('app.ketquahoc')}">
@@ -72,7 +72,7 @@
                   <i class="fa fa-circle blue fa-stack-2x"></i>
                   <i class="fa fa-area-chart fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Kết quả học tập</span>
+                <span class="menu_name">{{'goal' | translate}}</span>
               </a>
             </li>
             <li ui-sref="app.contact" menu-toggle="left" ng-class="{active: isActiveTab('app.lienhe')}">
@@ -81,7 +81,7 @@
                   <i class="fa fa-circle green fa-stack-2x"></i>
                   <i class="fa fa-phone fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Liên hệ</span>
+                <span class="menu_name">{{'contact' | translate}}</span>
               </a>
             </li>
             <li ui-sref="app.setting" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
@@ -90,7 +90,7 @@
                   <i class="fa fa-circle pink fa-stack-2x"></i>
                   <i class="fa fa-cog fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Cài đặt</span>
+                <span class="menu_name">{{'setting' | translate}}</span>
               </a>
             </li>
             <li on-tap="logout()" menu-toggle="left" ng-class="{active: isActiveTab('app.caidat')}">
@@ -99,7 +99,7 @@
                   <i class="fa fa-circle violet fa-stack-2x"></i>
                   <i class="fa fa-sign-out fa-stack-1x"></i>
                 </span>
-                <span class="menu_name">Đăng xuất</span>
+                <span class="menu_name">{{'logout' | translate}}</span>
               </a>
             </li>
           </ul>

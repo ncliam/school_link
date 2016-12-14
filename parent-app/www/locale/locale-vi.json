@@ -86,7 +86,6 @@
 	"confirm_password": "Xác nhận mật khẩu",
 	"code_confirm": "Mã xác nhận",
 	"message": "Tin nhắn",
-	"notification": "Thông báo",
 	"schedule": "Thời khóa biểu",
 	"choose_school": "Chọn trường",
 	"setup": "Thiết lập",
@@ -98,5 +97,14 @@
 	"old_password": "Mật khẩu cũ",
 	"new_password": "Mật khẩu mới",
 	"confirm_new_pass": "Xác nhận mật khẩu mới",
-	"button_confirm": "Xác nhận"
+	"button_confirm": "Xác nhận",
+	"message": "Tin nhắn",
+	"contact" :"Liên hệ",
+	"schedule": "Thời khóa biểu",
+	"goal" : "Kết quả học tập",
+	"notification": "Thông báo",
+	"setting" : "Cài đặt",
+	"logout": "Đăng xuất",
+	"mobile":"Số điện thoại"
+
 }
