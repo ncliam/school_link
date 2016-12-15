@@ -34,8 +34,6 @@
       }, function(error){
         $Error.callbackError(error);
       });
-
-     
     };
     _init();
 
@@ -85,50 +83,67 @@
         $scope.listNotification = listNotification;
       }
     };
-
+    var _validate = function(){
+      var flag = true;
+      if(!$scope.newNotification.subject || $scope.newNotification.subject.length === 0){
+        toastr.error("Bạn phải nhập tiêu đề", "", {});
+        flag = false;
+      }
+      if(!$scope.newNotification.body || $scope.newNotification.body.length === 0){
+        toastr.error("Bạn phải nhập nội dung", "", {});
+        flag = false;
+      }
+      if(!$scope.newNotification.listToUser || $scope.newNotification.listToUser.length === 0){
+        toastr.error("Bạn phải chọn đối tượng gửi", "", {});
+        flag = false;
+      } 
+      return flag;
+    }
     $scope.createNewNotification = function(){
-      var listParentIds = [];
-      $scope.newNotification.listToUser.forEach(function(obj){
-        if(obj.all){
-          listClass.forEach(function(classOb){
-            listParentIds = _.union(listParentIds, classOb.parent_ids);
-          });
-        } else{
-          if(!obj.class){
-            var listClassChoice = _.filter(listClass, function(classOb){
-              return classOb.group_id[0] === obj.id;
-            });
-            listClassChoice.forEach(function(classOb){
+      if(_validate()){
+        var listParentIds = [];
+        $scope.newNotification.listToUser.forEach(function(obj){
+          if(obj.all){
+            listClass.forEach(function(classOb){
               listParentIds = _.union(listParentIds, classOb.parent_ids);
             });
           } else{
-            listParentIds = _.union(listParentIds, obj.parent_ids);
-          }
-        }
-      });
-      $Parent.getListParentByIds({parent_ids: listParentIds}, function(listParent){
-        var user_ids = [];
-        listParent.forEach(function(parent){
-          if(parent.parent_user_id){
-            user_ids.push({id:parent.parent_user_id[0]});
-          }
-          if(parent.parent_partner_id){
-            $scope.newNotification.user_ids .push(parent.parent_partner_id[0]);
+            if(!obj.class){
+              var listClassChoice = _.filter(listClass, function(classOb){
+                return classOb.group_id[0] === obj.id;
+              });
+              listClassChoice.forEach(function(classOb){
+                listParentIds = _.union(listParentIds, classOb.parent_ids);
+              });
+            } else{
+              listParentIds = _.union(listParentIds, obj.parent_ids);
+            }
           }
         });
-        $Notification.createNotification($scope.newNotification, function(result){
-          $Notification.sentNotifition({id: result}, function(success){
-            $Notification.pushNotificationToOneSignal({notification: $scope.newNotification.subject, to_users: user_ids}, function(pushNotification){
+        $Parent.getListParentByIds({parent_ids: listParentIds}, function(listParent){
+          var user_ids = [];
+          listParent.forEach(function(parent){
+            if(parent.parent_user_id){
+              user_ids.push({id:parent.parent_user_id[0]});
+            }
+            if(parent.parent_partner_id){
+              $scope.newNotification.user_ids .push(parent.parent_partner_id[0]);
+            }
+          });
+          $Notification.createNotification($scope.newNotification, function(result){
+            $Notification.sentNotifition({id: result}, function(success){
+              $Notification.pushNotificationToOneSignal({notification: $scope.newNotification.subject, to_users: user_ids}, function(pushNotification){
 
-            }, function(error){});
-            $scope.backList();
-          }, function(error){
-            $Error.callbackError(error);
-          })
-        }, function(error){$Error.callbackError(error);});
-      }, function(error){
-        $Error.callbackError(error);
-      });
+              }, function(error){});
+              $scope.backList();
+            }, function(error){
+              $Error.callbackError(error);
+            })
+          }, function(error){$Error.callbackError(error);});
+        }, function(error){
+          $Error.callbackError(error);
+        });
+      }
     };
 
 
