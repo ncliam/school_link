@@ -95,10 +95,13 @@
 	"ring": "Sonar",
 	"notification_system": "Notificación del sistema",
 	"old_password": "Contraseña anterior",
+	"contact" :"Conectado",
 	"new_password": "Nueva contraseña",
 	"confirm_new_pass": "Reescriba nueva contraseña",
 	"button_confirm": "Confirmar",
 	"morning": "Mañana",
 	"afternoon": "Tarde",
+	"logout": "cerrar sesión",
 	"mobile":"Móvil"
+
 }
