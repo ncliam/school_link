@@ -2,7 +2,8 @@
 'use strict';
 
 angular.module('starter.controllers')
-.controller('ContactCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService, $state, MultipleViewsManager) {
+.controller('ContactCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService, $state,
+ MultipleViewsManager, $SchoolClass) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -80,7 +81,29 @@ angular.module('starter.controllers')
       return ret;
     };
     var children = localStorageService.get("children");
-    SchoolService.getContacts({userInfo:$scope.userInfo, student_id: children.id}).then(function(result){
+    var listParentLocal;
+    var _init = function(){
+      var class_id = localStorageService.get("class");
+      $SchoolClass.getClassById({id: class_id}, function(result){
+        var currentClass = result.records[0];
+        $SchoolClass.getListTeacherByIds({ids: currentClass.teacher_ids}, function(listTeacher){
+          $scope.teachers = listTeacher;
+        }, function(error){$Error.callbackError(error);});
+        $SchoolClass.getListParentByIds({parent_ids: currentClass.parent_ids}, function(listParent){
+          $scope.parents = listParent;
+          $scope.suppers = _.filter($scope.parents, function(parent) {
+          return parent.category_id.length > 0;
+        });
+        }, function(error){
+          $Error.callbackError(error);
+        });
+      }, function(error){
+
+      });
+    }
+    _init();
+
+    /*SchoolService.getContacts({userInfo:$scope.userInfo, student_id: children.id}).then(function(result){
       console.log('getContacts return ', result);
       if(result.status){
         $scope.teachers = result.teacherResults;
@@ -89,7 +112,7 @@ angular.module('starter.controllers')
           return parent.category_id.length > 0;
         });
       }
-    });
+    });*/
 
     var _getScheduleBySemester = function(){
       SchoolService.getTKB({userInfo:$scope.userInfo}).then(function(result){

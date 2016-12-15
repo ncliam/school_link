@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function NotificationCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $SchoolClass, $Schedule, MultipleViewsManager, $uibModal, 
-    toastr, $Notification, $SchoolClassGroup, $Error, $Parent) {
+    toastr, $Notification, $SchoolClassGroup, $Error, $Parent, $resUser) {
     $scope.listNotification = [];
     var listNotification = [];
     var listGroup = [];
@@ -92,7 +92,6 @@
         if(obj.all){
           listClass.forEach(function(classOb){
             listParentIds = _.union(listParentIds, classOb.parent_ids);
-            $scope.newNotification.user_ids = _.union($scope.newNotification.user_ids, classOb.parent_ids);
           });
         } else{
           if(!obj.class){
@@ -101,34 +100,35 @@
             });
             listClassChoice.forEach(function(classOb){
               listParentIds = _.union(listParentIds, classOb.parent_ids);
-              $scope.newNotification.user_ids = _.union($scope.newNotification.user_ids, classOb.parent_ids);
             });
           } else{
             listParentIds = _.union(listParentIds, obj.parent_ids);
-            $scope.newNotification.user_ids = _.union($scope.newNotification.user_ids, obj.parent_ids);
           }
         }
       });
-      $Notification.createNotification($scope.newNotification, function(result){
-        $Notification.sentNotifition({id: result}, function(success){
-          $Parent.getListParentByIds({parent_ids: listParentIds}, function(listParent){
-            var user_ids = [];
-            listParent.forEach(function(parent){
-              if(parent.parent_user_id){
-                user_ids.push({id:parent.parent_user_id[0]});
-              }
-            });
+      $Parent.getListParentByIds({parent_ids: listParentIds}, function(listParent){
+        var user_ids = [];
+        listParent.forEach(function(parent){
+          if(parent.parent_user_id){
+            user_ids.push({id:parent.parent_user_id[0]});
+          }
+          if(parent.parent_partner_id){
+            $scope.newNotification.user_ids .push(parent.parent_partner_id[0]);
+          }
+        });
+        $Notification.createNotification($scope.newNotification, function(result){
+          $Notification.sentNotifition({id: result}, function(success){
             $Notification.pushNotificationToOneSignal({notification: $scope.newNotification.subject, to_users: user_ids}, function(pushNotification){
 
             }, function(error){});
             $scope.backList();
           }, function(error){
             $Error.callbackError(error);
-          });
-        }, function(error){
-          $Error.callbackError(error);
-        })
-      }, function(error){$Error.callbackError(error);});
+          })
+        }, function(error){$Error.callbackError(error);});
+      }, function(error){
+        $Error.callbackError(error);
+      });
     };
 
 

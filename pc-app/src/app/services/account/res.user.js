@@ -66,6 +66,18 @@
       }
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
+    this.getListUserByIds = function(info, callbackSuccess, callbackError){
+      var path = "/api/callKw";
+      var param = {
+        model: _self.model,
+        session_id: _self.user.session_id ,
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"read",
+        args: [info.user_ids, _self.fields]
+      };
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
 
     this.checkGroupForUser = function(info, callbackSuccess, callbackError){
       var path ="/api/callKw";

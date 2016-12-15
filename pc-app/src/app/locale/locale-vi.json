@@ -115,5 +115,6 @@
 	"mark_tb": "Điểm TB",
 	"mark_hl":"Học lực",
 	"mark_hk": "Hạnh kiểm",
-	"search_student": "Tìm kiếm học sinh"
+	"search_student": "Tìm kiếm học sinh",
+	"login.language": "Language"
 }

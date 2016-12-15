@@ -34,7 +34,8 @@
       "mobile",
       "category_id",
       "children",
-      "parent_user_id"
+      "parent_user_id",
+      "parent_partner_id"
     ];
     this.domain = [];
     this.model = "res.partner";

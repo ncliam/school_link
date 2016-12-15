@@ -60,7 +60,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             /*alert("Notification received:\n" + JSON.stringify(jsonData));
             console.log('Did I receive a notification: ' + JSON.stringify(jsonData));*/
           })
-          .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
+          .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
           .endInit();
         $ionicPlatform.registerBackButtonAction(function (e) {
           //ionic.Platform.exitApp();

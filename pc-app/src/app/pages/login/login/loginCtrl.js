@@ -22,7 +22,24 @@
       $scope.user.password = "";
     };
     $scope.form = "login";
-    
+
+    $scope.listLanguage = [
+      {id: 1, name: "Vietnamese", value:"vi"},
+      {id: 2, name: "English", value:"en"},
+      {id:3, name: "Espanol", value:"es"}
+    ];
+    $scope.chooseLangue = {
+      id: 2
+    };
+    $translate.refresh();
+    $translate.use($scope.listLanguage[1].value);
+    $scope.changeLanguage = function(){
+      var existLang = _.find($scope.listLanguage, function(lang){
+        return lang.id === $scope.chooseLangue.id;
+      });
+      $translate.refresh();
+      $translate.use(existLang.value);
+    }
     $scope.host = "";
     $scope.login = function(){
       localStorageService.remove("user");
