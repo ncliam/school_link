@@ -41,13 +41,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           navigator.globalization.getPreferredLanguage(
               function (language) {
                 $translate.refresh();
-                if(language.value == "vi-VN"){
-                  $translate.use('vi')
-                } else if(language.value == "en-US"){
-                  $translate.use('en')
-                } else{
-                  $translate.use('vi')
-                }
+                $translate.use(language.value);
               },
               function () {alert('Error getting language\n');}
           );
