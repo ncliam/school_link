@@ -38,12 +38,12 @@
     $scope.csv = {
       content: null,
       header: true,
-      headerVisible: true,
+      headerVisible: false,
       separator: ',',
-      separatorVisible: true,
+      separatorVisible: false,
       result: null,
       encoding: 'UTF-8',
-      encodingVisible: true,
+      encodingVisible: false,
     };
 
     var _init = function(){

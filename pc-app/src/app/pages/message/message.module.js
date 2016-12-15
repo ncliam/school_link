@@ -16,7 +16,7 @@
           templateUrl: 'app/pages/message/message.html',
           title: 'Tin nhắn',
           sidebarMeta: {
-            icon: 'ion-android-home',
+            icon: 'ion-chatboxes',
             order: 0,
             permission: 1
           },

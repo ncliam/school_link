@@ -18,7 +18,7 @@
         title: 'menu.setting.notification',
         sidebarMeta: {
           order: 50,
-          icon: 'ion-calendar',
+          icon: 'ion-android-notifications',
           permission: 2
         },
         controller: "NotificationCtrl"
