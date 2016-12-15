@@ -1,0 +1,4 @@
+file: schoolink.jks
+vinnet@123
+alias: schoollink
+vinnet@123
