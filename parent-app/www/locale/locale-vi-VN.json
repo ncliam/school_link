@@ -117,6 +117,7 @@
 	"wrong_code": "Sai mã xác nhận",
 	"change_password_success": "Đổi mật khẩu thành công",
 	"error_same_password":"Mật khẩu phải giống nhau",
-	"change_password_error": "Đổi mật khẩu không thành công"
+	"change_password_error": "Đổi mật khẩu không thành công",
+	"old_password_error": "Mật khẩu cũ không chính xác"
 
 }

@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('starter.controllers')
-.controller('GoalCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService) {
+.controller('GoalCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService, $translate) {
     $scope.$parent.hideHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;

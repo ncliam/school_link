@@ -22,12 +22,19 @@ angular.module('starter.controllers')
       navigator.globalization.getPreferredLanguage(
           function (language) {
             $translate.refresh();
-            $translate.use(language.value);
+            if(language.value == "vi-VN" || language.value == "en-US" || language.value == "es-ES"){
+              $translate.use(language.value);
+              $scope.language = language.value;
+            } else{
+              $translate.use("en-US");
+              $scope.language = "en-US";
+            }
           },
           function () {alert('Error getting language\n');}
       );
     } else{
        $translate.use('en')
+       $scope.language = "en-US";
     }
 
     $scope.doLogin = function(){

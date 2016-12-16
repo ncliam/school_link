@@ -1,19 +1,19 @@
 <div class="modal">
 	<header class="bar bar-header bar-positive">
-	  <h1 class="title">Danh sách liên hệ</h1>
+	  <h1 class="title">{{'contact' | translate}}</h1>
 	  <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-ios-close-empty"></span></div>
 	</header>
 	<content has-header="true" padding="true">
 		<div class="tabs-striped tabs-top">
 		  <div class="tabs"  style="background: #f8f8f8;margin-top: 5px;">
 		      <a class="tab-item" ng-class="{active: group == 'teachers'}" ng-click="changeGroup('teachers')">
-		        Giáo viên
+		        {{'teacher' | translate}}
 		      </a>
 		      <a class="tab-item" ng-class="{active: group == 'parents'}" ng-click="changeGroup('parents')">
-		        Phụ huynh
+		        {{'parent' | translate}}
 		      </a>
 	        <a class="tab-item" ng-class="{active: group == 'supper'}" ng-click="changeGroup('supper')">
-	          Ban phụ huynh
+	          {{'group_parent' | translate}}
 	        </a>
 		    </div>
 		  </div>

@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $Imchat, localStorageService, 
-  $time, MultipleViewsManager, $resUser, $state, $Error, $ionicSideMenuDelegate, $ionicModal, SchoolService, $location) {
+  $time, MultipleViewsManager, $resUser, $state, $Error, $ionicSideMenuDelegate, $ionicModal, SchoolService, $location, $SchoolClass) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -332,7 +332,24 @@ angular.module('starter.controllers')
       }
       return ret;
     };
-    var children = localStorageService.get("children");
+    var class_id = localStorageService.get("class");
+    $SchoolClass.getClassById({id: class_id}, function(result){
+      var currentClass = result.records[0];
+      $SchoolClass.getListTeacherByIds({ids: currentClass.teacher_ids}, function(listTeacher){
+        $scope.teachers = listTeacher;
+      }, function(error){$Error.callbackError(error);});
+      $SchoolClass.getListParentByIds({parent_ids: currentClass.parent_ids}, function(listParent){
+        $scope.parents = listParent;
+        $scope.suppers = _.filter($scope.parents, function(parent) {
+        return parent.category_id.length > 0;
+      });
+      }, function(error){
+        $Error.callbackError(error);
+      });
+    }, function(error){
+
+    });
+    /*var children = localStorageService.get("children");
     SchoolService.getContacts({userInfo:$scope.userInfo, student_id: children.id}).then(function(result){
       console.log('getContacts return ', result);
       if(result.status){
@@ -342,7 +359,7 @@ angular.module('starter.controllers')
           return parent.category_id.length > 0;
         });
       }
-    });
+    });*/
 
     var _getScheduleBySemester = function(){
       SchoolService.getTKB({userInfo:$scope.userInfo}).then(function(result){

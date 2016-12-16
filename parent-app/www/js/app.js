@@ -41,7 +41,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           navigator.globalization.getPreferredLanguage(
               function (language) {
                 $translate.refresh();
-                $translate.use(language.value);
+                if(language.value == "vi-VN" || language.value == "en-US" || language.value == "es-ES"){
+                    $translate.use(language.value);
+                } else{
+                    $translate.use("en-US");
+                }
               },
               function () {alert('Error getting language\n');}
           );
@@ -287,5 +291,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
       })(),
       suffix: '.json'
     });
-    
+
 });
