@@ -138,3 +138,7 @@ ion-header-bar .button-icon{
 .action-sheet-group .action-sheet-cancel{
     display: block !important;
 }
+
+.oe_mail_cleaned{
+    display: none;
+}

@@ -27,7 +27,7 @@ angular.module('starter.controllers')
     $scope.markTB;
     $scope.markHK;
     $scope.markHL;
-    $scope.listSemester = [{id: 1, value:"first", name:"Học kì 1"}, {id: 2, value:"second", name:"Học kì 2"}];
+    $scope.listSemester = [{id: 1, value:"first", name: $translate.instant('first')}, {id: 2, value:"second", name:$translate.instant('second')}];
     $scope.formData = {
       semester_id: 1
     }

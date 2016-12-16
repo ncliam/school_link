@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('SettingCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $state, SchoolService, localStorageService, 
-  $pouchDb, $resUser, toaster) {
+  $pouchDb, $resUser, toaster, $translate) {
   $scope.$parent.showHeader();
   $scope.$parent.clearFabs();
   $scope.isExpanded = false;
@@ -72,13 +72,13 @@ angular.module('starter.controllers')
         new_passwd: $scope.user.new_passwd
       }
       $resUser.changePassword(info, function(success){
-        toaster.pop('success', "", "Đổi mật khẩu thành công");
+        toaster.pop('success', "", $translate.instant('change_password_success'));
         $scope.user.login = false;
         localStorageService.set("user", $scope.user);
         _updateUserLc();
         $state.go("app.login");
       }, function(error){
-        toaster.pop('error', "", "Đổi mật khẩu không thành công");
+        toaster.pop('error', "", $translate.instant('change_password_error'));
         $Error.callbackError(error);
       });
     }
@@ -94,11 +94,11 @@ angular.module('starter.controllers')
   var _validate = function(){
     var flag = true;
     if($scope.user.password !== $scope.user.old_passwd){
-      toaster.pop('error', "", "Mật khẩu cũ không chính xác");
+      toaster.pop('error', "", $translate.instant('old_password_error'));
       flag = false;
     }
     if($scope.user.new_passwd !== $scope.user.confirm_new_passwd){
-      toaster.pop('error', "", "Mật khẩu mới không trùng nhau");
+      toaster.pop('error', "", $translate.instant('error_same_password'));
       flag = false;
     }
     return flag;

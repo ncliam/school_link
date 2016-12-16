@@ -12,11 +12,12 @@
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
         <div class="tabs tabs-icon-top" style="padding: 5px 0px 0px 0px;">
           <a class="tab-item" ui-sref="app.notification" ng-class="{active: isActiveTab('app.notification')}" >
+            <i ng-show="numberNotification > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 2px 6px; font-size: 12px; position: absolute; right: 5px;">{{numberNotification}}</i>
             <i class="fa fa-bell fa-3x" ></i>
             <p>{{'notification' | translate}}</p>
           </a>
           <a class="tab-item" on-tap="gotoMessage()" ng-class="{active: isActiveTab('app.message')}" >
-            <i ng-show="numberMessage > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 2px 6px; font-size: 12px; position: absolute; right: 0px;">{{numberMessage}}</i>
+            <i ng-show="numberMessage > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 2px 6px; font-size: 12px; position: absolute; right: 5px;">{{numberMessage}}</i>
             <i class="fa fa-comments fa-3x" ></i>
             <p>{{'message' | translate}}</p>
           </a>

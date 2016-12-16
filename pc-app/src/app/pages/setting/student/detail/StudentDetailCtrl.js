@@ -64,11 +64,7 @@
         if($scope.listParentSearch.length === 0){
           toastr.warning("Không tìm thấy phụ huynh nào", "", {});
         } else{
-          if($scope.listParentSearch.length === 1){
-            $scope.addParent($scope.listParentSearch[0]);
-          } else{
-            $scope.openPopupListParent();
-          }
+          $scope.openPopupListParent();
         }
       }, function(error){$Error.callbackError(error);});
     };

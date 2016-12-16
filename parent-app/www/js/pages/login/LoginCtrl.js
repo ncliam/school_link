@@ -60,7 +60,7 @@ angular.module('starter.controllers')
         window.plugins.OneSignal.sendTag("user_id", info.uid);
 
       }, function(error){
-        toaster.pop('error', "", "Sai tài khoản hoặc mật khẩu");
+        toaster.pop('error', "", $translate.instant('login.error'));
         //$Error.callbackError(error);
       });
     };
@@ -109,7 +109,7 @@ angular.module('starter.controllers')
 
     $scope.doRegister = function(){
       $LoginService.register({mobile: $scope.user.mobile}, function(result){
-        toaster.pop('success', "", "Vui lòng đợi tin nhắn trong giây lát");
+        toaster.pop('success', "", $translate.instant('login.error'));
         $scope.form.value= "confirm";
         token_id = result;
       }, function(error){$Error.callbackError(error);});
@@ -123,16 +123,16 @@ angular.module('starter.controllers')
           password: $scope.user.password_register
         };
         $LoginService.confirmCode(info, function(result){
-          toaster.pop('success', "", "Đăng ký thành công");
+          toaster.pop('success', "", $translate.instant('register_success'));
           $scope.form.value= "login";
         }, function(error){
-          toaster.pop('error', "", "Sai mã xác nhận");
+          toaster.pop('error', "", $translate.instant('wrong_code'));
         });
       }
     };
     $scope.doForget = function(){
       $LoginService.forgetPassword({mobile: $scope.user.mobile}, function(result){
-        toaster.pop('success', "", "Vui lòng đợi tin nhắn trong giây lát");
+        toaster.pop('success', "", $translate.instant('please_input_message'));
         $scope.form.value= "confirmForget";
         token_id = result;
       }, function(error){$Error.callbackError(error);});
@@ -146,10 +146,10 @@ angular.module('starter.controllers')
           password: $scope.user.password_register
         };
         $LoginService.confirmForget(info, function(result){
-          toaster.pop('success', "", "Đổi mật khẩu thành công");
+          toaster.pop('success', "", $translate.instant('change_password_success'));
           $scope.form.value= "login";
         }, function(error){
-          toaster.pop('error', "", "Sai mã xác nhận");
+          toaster.pop('error', "", $translate.instant('wrong_code'));
         });
       }
     };
@@ -166,7 +166,7 @@ angular.module('starter.controllers')
       var flag = true;
       if($scope.user.password_register !== $scope.user.passwordConfirm){
         flag = false;
-        toaster.pop('error', "", "Mật khẩu phải giống nhau");
+        toaster.pop('error', "", $translate.instant('error_same_password'));
       }
       return flag;
     }

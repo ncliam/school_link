@@ -256,6 +256,7 @@
           $resUser.getScheduledSubjects(info, function(result){
             $SchoolSubject.getSubjectByIds({subject_ids: result}, function(listSubject){
               $scope.listSubject = listSubject;
+              $scope.searchExam();
             }, function(error){
               $Error.callbackError(error);
             })

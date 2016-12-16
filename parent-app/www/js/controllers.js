@@ -4,7 +4,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, $state, $LoginService, localStorageService, $pouchDb, MultipleViewsManager,
- SchoolService, $resUser) {
+ SchoolService, $resUser, $Notification) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.isExpanded = false;
@@ -140,6 +140,9 @@ angular.module('starter.controllers', [])
     MultipleViewsManager.updated('notification_new_message', function (data) {
         $scope.numberMessage++;
     });
+    MultipleViewsManager.updated('notification', function (data) {
+         _getNotificationToRead();
+    });
     $scope.gotoMessage = function(){
         $scope.numberMessage = 0;
         $state.go("app.message");
@@ -170,6 +173,17 @@ angular.module('starter.controllers', [])
         });
       });
     };
+
+    var _getNotificationToRead = function(){
+      if(localStorageService.get("user")){
+        $Notification.getNotificationToRead({}, function(result){
+          $scope.numberNotification = result.length;
+        }, function(error){
+
+        })
+      }
+    };
+    _getNotificationToRead();
 })
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {

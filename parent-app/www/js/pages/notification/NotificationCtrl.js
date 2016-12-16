@@ -33,6 +33,13 @@ angular.module('starter.controllers')
     };
     _init();
     $scope.gotoDetailNotification = function(notification){
+        if(notification.to_read){
+            $Notification.readNotification({id: notification.id, default_res_id: notification.res_id}, function(result){
+               MultipleViewsManager.updateView("notification");
+            }, function(error){
+
+            })
+        }
         localStorageService.set("current_notification", notification);
         $state.go("app.detail_notification");
     }

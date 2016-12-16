@@ -4,9 +4,10 @@
           <div style="margin: 5px;" class="card stable-bg ink ink-dark">
             <div class="item item-avatar item-text-wrap" style="background: none; padding: 5px 5px 5px 88px; min-height: 65px;">
               <span class="avatar" style="background-image: url('img/notification.png'); width: 45px; height: 45px;"></span>
-              <strong>{{notification.subject}}</strong>
+              <strong style="font-size: 18px" ng-show="notification.to_read">{{notification.subject}}</strong>
+              <div style="font-size: 18px" ng-show="!notification.to_read">{{notification.subject}}</div>
               <span style="color: gray; font-style: italic; font-size: 12px; float: right;">{{notification.showDate}}</span>
-              <div class="card-footer text-right">
+              <div class="card-footer text-left">
                   <div ng-bind-html="notification.body_short" class="pull-left" style="color: gray; font-style: italic; font-size: 12px;">
                   </div>
               </div>

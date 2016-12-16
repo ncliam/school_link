@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('ChannelCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $Imchat, localStorageService, 
-  $time, MultipleViewsManager, $resUser, $rootScope, $ionicScrollDelegate, $ionicActionSheet, $state, toaster) {
+  $time, MultipleViewsManager, $resUser, $rootScope, $ionicScrollDelegate, $ionicActionSheet, $state, toaster, $translate) {
     $scope.$parent.hideHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -58,9 +58,9 @@ angular.module('starter.controllers')
         $scope.listMessage = history.reverse();
         $scope.listMessage.forEach(function(message){
           if(moment(message.create_date).format("DD/MM/YYYY") === currentDate){
-            message.showDate = "Hôm nay "+ moment(message.create_date).format("HH:mm A");
+            message.showDate = $translate.instant('today') + " "+ moment(message.create_date).format("HH:mm A");
           } else if(moment(message.create_date).format("DD/MM/YYYY") === prevDate){
-            message.showDate = "Hôm qua "+ moment(message.create_date).format("HH:mm A");
+            message.showDate = $translate.instant('prev_day') + " "+ moment(message.create_date).format("HH:mm A");
           } else{
             message.showDate = moment(message.create_date).format("DD/MM/YYYY HH:mm A");
           }
@@ -98,12 +98,12 @@ angular.module('starter.controllers')
           }
           $scope.listChannelLocal[newMessage.to_id[1]].last_message = {
             text: newMessage.message,
-            date: "Hôm nay "+ moment(newMessage.create_date).format("HH:mm A")
+            date: $translate.instant('day') + " "+ moment(newMessage.create_date).format("HH:mm A")
           };
           if($scope.chooseChannel && $scope.chooseChannel.length > 0){
             if($scope.chooseChannel[1].uuid === newMessage.to_id[1]){
               $scope.listMessage.push({
-                showDate:  "Hôm nay "+ moment(new Date()).format("HH:mm A"),
+                showDate:  $translate.instant('prev_day') +" "+ moment(new Date()).format("HH:mm A"),
                 from_id: newMessage.from_id,
                 message: newMessage.message
               });
@@ -137,7 +137,7 @@ angular.module('starter.controllers')
           $Error.callbackError(error);
         });
       } else{
-        toaster.pop('warning', "Cảnh báo", "Bạn phải nhập tin nhắn");
+        toaster.pop('warning', $translate.instant('warning'), $translate.instant('require_message'));
       }
 
     };

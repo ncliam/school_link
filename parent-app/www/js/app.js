@@ -56,9 +56,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         window.plugins.OneSignal
           .startInit("3fcdf8f2-9523-4ca7-8489-fefb29cbecc4", "204984235412")
           .handleNotificationReceived(function(jsonData) {
-             cordova.plugins.notification.badge.increase();
-            /*alert("Notification received:\n" + JSON.stringify(jsonData));
-            console.log('Did I receive a notification: ' + JSON.stringify(jsonData));*/
+            cordova.plugins.notification.badge.increase();
+            //alert("Notification received:\n" + JSON.stringify(jsonData));
+            MultipleViewsManager.updateView("notification");
+            //console.log('Did I receive a notification: ' + JSON.stringify(jsonData));
           })
           .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
           .endInit();
