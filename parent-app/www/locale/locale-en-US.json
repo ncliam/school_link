@@ -83,6 +83,7 @@
 	"button_back": "Back",
 	"button_confirm": "Confirm",
 	"password": "Password",
+	"mobile":"Mobile",
 	"confirm_password": "Re-type password",
 	"code_confirm": "Confirmation code",
 	"message": "Message",
@@ -94,6 +95,7 @@
 	"change_password": "Change password",
 	"vibrate": "Vibrate",
 	"ring": "Sound",
+	"contact" :"Contact",
 	"notification_system": "System notification",
 	"old_password": "Old password",
 	"new_password": "New password",
@@ -101,4 +103,16 @@
 	"button_confirm": "Confirm",
 	"morning": "Morning",
 	"afternoon": "Afternoon"
+	"logout": "Cerrar sesión",
+	"today": "Today",
+	"prev_day": "yesterday",
+	"warning": "Warning",
+	"require_message": "You must enter a message",
+	"please_input_message":"Please wait a moment message",
+	"register_success": "Register success",
+	"wrong_code": "confirmation code errors",
+	"change_password_success": "Change password succeeded",
+	"error_same_password":"Passwords must be the same",
+	"change_password_error": "Change password failed",
+	"old_password_error": "Incorrect old password"
 }

@@ -1,4 +1,5 @@
 {
+	"login.user": "Usuario",
 	"login.password": "Contraseña",
 	"login.error": "Usuario o contraseña invalido",
 	"login.error.title": "Error de inicio de sesión",
@@ -101,7 +102,17 @@
 	"button_confirm": "Confirmar",
 	"morning": "Mañana",
 	"afternoon": "Tarde",
-	"logout": "cerrar sesión",
-	"mobile":"Móvil"
-
+	"mobile":"Móvil",
+	"logout": "Cerrar sesión",
+	"today": "Hoy",
+	"prev_day": "Día previo",
+	"warning": "Advertencia",
+	"require_message": "Requiere un mensaje",
+	"please_input_message":"Por favor, mensaje de entrada",
+	"register_success": "Registre el éxito",
+	"wrong_code": "Código equivocado",
+	"change_password_success": "Cambio de contraseña exitoso",
+	"error_same_password":"Error de la misma contraseña",
+	"change_password_error": "Cambio de error en la contraseña",
+	"old_password_error": "Antigua contraseña incorrecta"
 }
