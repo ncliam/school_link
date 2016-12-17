@@ -117,7 +117,7 @@ angular.module('starter.controllers')
 
     $scope.doRegister = function(){
       $LoginService.register({mobile: $scope.user.mobile}, function(result){
-        toaster.pop('success', "", $translate.instant('login.error'));
+        toaster.pop('success', "", $translate.instant('register_success'));
         $scope.form.value= "confirm";
         token_id = result;
       }, function(error){$Error.callbackError(error);});
@@ -131,7 +131,7 @@ angular.module('starter.controllers')
           password: $scope.user.password_register
         };
         $LoginService.confirmCode(info, function(result){
-          toaster.pop('success', "", $translate.instant('register_success'));
+          toaster.pop('success', "", $translate.instant('confirm_success'));
           $scope.form.value= "login";
         }, function(error){
           toaster.pop('error', "", $translate.instant('wrong_code'));

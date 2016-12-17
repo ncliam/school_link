@@ -114,6 +114,7 @@
 	"require_message": "Bạn phải nhập tin nhắn",
 	"please_input_message":"Vui lòng đợi tin nhắn trong giây lát",
 	"register_success": "Đăng ký thành công",
+	"confirm_success": "Xác nhận thành công",
 	"wrong_code": "Sai mã xác nhận",
 	"change_password_success": "Đổi mật khẩu thành công",
 	"error_same_password":"Mật khẩu phải giống nhau",
