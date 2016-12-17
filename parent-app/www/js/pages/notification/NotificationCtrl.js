@@ -24,7 +24,7 @@ angular.module('starter.controllers')
       $Notification.getNotification({}, function(result){
         $scope.listNotification = result;
         $scope.listNotification.forEach(function(noti){
-          noti.showDate = moment(noti.date).format("DD/MM/YYYY hh:mm");
+          noti.showDate = moment.tz(noti.date, moment.tz.guess()).format("hh:mm A DD/MM/YYYY");
         })
       }, function(error){
 

@@ -16,7 +16,7 @@
             <i class="fa fa-bell fa-3x" ></i>
             <p>{{'notification' | translate}}</p>
           </a>
-          <a class="tab-item" on-tap="gotoMessage()" ng-class="{active: isActiveTab('app.message')}" >
+          <a class="tab-item" ui-sref="app.message" ng-class="{active: isActiveTab('app.message')}" >
             <i ng-show="numberMessage > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 2px 6px; font-size: 12px; position: absolute; right: 5px;">{{numberMessage}}</i>
             <i class="fa fa-comments fa-3x" ></i>
             <p>{{'message' | translate}}</p>

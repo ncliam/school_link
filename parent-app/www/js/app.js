@@ -26,7 +26,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             $Longpolling.last = 0;
             $Longpolling.poll();
             MultipleViewsManager.updateView("chooseChildren");
-            $state.go("app.message");
+            if(!$rootScope.autoGoScreen){
+                $state.go("app.message");
+            }
             window.plugins.OneSignal.sendTag("user_id", existUser.data.uid);
           } else{
             $state.go("app.login");
@@ -61,9 +63,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           .startInit("3fcdf8f2-9523-4ca7-8489-fefb29cbecc4", "204984235412")
           .handleNotificationReceived(function(jsonData) {
             cordova.plugins.notification.badge.increase();
-            //alert("Notification received:\n" + JSON.stringify(jsonData));
             MultipleViewsManager.updateView("notification");
-            //console.log('Did I receive a notification: ' + JSON.stringify(jsonData));
+          })
+          .handleNotificationOpened(function(jsonData){
+            var type = jsonData.notification.payload.title.split('-')[0];
+            $rootScope.autoGoScreen = true;
+            if(type.toUpperCase() ==="MESSAGE"){
+                $state.go("app.message");
+            }
+            if(type.toUpperCase() ==="NOTIFICATION"){
+                $state.go("app.notification");
+            }
+            
           })
           .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
           .endInit();

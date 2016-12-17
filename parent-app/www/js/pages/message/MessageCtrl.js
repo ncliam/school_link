@@ -2,8 +2,8 @@
 'use strict';
 
 angular.module('starter.controllers')
-.controller('MessageCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $Imchat, localStorageService, 
-  $time, MultipleViewsManager, $resUser, $state, $Error, $ionicSideMenuDelegate, $ionicModal, SchoolService, $location, $SchoolClass) {
+.controller('MessageCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $Imchat, localStorageService, $rootScope,
+  $time, MultipleViewsManager, $resUser, $state, $Error, $ionicSideMenuDelegate, $ionicModal, SchoolService, $location, $SchoolClass, $translate) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -61,6 +61,7 @@ angular.module('starter.controllers')
     };
 
     var _init = function(){
+      
       if($scope.add_new_channel){
         $state.go("app.channel");
       } else{
@@ -116,10 +117,6 @@ angular.module('starter.controllers')
 
     // listen event new message
     MultipleViewsManager.updated('new_message', function (data) {
-      var path = $location.path();
-      if(path != "/app/message"){
-        MultipleViewsManager.updateView("notification_new_message");
-      }
       var newMessage = localStorageService.get("new_message")[0].message;
       var chooseChannel = localStorageService.get("chooseChannel");
       if(newMessage.type){
@@ -129,7 +126,7 @@ angular.module('starter.controllers')
           }
           $scope.listChannelLocal[newMessage.to_id[1]].last_message = {
             text: newMessage.message,
-            date: "Hôm nay "+ moment(newMessage.create_date).format("HH:mm A")
+            date: moment(newMessage.create_date).format("HH:mm A")+ " "+ $translate.instant('today')
           };
           if(chooseChannel && chooseChannel.length > 0){
             if(chooseChannel[1].uuid !== newMessage.to_id[1]){
@@ -138,7 +135,7 @@ angular.module('starter.controllers')
               localStorageService.set("message_channel", localStorageService.get("new_message"))
               MultipleViewsManager.updateView("message_channel");
               $scope.listMessage.push({
-                showDate:  "Hôm nay "+ moment(new Date()).format("HH:mm A"),
+                showDate:  $translate.instant('today') + " "+ moment(new Date()).format("HH:mm A"),
                 from_id: newMessage.from_id,
                 message: newMessage.message
               });
@@ -189,9 +186,8 @@ angular.module('starter.controllers')
         } else if(newMessage.state ==="close"){
           _updateStateAndAddToChannel(newMessage, newMessage.users);
         }
-        
       }
-      console.log(newMessage);
+      MultipleViewsManager.updateView("notification_new_message");
     });
 
     var _updateStateAndAddToChannel = function(uuid, users){

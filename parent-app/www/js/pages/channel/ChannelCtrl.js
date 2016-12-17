@@ -58,11 +58,11 @@ angular.module('starter.controllers')
         $scope.listMessage = history.reverse();
         $scope.listMessage.forEach(function(message){
           if(moment(message.create_date).format("DD/MM/YYYY") === currentDate){
-            message.showDate = $translate.instant('today') + " "+ moment(message.create_date).format("HH:mm A");
+            message.showDate = moment(message.create_date).format("HH:mm A") + " "+ $translate.instant('today');
           } else if(moment(message.create_date).format("DD/MM/YYYY") === prevDate){
-            message.showDate = $translate.instant('prev_day') + " "+ moment(message.create_date).format("HH:mm A");
+            message.showDate = moment(message.create_date).format("HH:mm A") + " "+ $translate.instant('prev_day');
           } else{
-            message.showDate = moment(message.create_date).format("DD/MM/YYYY HH:mm A");
+            message.showDate = moment(message.create_date).format("HH:mm A DD/MM/YYYY");
           }
         });
         if($scope.listMessage.length > 0){
@@ -98,12 +98,12 @@ angular.module('starter.controllers')
           }
           $scope.listChannelLocal[newMessage.to_id[1]].last_message = {
             text: newMessage.message,
-            date: $translate.instant('day') + " "+ moment(newMessage.create_date).format("HH:mm A")
+            date: moment(newMessage.create_date).format("HH:mm A") + " "+ $translate.instant('day')
           };
           if($scope.chooseChannel && $scope.chooseChannel.length > 0){
             if($scope.chooseChannel[1].uuid === newMessage.to_id[1]){
               $scope.listMessage.push({
-                showDate:  $translate.instant('prev_day') +" "+ moment(new Date()).format("HH:mm A"),
+                showDate:  moment(new Date()).format("HH:mm A") +" "+ $translate.instant('prev_day'),
                 from_id: newMessage.from_id,
                 message: newMessage.message
               });
@@ -165,6 +165,9 @@ angular.module('starter.controllers')
       });
     };
 
-
+    $scope.gotoMessage = function(){
+      MultipleViewsManager.updateView("notification_new_message");
+      $state.go("app.message");
+    }
 
 })

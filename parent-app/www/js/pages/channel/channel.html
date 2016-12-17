@@ -1,7 +1,7 @@
 <ion-view view-title="">
     <div class="tabs-striped tabs-top tabs-background-positive">
       <div class="tabs" style="top: 0px;background: #387ef5;">
-          <i ui-sref="app.message" class="ion-ios-arrow-back" style="position: absolute; left: 0px; font-size: 24px; color: #fff; padding: 0px 15px;"></i>
+          <i on-tap="gotoMessage()" class="ion-ios-arrow-back" style="position: absolute; left: 0px; font-size: 24px; color: #fff; padding: 0px 15px;"></i>
          <label style="color: #fff; line-height: 45px; font-size: 16px;" ng-show="listChatName[userChat.id]">{{listChatName[userChat.id]}}</label>
          <label style="color: #fff; line-height: 45px; font-size: 16px;" ng-show="!listChatName[userChat.id]">{{userChat.name}}</label>
          <i on-tap="showActionsheet()" class="ion-android-more-vertical" style="position: absolute; right: 0px; font-size: 24px; color: #fff; padding: 0px 15px;"></i>

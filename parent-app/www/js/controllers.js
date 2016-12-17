@@ -4,7 +4,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, $state, $LoginService, localStorageService, $pouchDb, MultipleViewsManager,
- SchoolService, $resUser, $Notification) {
+ SchoolService, $resUser, $Notification, $Imchat) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.isExpanded = false;
@@ -138,7 +138,7 @@ angular.module('starter.controllers', [])
         $scope.listChildren = localStorageService.get("listChildren");
     });
     MultipleViewsManager.updated('notification_new_message', function (data) {
-        $scope.numberMessage++;
+      _getMessageToRead();
     });
     MultipleViewsManager.updated('notification', function (data) {
          _getNotificationToRead();
@@ -183,6 +183,23 @@ angular.module('starter.controllers', [])
         })
       }
     };
+    var _getMessageToRead = function(){
+      $scope.numberMessage = 0;
+      $Imchat.initImchat({}, function(result){
+        $scope.listChannel = _.reject(result, function(channel){
+          return channel[1].type;
+        });
+        $scope.listChannelLocal = localStorageService.get("channels");
+        $scope.listChannel.forEach(function(channel){
+          if($scope.listChannelLocal[channel[1].uuid]){
+            $scope.numberMessage += $scope.listChannelLocal[channel[1].uuid].numberNotifi;
+          }
+        })
+      }, function(error){
+
+      });
+    }
+    _getMessageToRead();
     _getNotificationToRead();
 })
 
