@@ -54,6 +54,9 @@ cordova platform add android
 cordova plugin add cordova-plugin-whitelist
 cordova plugin add ionic-plugin-keyboard
 cordova plugin add onesignal-cordova-plugin
+cordova plugin add cordova-plugin-app-event
+cordova plugin add cordova-plugin-globalization
+cordova plugin add cordova-plugin-badge
 cordova build
 
 # add platform ios before build

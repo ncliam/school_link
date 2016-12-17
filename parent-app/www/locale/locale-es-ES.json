@@ -102,6 +102,17 @@
 	"morning": "Mañana",
 	"afternoon": "Tarde",
 	"logout": "cerrar sesión",
-	"mobile":"Móvil"
+	"mobile":"Móvil",
+	"today": "hoy",
+	"prev_day": "día previo",
+	"warning": "advertencia",
+	"require_message": "requiere un mensaje",
+	"please_input_message":"por favor, mensaje de entrada",
+	"register_success": "registre el éxito",
+	"wrong_code": "código equivocado",
+	"change_password_success": "cambio de contraseña exitoso",
+	"error_same_password":"error de la misma contraseña",
+	"change_password_error": "cambio de error en la contraseña",
+	"old_password_error": "Antigua contraseña incorrecta"
 
 }
