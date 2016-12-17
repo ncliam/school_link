@@ -57,6 +57,7 @@
           group_id: info.group_id,
           year_id: info.year_id,
           company_id: _self.user.company_id,
+          teacher_id: info.teacher_id || null,
           student_ids: [[6, false, info.student_ids]]
         }]
       };
@@ -76,6 +77,7 @@
               name: info.name,
               group_id: info.group_id,
               year_id: info.year_id,
+              teacher_id: info.teacher_id || null,
               student_ids: [[6, false, info.student_ids]]
             }
           ]

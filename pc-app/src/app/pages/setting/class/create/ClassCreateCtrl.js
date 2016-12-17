@@ -10,10 +10,11 @@
 
   /** @ngInject */
   function ClassCreateCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $translate, $Schoolarity, $SchoolClassGroup, $SchoolClass, 
-    $Student, $Parent, $Error) {
+    $Student, $Parent, $Error, $Teacher) {
     $scope.class = {};
     $scope.listGroup = [];
     $scope.listSchoolarity =[];
+    $scope.listTeacher =[];
     $scope.popup2 = {
       opened: false
     };
@@ -52,7 +53,10 @@
       }, function(error){$Error.callbackError(error);});
       $SchoolClassGroup.getAllClassGroup({}, function(result){
         $scope.listGroup  = result.records;
-      }, function(error){$Error.callbackError(error);})
+      }, function(error){$Error.callbackError(error);});
+      $Teacher.getAllTeacher({}, function(result){
+        $scope.listTeacher = result.records;
+      }, function(error){$Error.callbackError(error);});
     };
     _init();
 

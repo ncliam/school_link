@@ -21,6 +21,7 @@ angular.module('starter.controllers')
     $scope.parents = [];
     $scope.suppers = [];
     $scope.group = 'teachers';
+    $scope.currentClass = {};
 
 
     $scope.callTel = function(tel) {
@@ -85,11 +86,11 @@ angular.module('starter.controllers')
     var _init = function(){
       var class_id = localStorageService.get("class");
       $SchoolClass.getClassById({id: class_id}, function(result){
-        var currentClass = result.records[0];
-        $SchoolClass.getListTeacherByIds({ids: currentClass.teacher_ids}, function(listTeacher){
+        $scope.currentClass = result.records[0];
+        $SchoolClass.getListTeacherByIds({ids: $scope.currentClass.teacher_ids}, function(listTeacher){
           $scope.teachers = listTeacher;
         }, function(error){$Error.callbackError(error);});
-        $SchoolClass.getListParentByIds({parent_ids: currentClass.parent_ids}, function(listParent){
+        $SchoolClass.getListParentByIds({parent_ids: $scope.currentClass.parent_ids}, function(listParent){
           $scope.parents = listParent;
           $scope.suppers = _.filter($scope.parents, function(parent) {
           return parent.category_id.length > 0;

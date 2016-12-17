@@ -10,11 +10,12 @@
 
   /** @ngInject */
   function ClassDetailCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $SchoolClass, $Student, $Schoolarity,
-   $SchoolClassGroup, $Parent, $Error) {
+   $SchoolClassGroup, $Parent, $Error, $Teacher) {
     $scope.class = localStorageService.get("chooseClass");
     $scope.class.group_id = $scope.class.group_id[0];
     $scope.class.year_id = $scope.class.year_id[0];
     $scope.listStudent = [];
+    $scope.listTeacher = [];
     var modalInstanceCreateLot;
     var chooseLine;
     $scope.popup1 = {
@@ -43,12 +44,19 @@
           $Error.callbackError(error);
         });
       };
+      if($scope.class.teacher_id){
+        $scope.class.teacher_id = $scope.class.teacher_id[0];
+      }
       $Schoolarity.getAllSchoolarity({}, function(result){
         $scope.listSchoolarity  = result.records;
       }, function(error){$Error.callbackError(error);});
       $SchoolClassGroup.getAllClassGroup({}, function(result){
         $scope.listGroup  = result.records;
       }, function(error){$Error.callbackError(error);});
+      $Teacher.getAllTeacher({}, function(result){
+        $scope.listTeacher = result.records;
+      }, function(error){$Error.callbackError(error);});
+
     };
     $scope.csv = {
       content: null,
