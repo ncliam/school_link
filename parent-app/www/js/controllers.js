@@ -199,8 +199,10 @@ angular.module('starter.controllers', [])
 
       });
     }
-    _getMessageToRead();
-    _getNotificationToRead();
+    if(localStorageService.get("user") && localStorageService.get("user").sid){
+      _getMessageToRead();
+      _getNotificationToRead();
+    }
 })
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
