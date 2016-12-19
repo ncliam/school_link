@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('SchoolCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $state, SchoolService, localStorageService, 
-  $pouchDb, $resUser, MultipleViewsManager) {
+  $pouchDb, $resUser, MultipleViewsManager, $Error) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
