@@ -17,9 +17,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="notification in listNotification" class="no-top-border">
+        <tr ng-repeat="notification in listNotification" class="no-top-border" ng-click="openPopupDetailNotification(notification)">
           <td>{{notification.subject}}</td>
-          <td><div ng-bind-html="notification.body"></div></td>
+          <td><div ng-bind-html="notification.body_short"></div></td>
           <td>{{notification.showDate}}</td>
         </tr>
         </tbody>

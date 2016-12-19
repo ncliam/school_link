@@ -83,6 +83,15 @@
         $scope.listNotification = listNotification;
       }
     };
+    var modalDetailNotification;
+    $scope.openPopupDetailNotification = function (noti) {
+      $scope.currentNotification = noti;
+      modalDetailNotification = $uibModal.open({
+        animation: true,
+        templateUrl: "app/pages/notification/widgets/popup.detail.notication.html",
+        scope: $scope
+      });
+    };
     var _validate = function(){
       var flag = true;
       if(!$scope.newNotification.subject || $scope.newNotification.subject.length === 0){
