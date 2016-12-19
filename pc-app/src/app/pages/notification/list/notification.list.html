@@ -19,7 +19,7 @@
         <tbody>
         <tr ng-repeat="notification in listNotification" class="no-top-border">
           <td>{{notification.subject}}</td>
-          <td><div ng-bind-html="notification.body_short"></div></td>
+          <td><div ng-bind-html="notification.body"></div></td>
           <td>{{notification.showDate}}</td>
         </tr>
         </tbody>
