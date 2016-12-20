@@ -119,7 +119,7 @@ angular.module('starter.controllers')
 
     $scope.doRegister = function(){
       $LoginService.register({mobile: $scope.user.mobile}, function(result){
-        toaster.pop('success', "", $translate.instant('register_success'));
+        toaster.pop('success', "", $translate.instant('please_input_message'));
         $scope.form.value= "confirm";
         token_id = result;
       }, function(error){$Error.callbackError(error);});

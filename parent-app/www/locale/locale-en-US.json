@@ -108,11 +108,14 @@
 	"prev_day": "yesterday",
 	"warning": "Warning",
 	"require_message": "You must enter a message",
-	"please_input_message":"Please wait a moment message",
+	"please_input_message":"Please check your inbox to get confirmation code",
 	"register_success": "Register success",
 	"wrong_code": "Confirmation code errors",
 	"change_password_success": "Change password succeeded",
 	"error_same_password":"Passwords must be the same",
 	"change_password_error": "Change password failed",
-	"old_password_error": "Incorrect old password"
+	"old_password_error": "Incorrect old password",
+	"info_user": "Profile",
+	"email": "Email",
+	"update_user_success": "Update successful"
 }

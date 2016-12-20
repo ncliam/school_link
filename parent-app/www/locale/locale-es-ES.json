@@ -108,11 +108,14 @@
 	"prev_day": "Día previo",
 	"warning": "Advertencia",
 	"require_message": "Requiere un mensaje",
-	"please_input_message":"Por favor, mensaje de entrada",
+	"please_input_message":"Comprueba tu bandeja de entrada para obtener el código de confirmación.",
 	"register_success": "Registre el éxito",
 	"wrong_code": "Código equivocado",
 	"change_password_success": "Cambio de contraseña exitoso",
 	"error_same_password":"Error de la misma contraseña",
 	"change_password_error": "Cambio de error en la contraseña",
-	"old_password_error": "Antigua contraseña incorrecta"
+	"old_password_error": "Antigua contraseña incorrecta",
+	"info_user": "Perfil",
+	"email": "Email",
+	"update_user_success": "Actualización exitosa"
 }
