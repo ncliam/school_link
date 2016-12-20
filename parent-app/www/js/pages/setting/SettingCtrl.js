@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('SettingCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $state, SchoolService, localStorageService, 
-  $pouchDb, $resUser, toaster, $translate) {
+  $pouchDb, $resUser, toaster, $translate, MultipleViewsManager) {
   $scope.$parent.showHeader();
   $scope.$parent.clearFabs();
   $scope.isExpanded = false;
@@ -23,6 +23,7 @@ angular.module('starter.controllers')
     };
   }
   $scope.user = localStorageService.get("user");
+  $scope.partner = localStorageService.get("partner_user");
   // Activate ink for controller
   ionicMaterialInk.displayEffect(); 
   $scope.group = "setting";
@@ -102,6 +103,14 @@ angular.module('starter.controllers')
       flag = false;
     }
     return flag;
+  };
+
+  $scope.updatePartner = function(){
+    $resUser.updatePartner($scope.partner, function(success){
+      localStorageService.set("partner_user", $scope.partner);
+      MultipleViewsManager.updateView("getInfoForUser");
+      toaster.pop('success', "", $translate.instant('update_user_success'));
+    }, function(error){});
   }
 
     

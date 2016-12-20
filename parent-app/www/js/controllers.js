@@ -143,6 +143,13 @@ angular.module('starter.controllers', [])
     MultipleViewsManager.updated('notification', function (data) {
          _getNotificationToRead();
     });
+    MultipleViewsManager.updated('getInfoForUser', function (data) {
+      if(localStorageService.get('partner_user')){
+        $scope.partner_user = localStorageService.get('partner_user');
+      } else{
+        _getInfoForUser();
+      }
+    });
     $scope.gotoMessage = function(){
         $scope.numberMessage = 0;
         $state.go("app.message");
@@ -198,11 +205,25 @@ angular.module('starter.controllers', [])
       }, function(error){
 
       });
+    };
+
+    var _getInfoForUser = function(){
+      $scope.user = localStorageService.get("user") ;
+      $resUser.getUserById({id: localStorageService.get("user").uid}, function(user){
+        $resUser.getPartnerById({id:user.records[0].partner_id[0]}, function(partner){
+          $scope.partner_user = partner;
+          localStorageService.set("partner_user", partner);
+        }, function(error){});
+      }, function(error){});
     }
+
     if(localStorageService.get("user") && localStorageService.get("user").sid){
+      $scope.user = localStorageService.get("user") ;
+      _getInfoForUser();
       _getMessageToRead();
       _getNotificationToRead();
     }
+
 })
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {

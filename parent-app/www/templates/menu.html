@@ -37,7 +37,9 @@
     </ion-side-menu-content>
     <ion-side-menu side="left">
         <ion-header-bar class="dark-bg expanded" on-tap="show.menu = !show.menu" style="background-image: url('img/background_menu.jpg')">
-            <span class="avatar" style="background: url('img/logo.jpg'); background-size: cover;"></span>
+            <div class="avatar" style="background: url('img/logo.jpg'); background-size: cover;"></div>
+            <div style="position: absolute;top: 15px;right: 10px; font-size: 16px;">{{partner_user.name}}</div>
+            <div style="position: absolute;top: 40px;right: 10px; font-size: 14px;">{{user.username}}</div>
             <h2>{{children.name}}</h2>
             <i ng-show="show.menu" class="ion-android-arrow-dropdown" style="position: absolute;bottom: 5px;right: 10px; font-size: 24px;"></i>
             <i ng-show="!show.menu" class="ion-android-arrow-dropup" style="position: absolute;bottom: 5px;right: 10px; font-size: 24px;"></i>

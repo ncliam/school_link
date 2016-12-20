@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('LoginCtrl', function($scope,$state, $timeout, $stateParams, ionicMaterialInk, $LoginService, $Imchat, $Longpolling, localStorageService, 
-  $resUser, toaster, $pouchDb, $Error, $ionicSideMenuDelegate, $translate, $Notification, $SchoolClass) {
+  $resUser, toaster, $pouchDb, $Error, $ionicSideMenuDelegate, $translate, $Notification, $SchoolClass, MultipleViewsManager) {
     $scope.$parent.clearFabs();
     $scope.$parent.hideMenuRightButton();
     $scope.$parent.hideTabs();
@@ -53,6 +53,7 @@ angular.module('starter.controllers')
         info.login = true;
         localStorageService.set("user", info);
         _setUserForService(info);
+        MultipleViewsManager.updateView("getInfoForUser");
         $state.go("app.school");
         _initDatabaseLocalForUser();
         $Imchat.getPresenseByUserId({}, function(result){

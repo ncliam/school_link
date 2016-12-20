@@ -18,7 +18,8 @@
       "lang", 
       "login_date",
       "password",
-      "company_id"
+      "company_id",
+      "partner_id"
     ];
   /*  this.args = {
       active:true,
@@ -64,6 +65,38 @@
         context: _self.user.context,
         sid: _self.user.sid
       }
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
+    this.getPartnerById = function(info, callbackSuccess, callbackError){
+      var fields = ["id","name","email"];
+      var param = {
+        model: "res.partner", //"res.company"
+        args: [info.id, fields],
+        method: "read",
+        session_id: _self.user.session_id ,
+        context:_self.user.context,
+        sid: _self.user.sid
+      }
+      var path ="/api/callKw";
+      $request.postRequest(path, param, callbackSuccess, callbackError);
+    };
+
+    this.updatePartner = function(info, callbackSuccess, callbackError){
+      var path ="/api/callKw";
+      var param = {
+        model: "res.partner",
+        context: _self.user.context,
+        sid: _self.user.sid,
+        method:"write",
+        args: [
+          [info.id],
+          {
+            name: info.name,
+            email: info.email
+          }
+        ]
+      };
       $request.postRequest(path, param, callbackSuccess, callbackError);
     };
 

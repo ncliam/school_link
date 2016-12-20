@@ -7,7 +7,7 @@
           <a class="tab-item" ng-class="{active: group == 'changepassword'}" ng-click="changeGroup('changepassword')">
             {{'change_password' | translate}}
           </a>
-          <a class="tab-item" ng-class="{active: group == 'info_user'}" ng-click="changeGroup('changepassword')">
+          <a class="tab-item" ng-class="{active: group == 'info_user'}" ng-click="changeGroup('info_user')">
             {{'info_user' | translate}}
           </a>
         </div>
@@ -50,7 +50,7 @@
          <div ng-show="group === 'changepassword'">
             <div class="row" style="padding-top:20px">
                   <div class="col">
-                      <input type="text" placeholder="{{'old_password' | translate}}" ng-model="user.old_passwd">
+                      <input type="password" placeholder="{{'old_password' | translate}}" ng-model="user.old_passwd">
                   </div>
               </div>
               <div class="row" style="padding-top:20px">
@@ -68,6 +68,23 @@
                     <button class="button bp-button bp-button-block bp-button-blue" ng-click="changePassword()" >{{'button_confirm' | translate}}</button>
                 </div>
               </div>
+          </div>
+          <div ng-show="group === 'info_user'">
+            <div class="row" style="padding-top:20px">
+              <div class="col">
+                  <input type="text" placeholder="{{'name' | translate}}" ng-model="partner.name">
+              </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+              <div class="col">
+                  <input type="email" placeholder="{{'email' | translate}}" ng-model="partner.email">
+              </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+              <div class="col">
+                  <button class="button bp-button bp-button-block bp-button-blue" ng-click="updatePartner()" >{{'button_confirm' | translate}}</button>
+              </div>
+            </div>
           </div>
       </ion-content>
 

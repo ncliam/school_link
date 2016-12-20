@@ -120,5 +120,7 @@
 	"error_same_password":"Mật khẩu phải giống nhau",
 	"change_password_error": "Đổi mật khẩu không thành công",
 	"old_password_error": "Mật khẩu cũ không chính xác",
-	"info_user": "Thông tin cá nhân"
+	"info_user": "Thông tin cá nhân",
+	"email": "Email",
+	"update_user_success": "Cập nhật thông tin thành công"
 }
