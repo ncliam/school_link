@@ -38,7 +38,7 @@
                       ng-show="isGroupShown(item.id)">
                       <div class="row">
                         <div class="col col-25">
-                          <p>Con:</p>
+                          <p>{{'children' | translate}}:</p>
                         </div>
                         <div class="col col-50">
                           <p style="float: left;" ng-repeat="subItem in item.children">{{subItem.name}}<span ng-hide="$last">,</span></p>
@@ -46,7 +46,7 @@
                       </div>
                       <div class="row">
                         <div class="col col-25">
-                          <p>ĐT:</p>
+                          <p>{{'mobile' | translate}}:</p>
                         </div>
                         <div class="col col-50">
                           <p>{{item.mobile}}</p>
@@ -77,7 +77,7 @@
                       ng-show="isGroupShown(item.id)">
                       <div class="row">
                         <div class="col col-25">
-                          <p>Con:</p>
+                          <p>{{'children' | translate}}:</p>
                         </div>
                         <div class="col col-50">
                           <p style="float: left;" ng-repeat="subItem in item.children">{{subItem.name}}<span ng-hide="$last">,</span></p>
@@ -85,7 +85,7 @@
                       </div>
                       <div class="row">
                         <div class="col col-25">
-                          <p>ĐT:</p>
+                          <p>{{'mobile' | translate}}:</p>
                         </div>
                         <div class="col col-50">
                           <p>{{item.mobile}}</p>
@@ -115,7 +115,7 @@
 		                  ng-show="isGroupShown(item.id)">
               <div class="row">
                 <div class="col col-25">
-                  <p>Môn học:</p>
+                  <p>{{'subject' | translate}}:</p>
                 </div>
                 <div class="col col-50">
                   <p style="float: left;" ng-repeat="tkb in groupTeacher[item.id]">{{tkb.subject_id[1]}} <span ng-hide="$last">,</span></p>
@@ -126,15 +126,15 @@
                   <p>Email:</p>
                 </div>
                 <div class="col col-50">
-                  <p>{{item.email}}</p>
+                  <p>{{item.work_email}}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col col-25">
-                  <p>ĐT:</p>
+                  <p>{{'mobile' | translate}}:</p>
                 </div>
                 <div class="col col-50">
-                  <p>{{item.mobile}}</p>
+                  <p>{{item.work_phone}}</p>
                 </div>
               </div>
 		        </ion-item>
