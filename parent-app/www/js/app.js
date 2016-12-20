@@ -67,9 +67,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           })
           .handleNotificationOpened(function(jsonData){
             var type = jsonData.notification.payload.title.split('-')[0];
-            /*if(type.toUpperCase() ==="MESSAGE"){
+            if(type.toUpperCase() ==="MESSAGE"){
                 $state.go("app.message");
-            }*/
+            }
             if(type.toUpperCase() ==="NOTIFICATION"){
               $rootScope.autoGoScreen = true;
               $state.go("app.notification");

@@ -93,6 +93,39 @@ angular.module('starter.controllers')
             }, function(error){
               $Error.callbackError(error);
             });
+            $scope.listChannel.forEach(function(channel){
+              if(!$scope.listChannelLocal[channel[1].uuid]){
+                $scope.listChannelLocal[channel[1].uuid] = {};
+              }
+            });
+             _saveChannelLocal($scope.listChannelLocal);
+            $scope.listChannel.forEach(function(channel){
+              $Imchat.getHistoryByUuid({uuid:channel[1].uuid}, function(history){
+                $scope.listMessage = history.reverse();
+                $scope.listMessage.forEach(function(message){
+                  if(moment(message.create_date).format("DD/MM/YYYY") === currentDate){
+                    message.showDate = moment(message.create_date).format("HH:mm A") + " "+ $translate.instant('today');
+                  } else if(moment(message.create_date).format("DD/MM/YYYY") === prevDate){
+                    message.showDate = moment(message.create_date).format("HH:mm A") + " "+ $translate.instant('prev_day');
+                  } else{
+                    message.showDate = moment(message.create_date).format("HH:mm A DD/MM/YYYY");
+                  }
+                });
+                if($scope.listMessage.length > 0){
+                  channel.last_message = {
+                    text: $scope.listMessage[$scope.listMessage.length -1].message,
+                    date: $scope.listMessage[$scope.listMessage.length -1].showDate,
+                  };
+                  if(channel.last_message.text.length > 40){
+                    channel.last_message.text =channel.last_message.text.substring(0, 37) + "...";
+                  }
+                  $scope.listChannelLocal[channel[1].uuid].last_message = channel.last_message;
+                }
+                _saveChannelLocal($scope.listChannelLocal);
+              },function(error){
+
+              })
+            })
           }
           /*$timeout(function() {
             ionicMaterialMotion.fadeSlideIn({
