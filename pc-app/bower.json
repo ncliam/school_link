@@ -73,7 +73,8 @@
     "ng-tags-input": "^3.1.1",
     "angular-spinner": "^0.8.1",
     "angular-csv-import": "^0.0.37",
-    "angularMultipleSelect": "angular-multiple-select#^1.1.2"
+    "angularMultipleSelect": "angular-multiple-select#^1.1.2",
+    "moment-timezone": "^0.5.10"
   },
   "resolutions": {
     "angular": "~1.4.8"

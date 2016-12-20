@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('LoginCtrl', function($scope,$state, $timeout, $stateParams, ionicMaterialInk, $LoginService, $Imchat, $Longpolling, localStorageService, 
-  $resUser, toaster, $pouchDb, $Error, $ionicSideMenuDelegate, $translate, $Notification) {
+  $resUser, toaster, $pouchDb, $Error, $ionicSideMenuDelegate, $translate, $Notification, $SchoolClass) {
     $scope.$parent.clearFabs();
     $scope.$parent.hideMenuRightButton();
     $scope.$parent.hideTabs();
@@ -110,6 +110,7 @@ angular.module('starter.controllers')
       $resUser.user = user;
       $Longpolling.user = user;
       $Notification.user = user;
+      $SchoolClass.user = user;
       $Longpolling.last = 0;
     };
 

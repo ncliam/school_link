@@ -83,6 +83,7 @@ angular.module('starter.controllers')
                 listUserId.push(user.id);
               });
             });
+            listUserId.push($scope.user.uid);
             listUserId = _.uniq(listUserId);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
             localStorageService.set("listChannelInit", $scope.listChannel);

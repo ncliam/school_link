@@ -232,11 +232,11 @@
         $scope.listMessage = history.reverse();
         $scope.listMessage.forEach(function(message){
           if(moment(message.create_date).format("DD/MM/YYYY") === currentDate){
-            message.showDate = "Hôm nay "+ moment(message.create_date).format("HH:mm A");
+            message.showDate = moment(moment.tz(message.create_date, moment.tz.guess())._d).format("hh:mm A") +" Hôm nay ";
           } else if(moment(message.create_date).format("DD/MM/YYYY") === prevDate){
-            message.showDate = "Hôm qua "+ moment(message.create_date).format("HH:mm A");
+            message.showDate = moment(moment.tz(message.create_date, moment.tz.guess())._d).format("hh:mm A") +" Hôm qua";
           } else{
-            message.showDate = moment(message.create_date).format("DD/MM/YYYY HH:mm A");
+            message.showDate = moment(moment.tz(message.create_date, moment.tz.guess())._d).format("hh:mm A DD/MM/YYYY");
           }
         });
         if($scope.listMessage.length > 0){
@@ -265,7 +265,7 @@
         		message: $scope.form.message,
         		uuid: chooseChannel[1].uuid,
             to_users: to_users,
-            from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.id] || $scope.user.username}
+            from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.uid] || $scope.user.username}
         	};
           $scope.form.message = "";
         	$Imchat.postMessage(info, function(result){

@@ -29,7 +29,7 @@
       $Notification.getNotification({}, function(result){
         $scope.listNotification = result;
         $scope.listNotification.forEach(function(noti){
-          noti.showDate = moment(noti.date).format("DD/MM/YYYY hh:mm A");
+          noti.showDate = moment(moment.tz(noti.date, moment.tz.guess())._d).format("hh:mm A DD/MM/YYYY");
         })
       }, function(error){
         $Error.callbackError(error);

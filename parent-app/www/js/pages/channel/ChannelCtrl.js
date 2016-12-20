@@ -129,10 +129,10 @@ angular.module('starter.controllers')
           message: $scope.form.message,
           uuid: $scope.chooseChannel[1].uuid,
           to_users: to_users,
-          from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.id] || $scope.user.username}
+          from_user: {id: $scope.user.uid, name: $scope.listChatName[$scope.user.uid] || $scope.user.username}
         };
         $scope.form.message = "";
-          $Imchat.postMessage(info, function(result){
+        $Imchat.postMessage(info, function(result){
         }, function(error){
           $Error.callbackError(error);
         });

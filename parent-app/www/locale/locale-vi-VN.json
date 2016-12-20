@@ -119,5 +119,6 @@
 	"change_password_success": "Đổi mật khẩu thành công",
 	"error_same_password":"Mật khẩu phải giống nhau",
 	"change_password_error": "Đổi mật khẩu không thành công",
-	"old_password_error": "Mật khẩu cũ không chính xác"
+	"old_password_error": "Mật khẩu cũ không chính xác",
+	"info_user": "Thông tin cá nhân"
 }
