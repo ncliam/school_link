@@ -118,6 +118,7 @@ angular.module('starter.controllers', [])
     $scope.logout = function(){
         $scope.user = localStorageService.get("user");
         $scope.user.login = false;
+        localStorageService.remove("partner_user");
         localStorageService.set("user", $scope.user);
         _updateUserLc();
         $LoginService.logout({}, function(result){
