@@ -363,6 +363,7 @@ angular.module('starter.controllers')
       return ret;
     };
     var class_id = localStorageService.get("class");
+    $scope.listChildren = {};
     $SchoolClass.getClassById({id: class_id}, function(result){
       var currentClass = result.records[0];
       $SchoolClass.getListTeacherByIds({ids: currentClass.teacher_ids}, function(listTeacher){
@@ -371,8 +372,19 @@ angular.module('starter.controllers')
       $SchoolClass.getListParentByIds({parent_ids: currentClass.parent_ids}, function(listParent){
         $scope.parents = listParent;
         $scope.suppers = _.filter($scope.parents, function(parent) {
-        return parent.category_id.length > 0;
-      });
+          return parent.category_id.length > 0;
+        });
+        var children_ids = [];
+        $scope.parents.forEach(function(parent){
+          children_ids = children_ids.concat(parent.children);
+        });
+        $resUser.getStudentById({student_ids: children_ids}, function(listChildren){
+          listChildren.forEach(function(child){
+            $scope.listChildren[child.id] = child;
+          })
+        }, function(error){
+          $Error.callbackError(error);
+        })
       }, function(error){
         $Error.callbackError(error);
       });
@@ -430,8 +442,7 @@ angular.module('starter.controllers')
           })
           var existChannel = _.find(listChannelTwoUser, function(tmp){
             return tmp.user.id === user.user_id[0];
-          })
-          
+          });
           if(!existChannel){
             localStorageService.set("user_add_channel", user);
             MultipleViewsManager.updateView("add_new_channel");
