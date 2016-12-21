@@ -1,17 +1,13 @@
 <div class="modal-content" style="margin-top: 10%;">
-  <div class="modal-header bg-info">
-    <span>{{currentNotification.subject}}</span>
+  <div class="modal-header bg-info text-center">
+    <span style="font-weight: bold; font-size: 18px">{{currentNotification.subject}}</span>
   </div>
-  <div class="modal-body text-center">
-	  <div class="col-sm-12">
-	    <div class="form-group">
-	      <label for="inputFirstName" style="font-weight: bold;">{{'send_date' | translate}}:</label>
-	      <span style="float: left; margin-top: 7px;">{{currentNotification.showDate}}</span>
-	    </div>
-	  </div>
+  <div class="modal-body text-left">
     <div ng-bind-html="currentNotification.body"></div>
   </div>
   <div class="modal-footer">
+      <span style="float: left;margin-top: 7px;">{{"send_date" | translate}} : </span>
+      <span style="float: left; margin-top: 7px;">{{currentNotification.showDate}}</span>
     <button type="button" class="btn btn-default" ng-click="$dismiss()">{{"button.cancel" | translate}}</button>
   </div>
 </div>
