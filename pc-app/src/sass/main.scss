@@ -436,3 +436,19 @@ multiple-autocomplete input{
 .oe_mail_expand a{
   display: none;
 }
+.messages .active {
+  background: #0fafe4 !important;
+  color: #fff;
+}
+.active .mail-body-part {
+  color: #fff !important;
+}
+.cd-timeline-content.primary:before{
+  border-left-color: #e8e8e8 !important;
+}
+.cd-timeline-content.active:before{
+  border-left-color: #0fafe4 !important;
+}
+.panel ::-webkit-scrollbar-thumb{
+  background: #fff !important;
+}

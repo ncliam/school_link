@@ -55,3 +55,7 @@ build
 /.tmp/
 /docs/
 /cache/
+/platforms/
+/plugins/
+/res/
+/www/

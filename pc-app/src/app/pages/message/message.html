@@ -11,7 +11,26 @@
             </div>
             <div class="mail-messages-control" ng-show="listMessageToSeach.length === 0">
               <div class="messages w100" style="float: left;">
-                <table class="table-hover">
+                <div class="cd-timeline-content primary" ng-repeat="channel in listChannel" style="width: 98%; margin-bottom: 10px; padding: 10px; background: #e8e8e8;" ng-class="{active: channel.show}" ng-click="chooseChannel(channel)">
+                  <h5 style="overflow: hidden;">
+                    <div ng-show="channel[1].users.length === 2">
+                      <div class="name-container" ng-repeat="userChat in channel[1].users" ng-show="userChat.id !== user.uid">
+                        <div><span class="name">{{channel.title}}</span></div>
+                        <div><span class="tag label label-primary {{userChat.im_status}}">{{userChat.im_status}}</span></div>
+                      </div>
+                    </div>
+                    <div ng-show="channel[1].users.length > 2">
+                      <div style="float: left;" class="name-container" >
+                        <div style="float: left; white-space: nowrap;" class="name" >{{channel.title}}</div>
+                      </div>
+                    </div>
+                  </h5>
+                  <p>
+                    <div style="color: gray; font-style: italic; font-size: 12px; margin-top: 8px;" ng-class="{textBold: listChannelLocal[channel[1].uuid].numberNotifi > 0}" class="mail-body-part">{{listChannelLocal[channel[1].uuid].last_message.text | plainText}}</div>
+                  </p>
+                  <i ng-show="listChannelLocal[channel[1].uuid].numberNotifi && listChannelLocal[channel[1].uuid].numberNotifi > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 0px 5px; font-size: 12px; float: right; margin-top:-60px;">{{listChannelLocal[channel[1].uuid].numberNotifi}}</i>
+                </div>
+                <!-- <table class="table-hover">
                   <tr ng-repeat="channel in listChannel"
                       class="side-message-navigation-item little-human shineHover {{m.tag}}" style="border-bottom: 1px solid #ddd;" ng-class="{active: channel.show}" ng-click="chooseChannel(channel)">
                     <td  class="photo-td">
@@ -40,7 +59,7 @@
                       <i ng-show="listChannelLocal[channel[1].uuid].numberNotifi && listChannelLocal[channel[1].uuid].numberNotifi > 0" style="background: red; color: #ffffff; border-radius: 25px; padding: 0px 5px; font-size: 12px; float: left; margin-top:10px;margin-left: -15px;">{{listChannelLocal[channel[1].uuid].numberNotifi}}</i>
                     </td>
                   </tr>
-                </table>
+                </table> -->
               </div>
             </div>
             <div class="mail-messages-control" ng-show="listMessageToSeach.length > 0">

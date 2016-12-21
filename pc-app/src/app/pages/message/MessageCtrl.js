@@ -76,6 +76,19 @@
           listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           $resUser.getChatNameByUserId({user_ids: listUserId}, function(resultChatName){
             $scope.listChatName = resultChatName;
+            $scope.listChannel.forEach(function(channel){
+              var title = "";
+              channel[1].users.forEach(function(user){
+                if(user.id != $scope.user.uid){
+                  if(title.length === 0){
+                    title = title + $scope.listChatName[user.id];
+                  } else{
+                    title = title + ", " + $scope.listChatName[user.id];
+                  }
+                }
+              });
+              channel.title = title;
+            });
             $scope.chooseChannel($scope.listChannel[0]);
           }, function(error){$Error.callbackError(error);});
         }

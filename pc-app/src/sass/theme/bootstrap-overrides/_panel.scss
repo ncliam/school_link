@@ -29,7 +29,8 @@ $panel-heading-font-size: 16px;
     height: $large-panel-height;
   }
   &.viewport100 {
-    height: calc(100vh - 218px);
+    height: calc(100vh - 100px);
+    margin: 0px;
   }
 
   &.with-scroll {
