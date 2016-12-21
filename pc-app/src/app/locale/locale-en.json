@@ -105,16 +105,17 @@
 	"list_parent": "Danh sách phụ huynh",
 	"search_parent_name_mobile":"Tìm kiếm phụ huynh theo tên hoặc số điện thoại",
 	"relationship": "Quan hê",
-	"name_subject": "Tên môn học",
-	"subject": "Môn học",
-	"user_name": "Tên đăng nhập",
-	"search_teacher": "Tìm kiếm giáo viên",
+	"name_subject": "Name subject ",
+	"subject": "Subject",
+	"user_name": "User name",
+	"search_teacher": "Search teacher",
 	"mark_one": "Điểm hệ số 1",
 	"mark_two": "Điểm hệ số 2",
 	"mark_last": "Điểm HK",
 	"mark_tb": "Điểm TB",
 	"mark_hl":"Học lực",
 	"mark_hk": "Hạnh kiểm",
-	"search_student": "Tìm kiếm học sinh",
-	"login.language": "Language"
+	"search_student": "Search student",
+	"login.language": "Language",
+	"teacher_class": "Chủ nhiệm"
 }

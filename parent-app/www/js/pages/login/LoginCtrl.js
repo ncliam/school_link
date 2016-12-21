@@ -22,7 +22,7 @@ angular.module('starter.controllers')
       navigator.globalization.getPreferredLanguage(
           function (language) {
             $translate.refresh();
-            if(language.value == "vi-VN" || language.value == "en-US" || language.value == "es-ES"){
+            if(language.value == "vi-VN" || language.value == "en-US" || language.value == "es-ES" || language.value == "es-US" || language.value == "es-PE"){
               $translate.use(language.value);
               $scope.language = language.value;
             } else{
@@ -119,7 +119,7 @@ angular.module('starter.controllers')
 
     $scope.doRegister = function(){
       $LoginService.register({mobile: $scope.user.mobile}, function(result){
-        toaster.pop('success', "", $translate.instant('register_success'));
+        toaster.pop('success', "", $translate.instant('please_input_message'));
         $scope.form.value= "confirm";
         token_id = result;
       }, function(error){$Error.callbackError(error);});

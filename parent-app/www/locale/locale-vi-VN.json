@@ -112,7 +112,7 @@
 	"prev_day": "Hôm qua",
 	"warning": "Cảnh báo",
 	"require_message": "Bạn phải nhập tin nhắn",
-	"please_input_message":"Vui lòng đợi tin nhắn trong giây lát",
+	"please_input_message":"Vui lòng kiểm tra tin nhắn của bạn để lấy mã xác nhận",
 	"register_success": "Đăng ký thành công",
 	"confirm_success": "Xác nhận thành công",
 	"wrong_code": "Sai mã xác nhận",
