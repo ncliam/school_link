@@ -1,5 +1,5 @@
 # install nodejs and npm
-brew install nodejs
+brew install nodejs (version <=6.9)
 install nodejs
 
 

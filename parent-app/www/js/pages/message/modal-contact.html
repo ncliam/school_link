@@ -5,7 +5,15 @@
 	</header>
 	<content has-header="true" padding="true">
 		<div class="tabs-striped tabs-top">
-		  <div class="tabs"  style="background: #f8f8f8;margin-top: 5px;">
+      <div style="margin-top: 48px;">
+        <tags-input ng-model="tags" placeholder="TEST" replace-spaces-with-dashes="false">
+        <auto-complete source="loadReceive($query)"
+                     min-length="0"
+                     load-on-focus="true"                
+                     max-results-to-show="32"></auto-complete>
+        </tags-input>
+      </div>
+		  <div class="tabs"  style="background: #f8f8f8;margin-top: 1px;">
 		      <a class="tab-item" ng-class="{active: group == 'teachers'}" ng-click="changeGroup('teachers')">
 		        {{'teacher' | translate}}
 		      </a>

@@ -32,6 +32,24 @@ angular.module('starter.controllers')
     var currentDate = moment(new Date()).format("DD/MM/YYYY");
     var prevDate = moment($time.getPrevDate(new Date())).format("DD/MM/YYYY");
     $scope.listClass = [];
+  //   $scope.loadReceive = function($query) {
+  //     var listReceive;
+  //     if($scope.group == 'teachers'){
+  //       listReceive = $scope.teachers;
+  //     }else if($scope.group === 'parents') {
+  //       listReceive = $scope.parents;
+  //     } else{
+  //       listReceive = $scope.suppers;
+  //     }
+
+
+  //   return $listSender.then(function(response) {
+  //     var listName = response.name;
+  //     return listName.filter(function(listName) {
+  //       return listName.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+  //     });
+  //   });
+  // };
     var _createNewChannel = function(){
       var user = localStorageService.get("user_add_channel");
       if(user){

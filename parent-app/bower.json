@@ -17,6 +17,7 @@
     "pouchdb": "^6.0.7",
     "AngularJS-Toaster": "^2.0.0",
     "install": "^1.0.4",
-    "moment-timezone": "^0.5.10"
+    "moment-timezone": "^0.5.10",
+    "ng-tags-input": "^3.1.1"
   }
 }

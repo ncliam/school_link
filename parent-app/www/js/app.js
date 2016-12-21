@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'SchoolLink.service','LocalStorageModule', 
-    'toaster', 'pascalprecht.translate', 'angular.filter'])
+    'toaster', 'pascalprecht.translate', 'angular.filter','ngTagsInput'])
 
 .run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager, $translate, $ionicHistory) {
     $ionicPlatform.ready(function() {
