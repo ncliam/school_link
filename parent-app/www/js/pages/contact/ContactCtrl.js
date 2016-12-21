@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('ContactCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SchoolService, localStorageService, $state,
- MultipleViewsManager, $SchoolClass) {
+ MultipleViewsManager, $SchoolClass, $resUser) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -22,6 +22,7 @@ angular.module('starter.controllers')
     $scope.suppers = [];
     $scope.group = 'teachers';
     $scope.currentClass = {};
+    $scope.listChildren = {};
 
 
     $scope.callTel = function(tel) {
@@ -93,13 +94,24 @@ angular.module('starter.controllers')
         $SchoolClass.getListParentByIds({parent_ids: $scope.currentClass.parent_ids}, function(listParent){
           $scope.parents = listParent;
           $scope.suppers = _.filter($scope.parents, function(parent) {
-          return parent.category_id.length > 0;
-        });
+            return parent.category_id.length > 0;
+          });
+          var children_ids = [];
+          $scope.parents.forEach(function(parent){
+            children_ids = children_ids.concat(parent.children);
+          });
+          $resUser.getStudentById({student_ids: children_ids}, function(listChildren){
+            listChildren.forEach(function(child){
+              $scope.listChildren[child.id] = child;
+            })
+          }, function(error){
+            $Error.callbackError(error);
+          })
         }, function(error){
           $Error.callbackError(error);
         });
       }, function(error){
-
+        $Error.callbackError(error);
       });
     }
     _init();
@@ -171,9 +183,17 @@ angular.module('starter.controllers')
     };
 
     $scope.callPhoneNumber = function(user){
-      window.open('tel:' + user.mobile, '_system')
+      if(user.work_phone){
+        window.open('tel:' + user.work_phone, '_system')
+      } else{
+        window.open('tel:' + user.mobile, '_system')
+      }
     };
     $scope.sendEmail = function(user){
-      window.open('mailto:' + user.email);
+      if(user.work_email){
+        window.open('mailto:' + user.work_email);
+      } else{
+        window.open('mailto:' + user.email);
+      }
     };
 })

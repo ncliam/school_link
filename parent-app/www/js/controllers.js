@@ -200,7 +200,9 @@ angular.module('starter.controllers', [])
         $scope.listChannelLocal = localStorageService.get("channels");
         $scope.listChannel.forEach(function(channel){
           if($scope.listChannelLocal[channel[1].uuid]){
-            $scope.numberMessage += $scope.listChannelLocal[channel[1].uuid].numberNotifi;
+            if($scope.listChannelLocal[channel[1].uuid].numberNotifi){
+                $scope.numberMessage += $scope.listChannelLocal[channel[1].uuid].numberNotifi;
+            }
           }
         })
       }, function(error){
