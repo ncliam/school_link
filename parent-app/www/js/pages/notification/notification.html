@@ -2,14 +2,18 @@
     <ion-content ng-class="{expanded:isExpanded}" style="margin-top: 10px; margin-bottom: 55px;">
         <div class="item card-item" style="padding: 0px;" ng-repeat="notification in listNotification" on-tap="gotoDetailNotification(notification)">
           <div style="margin: 5px;" class="card stable-bg ink ink-dark">
-            <div class="item item-avatar item-text-wrap" style="background: none; padding: 5px 5px 5px 88px; min-height: 65px;">
-              <span class="avatar" style="background-image: url('img/notification.png'); width: 45px; height: 45px;"></span>
-              <strong style="font-size: 18px" ng-show="notification.to_read">{{notification.subject}}</strong>
-              <div style="font-size: 18px" ng-show="!notification.to_read">{{notification.subject}}</div>
-              <span style="color: gray; font-style: italic; font-size: 12px; float: right;">{{notification.showDate}}</span>
-              <div class="card-footer text-left">
-                  <div ng-bind-html="notification.body_short" class="pull-left" style="color: gray; font-style: italic; font-size: 12px;">
+            <div class="item item-avatar item-text-wrap" style="background: none; padding: 5px 5px 5px 58px; min-height: 65px; margin-right: 20px;">
+              <span class="avatar" style="background-image: url('img/notification.png'); width: 45px; height: 45px; left:8px;"></span>
+              <span style="position: absolute;right: -15px; width: 50px; height: 50px; top: 50%; background: url('img/ios-right-arrow.png');background-size: cover;margin-top:-25px;"></span>
+              <div style="margin-right: 20px;">
+                <strong style="font-size: 18px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-if="notification.to_read">{{notification.subject}}</strong>
+                <div style="font-size: 18px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-if="!notification.to_read">{{notification.subject}}</div>
+                <div class="card-footer text-left" style="padding-top: 0px">
+                  <div ng-bind-html="notification.body_short" style="color: gray; font-style: italic; font-size: 12px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
                   </div>
+                </div>        
+                <span style="color: gray; font-style: italic; font-size: 12px;text-align: right; width: 100%;display: block;">{{notification.showDate}}</span>
+                        
               </div>
             </div>
           </div>
