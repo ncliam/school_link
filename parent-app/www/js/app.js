@@ -7,7 +7,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'SchoolLink.service','LocalStorageModule', 
     'toaster', 'pascalprecht.translate', 'angular.filter'])
 
-.run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager, $translate) {
+.run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager, $translate, $ionicHistory) {
     $ionicPlatform.ready(function() {
         $pouchDb.initDB("res.user");
         //$pouchDb.destroyDatabase("res.user");
@@ -78,11 +78,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           })
           .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
           .endInit();
+
         $ionicPlatform.registerBackButtonAction(function (e) {
-          //ionic.Platform.exitApp();
-          e.preventDefault();
+          if($ionicHistory.viewHistory().backView.stateId != "app.login" && $ionicHistory.viewHistory().backView.stateId != "app.school"){
+            $ionicHistory.goBack();
+          }
+          /*e.preventDefault();
           e.stopImmediatePropagation();
-          e.stopPropagation();
+          e.stopPropagation();*/
         }, 100);
     });
     
