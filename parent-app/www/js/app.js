@@ -27,7 +27,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             $Longpolling.poll();
             MultipleViewsManager.updateView("chooseChildren");
             if(!$rootScope.autoGoScreen){
-                $state.go("app.message");
+                $state.go("app.notification");
             }
             window.plugins.OneSignal.sendTag("user_id", existUser.data.uid);
           } else{

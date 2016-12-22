@@ -88,7 +88,7 @@
               info.teacher = false;
             }
             localStorageService.set("user", info);
-            $state.go("message");
+            $state.go("notification");
             MultipleViewsManager.updateView("user");
           },function(error){
             $Error.callbackError(error);
