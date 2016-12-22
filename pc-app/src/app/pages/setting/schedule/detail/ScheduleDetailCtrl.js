@@ -26,36 +26,36 @@
       opened: false
     };
 
-    $scope.listSemester = [{id: 1, value:"first", name:"Học kì 1"}, {id: 2, value:"second", name:"Học kì 2"}];
+    $scope.listSemester = [{id: 1, value:"first", name:"{{first_semester|translate}}",}, {id: 2, value:"second", name:"{{second_semester|translate}}"}];
 
     $scope.weekDay = [
       {
         id: 1,
-        name: "Thứ 2",
+        name: "{{day_mon|translate}}",
         value: "mon"
       },{
         id: 2,
-        name: "Thứ 3",
+        name: "{{day_tue|translate}}",
         value: "tue"
       },{
         id: 3,
-        name: "Thứ 4",
+        name: "{{day_wed|translate}}",
         value: "wed"
       },{
         id: 4,
-        name: "Thứ 5",
+        name: "{{day_thu|translate}}",
         value: "thu"
       },{
         id: 5,
-        name: "Thứ 6",
+        name: "{{day_fri|translate}}",
         value: "fri"
       },{
         id: 6,
-        name: "Thứ 7",
+        name: "{{day_sat|translate}}",
         value: "sat"
       },{
         id: 7,
-        name: "Chủ nhật",
+        name: "{{day_sun|translate}}",
         value: "sun"
       }
     ];

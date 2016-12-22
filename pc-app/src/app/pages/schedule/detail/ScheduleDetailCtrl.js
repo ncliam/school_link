@@ -29,7 +29,7 @@
       $scope.show.list = true;
       MultipleViewsManager.updateView("reload_list_schedule");
     }
-    $scope.listSemester = [{id: 1, value:"first", name:"Học kì 1"}, {id: 2, value:"second", name:"Học kì 2"}];
+    $scope.listSemester = [{id: 1, value:"first", name:"first_semester"}, {id: 2, value:"second", name:"second_semester"}];
 
     $scope.weekDay = [
       {

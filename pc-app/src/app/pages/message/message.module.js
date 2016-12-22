@@ -14,7 +14,7 @@
         .state('message', {
           url: '/message',
           templateUrl: 'app/pages/message/message.html',
-          title: 'Tin nhắn',
+          title: 'menu.message',
           sidebarMeta: {
             icon: 'ion-chatboxes',
             order: 1,

@@ -14,7 +14,7 @@
         .state('test', {
           url: '/test',
           templateUrl: 'app/pages/test/test.html',
-          title: 'Kết quả học tập',
+          title: 'menu.report',
           sidebarMeta: {
             order: 100,
             icon: 'ion-compose',

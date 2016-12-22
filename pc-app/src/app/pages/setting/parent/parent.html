@@ -2,7 +2,7 @@
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase">
   <uib-tabset active="$tabSetStatus.activeTab" class="tac">
-    <input ng-change="searchParent()" style="width: 40%; margin-left: 3px; margin-top: 3px; float: left;font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Tìm kiếm phụ huynh">
+    <input ng-change="searchParent()" style="width: 40%; margin-left: 3px; margin-top: 3px; float: left;font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder={{'search'|translate}}>
     <div class="panel-heading" ng-click="openPopupParent()" style="float: right; height: 40px; box-shadow: none; border-bottom: none; border-left: 1px solid #fffffff;"><i style="font-size: 20px; margin-top: -5px; color: #ffffff; float: left; font-size: 24px;" class="ion-ios-plus-outline"></i></div>
   </uib-tabset>
   <div">

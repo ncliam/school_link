@@ -2,9 +2,9 @@
   ba-panel
   ba-panel-class="horizontal-tabs tabs-panel tab-purchase" ng-init="editSave = false">
   <uib-tabset active="$tabSetStatus.activeTab">
-    <uib-tab heading="Bảng điểm" ng-click="chooseTab('bd')">
+    <uib-tab heading="{{'transcripts' | translate}}" ng-click="chooseTab('bd')">
     </uib-tab>
-    <uib-tab heading="Đánh giá chung" ng-click="chooseTab('hk')">
+    <uib-tab heading="{{'details' | translate}}" ng-click="chooseTab('hk')">
     </uib-tab>
     <div ng-show="!editSave && user.teacher" ng-click="editForm()" class="panel-heading" style="float: right; height: 40px; box-shadow: none;  border-bottom: none;"><i style="font-size: 20px; color: #ffffff; margin-top: -2px; float: left;" class="ion-edit"></i></div>
    <!--  <label style="color: #fff;margin-top: 10px;">Bảng điểm</label> -->
@@ -21,7 +21,11 @@
         <label for="inputFirstName">
           {{'semester' | translate}}:
         </label>
-        <select class="form-control" ng-change="searchSubject()" ng-options="semester.id as semester.name for semester in listSemester" ng-model="formData.semester_id" ng-required="true"></select>
+<!--         <select class="form-control" ng-change="searchSubject()" ng-options="semester.id as semester.name for semester in listSemester" ng-model="formData.semester_id" ng-required="true"></select>
+ -->
+        <select class="form-control" ng-change="searchSubject()" ng-model="formData.semester_id" ng-required="true">        
+          <option ng-repeat="semester in listSemester" value="{{semester.id}}">{{semester.name | translate}}</option>
+        </select>
       </div>
       <div ng-show="tab ==='bd'" class="form-group col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12" style="margin-bottom: 0px;">
         <label for="inputFirstName">{{'subject' | translate}}:</label>
@@ -34,8 +38,8 @@
         <div class="fl w30 title-test text-center" style="font-weight: bold">{{'mark_one' | translate}}</div>
         <div class="fl w30 title-test text-center" style="font-weight: bold">{{'mark_two' | translate}}</div>
         <div class="fl w10 title-test text-center" style="padding: 10px 15px;">
-          <span ng-show="formData.semester_id == 1" style="font-weight: bold">{{listSemester[0].name}}</span>
-          <span ng-show="formData.semester_id == 2" style="font-weight: bold">{{listSemester[1].name}}</span>
+          <span ng-show="formData.semester_id == 1" style="font-weight: bold">{{listSemester[0].name| translate}}</span>
+          <span ng-show="formData.semester_id == 2" style="font-weight: bold">{{listSemester[1].name| translate}}</span>
           <span ng-show="!formData.semester_id" style="font-weight: bold">{{'mark_last' | translate}}</span>
         </div>
         <div class="fl w10 title-test text-center" style="font-weight: bold; padding: 10px 15px;">
@@ -59,7 +63,7 @@
             <tr>
               <td style="padding: 0px !important;">
                 <div class="fl w50 pb5" style="text-align: left; padding:10px;">
-                  <input ng-change="searchStundent()" style="width: 100%; margin-left: 0px; font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder="Tìm kiếm học sinh">
+                  <input ng-change="searchStundent()" style="width: 100%; margin-left: 0px; font-weight: 100;" ng-model="form.search" type="text" class="form-control" placeholder={{'search'|translate}}>
                 </div>
               </td>
             </tr>

@@ -86,7 +86,7 @@
     $scope.removeRecords = function(){
       $SchoolClassGroup.removeRecords($scope.group, function(result){
         modalShoolGroup.dismiss('cancel');
-        toastr.success("Xóa khối thành công", "", {});
+        toastr.success("{{'delete_success'|translate}}", "", {});
         _init();
       }, function(error){
         $Error.callbackError(error);
