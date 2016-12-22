@@ -2,15 +2,12 @@
     <div class="tabs-striped tabs-top tabs-background-positive">
       <div class="tabs" style="top: 0px;background: #387ef5;">
           <i ui-sref="app.notification" class="ion-ios-arrow-back" style="position: absolute; left: 0px; font-size: 24px; color: #fff; padding: 0px 15px;"></i>
-         <label style="color: #fff; line-height: 45px; font-size: 16px;">{{notification.subject}}</label>
+         <label style="color: #fff; line-height: 45px; font-size: 16px; padding-left: 35px;padding-right: 5px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{notification.subject}}</label>
         </div>
       </div>
-    <ion-content id="idContent" style="margin-top: 10px; margin-bottom: 60px;">
-        <div style="padding: 10px 8px;">
-
-          <div ng-bind-html="notification.body" style="border: 1px solid gray; width: 100%; float: left; padding: 10px; margin: 5px 0px; border-radius: 25px; background: #ffffff;"></div>
-            <div style="text-align: center; color: gray; font-style: italic; margin: 5px; font-size:12px;">{{notification.showDate}}</div>
-        </div>
+    <ion-content id="idContent" style="margin-top: 10px; margin-bottom: 60px;">       
+          <div ng-bind-html="notification.body" style="padding: 0 10px"></div>
+            <div style="text-align: right; font-style: italic; border: 1px solid silver; border-width: 1px 0 0; padding-top: 5px">{{notification.showDate}}</div>        
     </ion-content>
 
 </ion-view>

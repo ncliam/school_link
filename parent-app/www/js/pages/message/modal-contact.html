@@ -1,6 +1,6 @@
 <div class="modal">
 	<header class="bar bar-header bar-positive">
-	  <h1 class="title">{{'contact' | translate}}</h1>
+	  <h1 class="title">{{'please choose contact' | translate}}</h1>
 	  <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-ios-close-empty"></span></div>
 	</header>
 	<content has-header="true" padding="true">
@@ -20,15 +20,14 @@
 	  <ion-content class="bp-content-wrap" ng-show="group == 'parents'" style="margin-top: 68px">
         <div style="margin-top:30px;">
           <span ng-repeat="item in parents">
-            <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
-                      on-tap="toggleGroup(item.id)"
+            <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"                      
                       ng-class="{active: isGroupShown(item.id)}">
                 <div class="row">
-                  <div class="col col-70">
+                  <div class="col col-70" on-tap="createChannel(item);">
                     <div style="margin-top: 10px;">{{item.name}}</div>
                   </div>
                   <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-                    <i ng-show="item.parent_user_id" on-tap="createChannel(item); $event.stopImmediatePropagation();" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+                    <i ng-show="item.parent_user_id" on-tap="toggleGroup(item.id)" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
                     <i ng-show="!item.parent_user_id">&nbsp;</i>
                   </div>
                 </div>
@@ -59,15 +58,14 @@
       <ion-content class="bp-content-wrap" ng-show="group == 'supper'" style="margin-top: 68px">
         <div style="margin-top:30px;">
           <span ng-repeat="item in suppers">
-            <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
-                      on-tap="toggleGroup(item.id)"
+            <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"                      
                       ng-class="{active: isGroupShown(item.id)}">
                 <div class="row">
-                  <div class="col col-70">
+                  <div class="col col-70" on-tap="createChannel(item);">
                     <div style="margin-top: 10px;">{{item.name}}</div>
                   </div>
                   <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-                    <i ng-show="item.parent_user_id" on-tap="createChannel(item); $event.stopImmediatePropagation();" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+                    <i ng-show="item.parent_user_id" on-tap="toggleGroup(item.id)" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
                     <i ng-show="!item.parent_user_id">&nbsp;</i>
                   </div>
                 </div>
@@ -99,14 +97,13 @@
       <ion-content class="bp-content-wrap" ng-show="group == 'teachers'" style="margin-top: 68px">
         <div style="margin-top:30px;">
 	        <span ng-repeat="item in teachers">
-		        <ion-item style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
-		                  on-tap="toggleGroup(item.id)"
+		        <ion-item style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"	                 
 		                  ng-class="{active: isGroupShown(item.id)}">
 	            <div class="row">
-	              <div class="col col-70">
+	              <div class="col col-70"  on-tap="createChannel(item);">
 	                <div style="margin-top: 10px;">{{item.name}}</div> <span class="text-con"></span>
 	              </div>
-	              <div on-tap=" $event.stopImmediatePropagation(); createChannel(item);" class="col col-10 text-right lienhe-list-item" style="font-size:2em">
+	              <div on-tap="toggleGroup(item.id)" class="col col-10 text-right lienhe-list-item" style="font-size:2em">
 	                <i ng-show="item.user_id"  class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
 	              </div>
 	            </div>
