@@ -22,15 +22,23 @@
           <span ng-repeat="item in parents">
             <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"                      
                       ng-class="{active: isGroupShown(item.id)}">
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col col-70" on-tap="createChannel(item);">
-                    <div style="margin-top: 10px;">{{item.name}}</div>
+                    <div style="margin: 10px;">{{item.name}}</div>
                   </div>
-                  <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-                    <i ng-show="item.parent_user_id" on-tap="toggleGroup(item.id)" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+                  <div class="col col-10 ">
+                    <i ng-show="item.parent_user_id"  class="icon {{item.show?'ion-arrow-up-b':'ion-arrow-down-b'}}" style="position: absolute;top: 50%; margin-top: -8px;"></i>
                     <i ng-show="!item.parent_user_id">&nbsp;</i>
                   </div>
+                </div> -->
+                <div class="row">
+                <div class="col col-70"  on-tap="createChannel(item);">
+                  <div style="margin: 10px;">{{item.name}}</div> <span class="text-con"></span>
                 </div>
+                <div on-tap="toggleGroup(item.id)" class="col col-10">
+                  <i ng-show="item.parent_user_id"  class="icon {{item.show?'ion-arrow-up-b':'ion-arrow-down-b'}}" style="position: absolute;top: 50%; margin-top: -8px;"></i>
+                </div>
+              </div>
 
             </ion-item>
             <ion-item  style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
@@ -60,15 +68,23 @@
           <span ng-repeat="item in suppers">
             <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"                      
                       ng-class="{active: isGroupShown(item.id)}">
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col col-70" on-tap="createChannel(item);">
-                    <div style="margin-top: 10px;">{{item.name}}</div>
+                    <div style="margin: 10px;">{{item.name}}</div>
                   </div>
-                  <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
+                  <div class="col col-10">
                     <i ng-show="item.parent_user_id" on-tap="toggleGroup(item.id)" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
                     <i ng-show="!item.parent_user_id">&nbsp;</i>
                   </div>
+                </div> -->
+                <div class="row">
+                <div class="col col-70"  on-tap="createChannel(item);">
+                  <div style="margin: 10px;">{{item.name}}</div> <span class="text-con"></span>
                 </div>
+                <div on-tap="toggleGroup(item.id)" class="col col-10">
+                  <i ng-show="item.parent_user_id"  class="icon {{item.show?'ion-arrow-up-b':'ion-arrow-down-b'}}" style="position: absolute;top: 50%; margin-top: -8px;"></i>
+                </div>
+              </div>
 
             </ion-item>
             <ion-item  style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
@@ -101,10 +117,10 @@
 		                  ng-class="{active: isGroupShown(item.id)}">
 	            <div class="row">
 	              <div class="col col-70"  on-tap="createChannel(item);">
-	                <div style="margin-top: 10px;">{{item.name}}</div> <span class="text-con"></span>
+	                <div style="margin: 10px;">{{item.name}}</div> <span class="text-con"></span>
 	              </div>
-	              <div on-tap="toggleGroup(item.id)" class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-	                <i ng-show="item.user_id"  class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+	              <div on-tap="toggleGroup(item.id)" class="col col-10">
+	                <i ng-show="item.user_id"  class="icon {{item.show?'ion-arrow-up-b':'ion-arrow-down-b'}}" style="position: absolute;top: 50%; margin-top: -8px;"></i>
 	              </div>
 	            </div>
 		        </ion-item>

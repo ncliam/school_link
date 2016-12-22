@@ -1,161 +1,177 @@
 <ion-view view-title="{{'contact' | translate}}">
 	<div class="tabs-striped tabs-top">
-	  <div class="tabs"  style="background: #f8f8f8;margin-top: 5px;">
-	      <a class="tab-item" ng-class="{active: group == 'teachers'}" ng-click="changeGroup('teachers')">
-	        {{'teacher' | translate}}
-	      </a>
-	      <a class="tab-item" ng-class="{active: group == 'parents'}" ng-click="changeGroup('parents')">
-	        {{'parent' | translate}}
-	      </a>
-        <a class="tab-item" ng-class="{active: group == 'supper'}" ng-click="changeGroup('supper')">
-          {{'group_parent' | translate}}
+   <div class="tabs"  style="background: #f8f8f8;margin-top: 5px;">
+     <a class="tab-item" ng-class="{active: group == 'teachers'}" ng-click="changeGroup('teachers')">
+       {{'teacher' | translate}}
+     </a>
+     <a class="tab-item" ng-class="{active: group == 'parents'}" ng-click="changeGroup('parents')">
+       {{'parent' | translate}}
+     </a>
+     <a class="tab-item" ng-class="{active: group == 'supper'}" ng-click="changeGroup('supper')">
+      {{'group_parent' | translate}}
+    </a>
+  </div>
+</div>
+<ion-content class="bp-content-wrap" ng-show="group == 'parents'" style="margin-bottom: 55px;">
+  <div style="margin-top:30px; margin-bottom: 20px;">
+    <span ng-repeat="item in parents">
+      <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
+      on-tap="toggleGroup(item.id)"
+      ng-class="{active: isGroupShown(item.id)}">
+      <div class="row">
+        <div class="col col-70">
+          <div style="margin-top: 10px;">{{item.name}}</div>
+        </div>
+        <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
+          <i ng-show="item.parent_user_id" on-tap="createChannel(item); $event.stopImmediatePropagation();" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+          <i ng-show="!item.parent_user_id">&nbsp;</i>
+        </div>
+        <a on-tap="$event.stopImmediatePropagation(); callPhoneNumber(item);" class="col col-10 text-right lienhe-list-item">
+          <i ng-show="item.mobile" class="icon ion-ios-telephone" style="color:#387ef5;"></i>
+          <i ng-show="!item.mobile">&nbsp;</i>
         </a>
-	    </div>
-	  </div>
-   <ion-content class="bp-content-wrap" ng-show="group == 'parents'" style="margin-bottom: 55px;">
-        <div style="margin-top:30px; margin-bottom: 20px;">
-          <span ng-repeat="item in parents">
-            <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
-                      on-tap="toggleGroup(item.id)"
-                      ng-class="{active: isGroupShown(item.id)}">
-                <div class="row">
-                  <div class="col col-70">
-                    <div style="margin-top: 10px;">{{item.name}}</div>
-                  </div>
-                  <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-                    <i ng-show="item.parent_user_id" on-tap="createChannel(item); $event.stopImmediatePropagation();" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
-                    <i ng-show="!item.parent_user_id">&nbsp;</i>
-                  </div>
-                  <a on-tap="$event.stopImmediatePropagation(); callPhoneNumber(item);" class="col col-10 text-right lienhe-list-item">
-                      <i ng-show="item.mobile" class="icon ion-ios-telephone" style="color:#387ef5;"></i>
-                      <i ng-show="!item.mobile">&nbsp;</i>
-                  </a>
-                  <a on-tap="$event.stopImmediatePropagation(); sendEmail(item);" class="col col-10 text-right lienhe-list-item">
-                    <i ng-show="item.email" class="icon ion-email" style="color:#387ef5;"></i>
-                    <i ng-show="!item.email">&nbsp;</i>
-                </a>
-                </div>
+        <a on-tap="$event.stopImmediatePropagation(); sendEmail(item);" class="col col-10 text-right lienhe-list-item">
+          <i ng-show="item.email" class="icon ion-email" style="color:#387ef5;"></i>
+          <i ng-show="!item.email">&nbsp;</i>
+        </a>
+      </div>
 
-            </ion-item>
-            <ion-item  style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
-                      ng-show="isGroupShown(item.id)">
-                      <div class="row">
-                        <div class="col col-25">
-                          <p>{{'children' | translate}}:</p>
-                        </div>
-                        <div class="col col-50">
-                          <p style="float: left;" ng-repeat="subItem in item.children">{{listChildren[subItem].name}}<span ng-hide="$last">,</span></p>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col col-25">
-                          <p>{{'mobile' | translate}}:</p>
-                        </div>
-                        <div class="col col-50">
-                          <p>{{item.mobile}}</p>
-                        </div>
-                      </div>
-            </ion-item>
-          </span>
+    </ion-item>
+    <ion-item  style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
+    ng-show="isGroupShown(item.id)">
+    <div class="row">
+      <div class="col col-25">
+        <p>{{'children' | translate}}:</p>
+      </div>
+      <div class="col col-50">
+        <p style="float: left;" ng-repeat="subItem in item.children">{{listChildren[subItem].name}}<span ng-hide="$last">,</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-25">
+        <p>Email:</p>
+      </div>
+      <div class="col col-50">
+        <p>{{item.email}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-25">
+        <p>{{'mobile' | translate}}:</p>
+      </div>
+      <div class="col col-50">
+        <p>{{item.mobile}}</p>
+      </div>
+    </div>
+  </ion-item>
+</span>
+</div>
+</ion-content>
+<ion-content class="bp-content-wrap" ng-show="group == 'supper'" style="margin-bottom: 55px;">
+  <div style="margin-top:30px; margin-bottom: 20px;">
+    <span ng-repeat="item in suppers">
+      <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
+      on-tap="toggleGroup(item.id)"
+      ng-class="{active: isGroupShown(item.id)}">
+      <div class="row">
+        <div class="col col-70">
+          <div style="margin-top: 10px;">{{item.name}}</div>
         </div>
-      </ion-content>
-      <ion-content class="bp-content-wrap" ng-show="group == 'supper'" style="margin-bottom: 55px;">
-        <div style="margin-top:30px; margin-bottom: 20px;">
-          <span ng-repeat="item in suppers">
-            <ion-item ng-hide="item.parent_user_id && item.parent_user_id[0] === userInfo.uid" style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
-                      on-tap="toggleGroup(item.id)"
-                      ng-class="{active: isGroupShown(item.id)}">
-                <div class="row">
-                  <div class="col col-70">
-                    <div style="margin-top: 10px;">{{item.name}}</div>
-                  </div>
-                  <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-                    <i ng-show="item.parent_user_id" on-tap="createChannel(item); $event.stopImmediatePropagation();" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
-                    <i ng-show="!item.parent_user_id">&nbsp;</i>
-                  </div>
-                  <a on-tap="$event.stopImmediatePropagation(); callPhoneNumber(item);" class="col col-10 text-right lienhe-list-item">
-                      <i ng-show="item.mobile" class="icon ion-ios-telephone" style="color:#387ef5;"></i>
-                      <i ng-show="!item.mobile">&nbsp;</i>
-                  </a>
-                  <a on-tap="$event.stopImmediatePropagation(); sendEmail(item);" class="col col-10 text-right lienhe-list-item">
-                    <i ng-show="item.email" class="icon ion-email" style="color:#387ef5;"></i>
-                    <i ng-show="!item.email">&nbsp;</i>
-                </a>
-                </div>
+        <div class="col col-10 text-right lienhe-list-item" style="font-size:2em">
+          <i ng-show="item.parent_user_id" on-tap="createChannel(item); $event.stopImmediatePropagation();" class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+          <i ng-show="!item.parent_user_id">&nbsp;</i>
+        </div>
+        <a on-tap="$event.stopImmediatePropagation(); callPhoneNumber(item);" class="col col-10 text-right lienhe-list-item">
+          <i ng-show="item.mobile" class="icon ion-ios-telephone" style="color:#387ef5;"></i>
+          <i ng-show="!item.mobile">&nbsp;</i>
+        </a>
+        <a on-tap="$event.stopImmediatePropagation(); sendEmail(item);" class="col col-10 text-right lienhe-list-item">
+          <i ng-show="item.email" class="icon ion-email" style="color:#387ef5;"></i>
+          <i ng-show="!item.email">&nbsp;</i>
+        </a>
+      </div>
 
-            </ion-item>
-            <ion-item  style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
-                      ng-show="isGroupShown(item.id)">
-                      <div class="row">
-                        <div class="col col-25">
-                          <p>{{'children' | translate}}:</p>
-                        </div>
-                        <div class="col col-50">
-                          <p style="float: left;" ng-repeat="subItem in item.children">{{subItem.name}}<span ng-hide="$last">,</span></p>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col col-25">
-                          <p>{{'mobile' | translate}}:</p>
-                        </div>
-                        <div class="col col-50">
-                          <p>{{item.mobile}}</p>
-                        </div>
-                      </div>
-            </ion-item>
-          </span>
-        </div>
-      </ion-content>
+    </ion-item>
+    <ion-item  style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
+    ng-show="isGroupShown(item.id)">
+    <div class="row">
+      <div class="col col-25">
+        <p>{{'children' | translate}}:</p>
+      </div>
+      <div class="col col-50">
+        <p style="float: left;" ng-repeat="subItem in item.children">{{subItem.name}}<span ng-hide="$last">,</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-25">
+        <p>Email:</p>
+      </div>
+      <div class="col col-50">
+        <p>{{item.email}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-25">
+        <p>{{'mobile' | translate}}:</p>
+      </div>
+      <div class="col col-50">
+        <p>{{item.mobile}}</p>
+      </div>
+    </div>
+  </ion-item>
+</span>
+</div>
+</ion-content>
 
-      <ion-content class="bp-content-wrap" ng-show="group == 'teachers'" style="margin-bottom: 55px;">
-        <div style="margin-top:30px; margin-bottom: 20px;">
-	        <span ng-repeat="item in teachers">
-		        <ion-item style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
-		                  on-tap="toggleGroup(item.id)"
-		                  ng-class="{active: isGroupShown(item.id)}">
-	            <div class="row">
-	              <div class="col col-70">
-	                <div style="margin-top: 10px;"> {{item.name}} <i ng-show="item.id === currentClass.teacher_id[0]" class="icon ion-ios-star" style="color:#ca0d0d; margin-left: 5px"></i></div> <span class="text-con"></span>
-	              </div>
-	              <div on-tap=" $event.stopImmediatePropagation(); createChannel(item);" class="col col-10 text-right lienhe-list-item" style="font-size:2em">
-	                <i ng-show="item.user_id"  class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
-	              </div>
-                <a on-tap="$event.stopImmediatePropagation(); callPhoneNumber(item);" class="col col-10 text-right lienhe-list-item">
-                    <i ng-show="item.work_phone" class="icon ion-ios-telephone" style="color:#387ef5;"></i>
-                </a>
-                <a on-tap="$event.stopImmediatePropagation(); sendEmail(item);" class="col col-10 text-right lienhe-list-item">
-                    <i ng-show="item.work_email" class="icon ion-email" style="color:#387ef5;"></i>
-                </a>
-	            </div>
-		        </ion-item>
-		        <ion-item style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
-		                  ng-show="isGroupShown(item.id)">
-              <div class="row">
-                <div class="col col-25">
-                  <p>{{'subject' | translate}}:</p>
-                </div>
-                <div class="col col-50">
-                  <p style="float: left;" ng-repeat="tkb in groupTeacher[item.id]">{{tkb.subject_id[1]}} <span ng-hide="$last">,</span></p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col col-25">
-                  <p>Email:</p>
-                </div>
-                <div class="col col-50">
-                  <p>{{item.work_email}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col col-25">
-                  <p>{{'mobile' | translate}}:</p>
-                </div>
-                <div class="col col-50">
-                  <p>{{item.work_phone}}</p>
-                </div>
-              </div>
-		        </ion-item>
-	        </span>
-        </div>
-      </ion-content>
+<ion-content class="bp-content-wrap" ng-show="group == 'teachers'" style="margin-bottom: 55px;">
+  <div style="margin-top:30px; margin-bottom: 20px;">
+   <span ng-repeat="item in teachers">
+    <ion-item style="padding: 0px; color: #000000;" class="item-stable item-text-wrap item-lien-he"
+    on-tap="toggleGroup(item.id)"
+    ng-class="{active: isGroupShown(item.id)}">
+    <div class="row">
+     <div class="col col-70">
+       <div style="margin-top: 10px;"> {{item.name}} <i ng-show="item.id === currentClass.teacher_id[0]" class="icon ion-ios-star" style="color:#ca0d0d; margin-left: 5px"></i></div> <span class="text-con"></span>
+     </div>
+     <div on-tap=" $event.stopImmediatePropagation(); createChannel(item);" class="col col-10 text-right lienhe-list-item" style="font-size:2em">
+       <i ng-show="item.user_id"  class="icon ion-ios-chatbubble-outline" style="padding-right:20px; color:#387ef5;"></i>
+     </div>
+     <a on-tap="$event.stopImmediatePropagation(); callPhoneNumber(item);" class="col col-10 text-right lienhe-list-item">
+      <i ng-show="item.work_phone" class="icon ion-ios-telephone" style="color:#387ef5;"></i>
+    </a>
+    <a on-tap="$event.stopImmediatePropagation(); sendEmail(item);" class="col col-10 text-right lienhe-list-item">
+      <i ng-show="item.work_email" class="icon ion-email" style="color:#387ef5;"></i>
+    </a>
+  </div>
+</ion-item>
+<ion-item style="padding: 0px; color: #000000;" class="item-text-wrap item-accordion"
+ng-show="isGroupShown(item.id)">
+<div class="row">
+  <div class="col col-25">
+    <p>{{'subject' | translate}}:</p>
+  </div>
+  <div class="col col-50">
+    <p style="float: left;" ng-repeat="tkb in groupTeacher[item.id]">{{tkb.subject_id[1]}} <span ng-hide="$last">,</span></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-25">
+    <p>Email:</p>
+  </div>
+  <div class="col col-50">
+    <p>{{item.work_email}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-25">
+    <p>{{'mobile' | translate}}:</p>
+  </div>
+  <div class="col col-50">
+    <p>{{item.work_phone}}</p>
+  </div>
+</div>
+</ion-item>
+</span>
+</div>
+</ion-content>
 </ion-view>
