@@ -1,5 +1,8 @@
 /* General
 ==================================*/
+body{
+    font-size: 12px;
+}
 h1 {
     color: #fff;
     text-shadow: 0 1px 0px #000;
@@ -14,10 +17,10 @@ h1 {
     padding-top: 30px;
 }
 
-p {
+/*p {
     color: #555;
     margin: 0 0 25px;
-}
+}*/
 
 .scroll {
     height: 100%;

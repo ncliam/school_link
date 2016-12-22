@@ -117,5 +117,6 @@
 	"old_password_error": "Antigua contraseña incorrecta",
 	"info_user": "Perfil",
 	"email": "Email",
-	"update_user_success": "Actualización exitosa"
+	"update_user_success": "Actualización exitosa",
+	"please choose contact":"Por favor, elija contacto"
 }

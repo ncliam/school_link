@@ -25,6 +25,11 @@ angular.module('starter.controllers')
         $scope.listNotification = result;
         $scope.listNotification.forEach(function(noti){
           noti.showDate = moment(moment.tz(noti.date, moment.tz.guess())._d).format("hh:mm A DD/MM/YYYY");
+          noti.body_short = noti.body.replace(/<\/p>/g,' ').replace(/<(?:.|\n)*?>/gm, '');
+          // if(tmp.length > 150){
+          //       tmp = tmp.substring(0,tmp.lastIndexOf(" ", 140)) + "...";
+          // }
+          // noti.body_short=tmp;
         })
       }, function(error){
 
