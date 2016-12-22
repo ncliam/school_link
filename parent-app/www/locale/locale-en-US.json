@@ -117,5 +117,6 @@
 	"old_password_error": "Incorrect old password",
 	"info_user": "Profile",
 	"email": "Email",
-	"update_user_success": "Update successful"
+	"update_user_success": "Update successful",
+	"please choose contact":"Please choose contact"
 }

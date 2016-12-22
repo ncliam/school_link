@@ -145,3 +145,13 @@ ion-header-bar .button-icon{
 .oe_mail_cleaned{
     display: none;
 }
+
+i.icon {
+
+}
+i.expanded {
+    background-image: url('/img/collapsed.png');
+}
+i.collapsed {
+    background-image: url('/img/expanded.png');
+}
