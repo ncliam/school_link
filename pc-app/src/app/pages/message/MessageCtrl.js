@@ -208,6 +208,44 @@
           });
           if(existChannel){
             existChannel[1].users = newMessage.users;
+            var listUserId = [];
+            newMessage.users.forEach(function(user){
+              if(!$scope.listChatName[user.id]){
+                listUserId.push(user.id);
+              }
+            });
+            if(listUserId.length > 0){
+              $resUser.getChatNameByUserId({user_ids: listUserId}, function(resultChatName){
+                listUserId.forEach(function(user_id){
+                  $scope.listChatName[user_id] = resultChatName[user_id];
+                });
+                var title = "";
+                existChannel[1].users.forEach(function(user){
+                  if(user.id != $scope.user.uid){
+                    if(title.length === 0){
+                      title = title + $scope.listChatName[user.id];
+                    } else{
+                      title = title + ", " + $scope.listChatName[user.id];
+                    }
+                  }
+                });
+                existChannel.title = title;
+                $scope.chooseChannel($scope.listChannel[0]);
+              }, function(error){$Error.callbackError(error);});
+            } else{
+              var title = "";
+              existChannel[1].users.forEach(function(user){
+                if(user.id != $scope.user.uid){
+                  if(title.length === 0){
+                    title = title + $scope.listChatName[user.id];
+                  } else{
+                    title = title + ", " + $scope.listChatName[user.id];
+                  }
+                }
+              });
+              existChannel.title = title;
+              $scope.chooseChannel(existChannel);
+            }
           } else{
             $scope.listChannel.push([
               localStorageService.get("new_message")[0].channel,
@@ -217,6 +255,7 @@
                 uuid: newMessage.uuid
               }
             ]);
+
             _initChannelToDb($scope.listChannel);
           }
         }

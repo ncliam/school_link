@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function LoginCtrl($scope, $rootScope, $state, localStorageService, toastr, $translate, $account, $pouchDb, $Schoolarity, $SchoolSubject, $SchoolClassGroup, $Parent, $SchoolClass,
-    $School, $Student, $Teacher, $resUser, $Longpolling, $ResGroup, $Schedule, $Exam, $Imchat, $Error, MultipleViewsManager) {
+    $School, $Student, $Teacher, $resUser, $Longpolling, $ResGroup, $Schedule, $Exam, $Imchat, $Error, MultipleViewsManager, $Notification) {
     $rootScope.$pageLogin = true;
     $scope.user = {
       email: "school",
@@ -151,6 +151,7 @@
       $ResGroup.user = user;
       $Imchat.user = user;
       $Exam.user = user;
+      $Notification.user = user;
       $Longpolling.last = 0;
     };
 
