@@ -44,7 +44,7 @@ angular.module('starter.controllers')
             localStorageService.set("listChildren", $scope.listChildren);
             MultipleViewsManager.updateView("chooseChildren");
             _updateChildrenForUser(student.children, success[0].class_ids);
-            $state.go("app.message");
+            $state.go("app.notification");
           }, function(error){$Error.callbackError(error);})
         }
       })
