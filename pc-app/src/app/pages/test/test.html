@@ -30,9 +30,9 @@
     </div>
     <div style=" float: left; width: 100%;" class="horizontal-scroll">
       <div class="w100 fl black-muted-bg" ng-show="tab ==='bd'" >
-        <div class="fl w20 title-test" style="font-weight: bold">{{'student' | translate}}</div>
-        <div class="fl w30 title-test text-center" style="font-weight: bold">{{'mark_one' | translate}}</div>
-        <div class="fl w30 title-test text-center" style="font-weight: bold">{{'mark_two' | translate}}</div>
+        <div class="fl w30 title-test" style="font-weight: bold">{{'student' | translate}}</div>
+        <div class="fl w25 title-test text-center" style="font-weight: bold">{{'mark_one' | translate}}</div>
+        <div class="fl w25 title-test text-center" style="font-weight: bold">{{'mark_two' | translate}}</div>
         <div class="fl w10 title-test text-center" style="padding: 10px 15px;">
           <span ng-show="formData.semester_id == 1" style="font-weight: bold">{{listSemester[0].name}}</span>
           <span ng-show="formData.semester_id == 2" style="font-weight: bold">{{listSemester[1].name}}</span>
@@ -65,13 +65,13 @@
             </tr>
             <tr style="border-top: 1px solid gray;" ng-repeat="student in listStudent">
               <td style="padding: 0px !important;">
-                <div class="fl w20 br2 pb5" style="text-align: left; padding-left: 5px;">{{student.display_name}}</div>
-                <div class="fl w30 text-center br1 ">
+                <div class="fl w30 br2 pb5" style="text-align: left; padding-left: 5px; white-space: nowrap;">{{student.display_name}}</div>
+                <div class="fl w25 text-center br1 ">
                   <div class="fl w20 text-center br1 pb5" ng-repeat="mark in listMarkOne[student.id]">
                     <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" class="form-control input-mark">
                   </div>
                 </div>
-                <div class="fl w30 text-center br1">
+                <div class="fl w25 text-center br1">
                   <div class="fl w20 text-center br1 pb5" ng-repeat="mark in listMarkTwo[student.id]">
                     <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" class="form-control input-mark">
                   </div>
