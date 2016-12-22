@@ -17,7 +17,7 @@
         templateUrl: 'app/pages/notification/notification.html',
         title: 'menu.setting.notification',
         sidebarMeta: {
-          order: 50,
+          order: 0,
           icon: 'ion-android-notifications',
           permission: 2
         },

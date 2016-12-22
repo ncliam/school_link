@@ -17,7 +17,7 @@
           title: 'Tin nhắn',
           sidebarMeta: {
             icon: 'ion-chatboxes',
-            order: 0,
+            order: 1,
             permission: 1
           },
           controller: "MessageCtrl",
