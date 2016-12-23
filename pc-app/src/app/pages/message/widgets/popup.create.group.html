@@ -76,13 +76,13 @@
           <td><input  ng-change="changeCheckUser()" type="checkbox" ng-model="parent.checked" ng-disabled="!parent.parent_user_id"></td>
           <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.name}}</td>
           <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.mobile}}</td>
-          <td style="text-align: left" ng-click="chooseParent(parent)">{{listStudent[parent.children[0]][0].name}}</td>
+          <td style="text-align: left" ng-click="chooseParent(parent)"><span ng-repeat="children in parent.children">{{listStudent[children][0].name}}</span></td>
         </tr>
         <tr ng-if="tab =='group'" ng-disabled="!parent.parent_user_id" ng-click="adduserForChannel(parent)" ng-repeat="parent in listParentGroup">
           <td><input ng-change="changeCheckUser()" type="checkbox" ng-model="parent.checked" ng-disabled="!parent.parent_user_id"></td>
           <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.name}}</td>
           <td style="text-align: left" ng-click="chooseParent(parent)">{{parent.mobile}}</td>
-          <td style="text-align: left" ng-click="chooseParent(parent)">{{listStudent[parent.children[0]][0].name}}</td>
+          <td style="text-align: left" ng-click="chooseParent(parent)"><span ng-repeat="children in parent.children">{{listStudent[children][0].name}}</span></td>
         </tr>
         <!-- <tr ng-click="addUser(user)" ng-repeat="user in listParentGroup">
           <td style="text-align: left">{{user.last_name}} {{user.name}}</td>
