@@ -21,11 +21,11 @@
         <label for="inputFirstName">
           {{'semester' | translate}}:
         </label>
-<!--         <select class="form-control" ng-change="searchSubject()" ng-options="semester.id as semester.name for semester in listSemester" ng-model="formData.semester_id" ng-required="true"></select>
- -->
-        <select class="form-control" ng-change="searchSubject()" ng-model="formData.semester_id" ng-required="true">        
+        <select class="form-control" ng-change="searchSubject()" ng-options="semester.id as semester.name for semester in listSemester" ng-model="formData.semester_id" ng-required="true"></select>
+
+        <!-- <select class="form-control" ng-change="searchSubject()" ng-model="formData.semester_id" ng-required="true">        
           <option ng-repeat="semester in listSemester" value="{{semester.id}}">{{semester.name | translate}}</option>
-        </select>
+        </select> -->
       </div>
       <div ng-show="tab ==='bd'" class="form-group col-xlg-4 col-lg-4  col-md-4 col-sm-4 col-xs-12" style="margin-bottom: 0px;">
         <label for="inputFirstName">{{'subject' | translate}}:</label>
