@@ -94,7 +94,7 @@
                           <p>{{'children' | translate}}:</p>
                         </div>
                         <div class="col col-50">
-                          <p style="float: left;" ng-repeat="subItem in item.children">{{subItem.name}}<span ng-hide="$last">,</span></p>
+                          <p style="float: left;" ng-repeat="subItem in item.children">{{listChildren[subItem].name}}<span ng-hide="$last">,</span></p>
                         </div>
                       </div>
                       <div class="row">
