@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function ScheduleDetailCtrl($scope, $stateParams, localStorageService, $rootScope, $state, $uibModal, toastr, $Student, $Parent, $SchoolClass, $Teacher, 
-    $SchoolSubject, $time, $Schedule, $Error, MultipleViewsManager) {
+    $SchoolSubject, $time, $Schedule, $Error, MultipleViewsManager, $translate) {
     localStorageService.get("chooseSchedule") ? $scope.schedule = localStorageService.get("chooseSchedule") :  $scope.schedule = {};
     $scope.listClass = [];
     $scope.listTeacher = [];
@@ -29,7 +29,7 @@
       $scope.show.list = true;
       MultipleViewsManager.updateView("reload_list_schedule");
     }
-    $scope.listSemester = [{id: 1, value:"first", name:"first_semester"}, {id: 2, value:"second", name:"second_semester"}];
+    $scope.listSemester = [{id: 1, value:"first", name:$translate.instant('first_semester')}, {id: 2, value:"second", name:$translate.instant('second_semester')}];
 
     $scope.weekDay = [
       {
@@ -271,6 +271,7 @@
       $scope.schedule.semester_id == 1 ? $scope.schedule.semester = "first" : $scope.schedule.semester = "second";
       $Schedule.createSchedule($scope.schedule, function(result){
         toastr.success("Tạo thành công", "", {});
+        $scope.backList();
       }, function(error){$Error.callbackError(error);})
     };
 
@@ -279,13 +280,15 @@
       $scope.listTietHoc.forEach(function(tiethoc){
         $scope.weekDay.forEach(function(day){
           if(tiethoc[day.value].id){
-            if(tiethoc[day.value].delete){
-              $scope.schedule.lines.push([2, tiethoc[day.value].id, false]);
-            } else{
-              if(tiethoc[day.value].edit){
-                $scope.schedule.lines.push([1, tiethoc[day.value].id, tiethoc[day.value]]);
+            if(typeof(tiethoc[day.value].id) != "boolean"){
+              if(tiethoc[day.value].delete){
+                $scope.schedule.lines.push([2, tiethoc[day.value].id, false]);
               } else{
-                $scope.schedule.lines.push([4, tiethoc[day.value].id, false]);
+                if(tiethoc[day.value].edit){
+                  $scope.schedule.lines.push([1, tiethoc[day.value].id, tiethoc[day.value]]);
+                } else{
+                  $scope.schedule.lines.push([4, tiethoc[day.value].id, false]);
+                }
               }
             }
           } else{
@@ -296,6 +299,15 @@
         });
       });
       $Schedule.updateSchedule($scope.schedule, function(result){
+        $scope.listTietHoc.forEach(function(tiethoc){
+          $scope.weekDay.forEach(function(day){
+            if(!tiethoc[day.value].id){
+              if(tiethoc[day.value].subject_id && tiethoc[day.value].teacher_id){
+                tiethoc[day.value].id = true;
+              }
+            }
+          });
+        });
         toastr.success("Cập nhật thành công", "", {});
       }, function(error){$Error.callbackError(error);});
     }

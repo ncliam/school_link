@@ -22,9 +22,7 @@
       <div class="col-sm-4">
         <div class="form-group">
           <label for="inputLastName" style="font-weight: bold;">{{'semester' | translate}}</label>
-          <select style="float: right; width: 75%" class="form-control" ng-required="true">
-            <option ng-repeat="semester in listSemester" value="{{semester.id}}">{{semester.name | translate}}</option>
-          </select>
+          <select style="float: right; width: 75%" class="form-control" ng-options="semester.id as semester.name for semester in listSemester" ng-model="schedule.semester_id" ng-required="true"></select>
         </div>
       </div>
     </div>
