@@ -61,6 +61,7 @@ angular.module('starter.controllers')
   var _updateChildrenForUser = function(children){
     $pouchDb.getDocById("res.user", userInfo.username).then(function(userLc){
       userLc.data.setting = $scope.setting;
+      localStorageService.set("setting", userLc.data.setting);
       $pouchDb.updateDoc("res.user", userLc).then(function(result){
       });
     });
