@@ -19,7 +19,7 @@
         sidebarMeta: {
           order: 0,
           icon: 'ion-android-notifications',
-          permission: 2
+          permission: 1
         },
         controller: "NotificationCtrl"
       })
