@@ -13,11 +13,11 @@
       <a uib-dropdown-toggle class="profile-toggle-link">
         <img ng-src="{{::( 'logo' | profilePicture )}}">
       </a>
-      <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
+      <ul  class="top-dropdown-menu profile-dropdown" style="width: auto" uib-dropdown-menu>
         <li><i class="dropdown-arr"></i></li>
-        <li><a href ng-click="openChangePassword()"><i class="fa fa-user"></i>Đổi mật khẩu</a></li>
+        <li><a href ng-click="openChangePassword()"><i class="fa fa-user"></i>{{"change_password"|translate}}</a></li>
        <!-- <li><a href><i class="fa fa-cog"></i>Settings</a></li> -->
-        <li><a href ng-click="logout()" class="signout"><i class="fa fa-power-off"></i>Đăng xuất</a></li>
+        <li><a href ng-click="logout()" class="signout"><i class="fa fa-power-off"></i>{{"logout"|translate}}</a></li>
       </ul>
     </div>
     <!-- <msg-center></msg-center> -->

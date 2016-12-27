@@ -28,6 +28,13 @@ gulp serve
 # build de chay tren PC (exe)
 gulp buildnw
 
+#build app PC tren Mobile
+npm install -g ionic
+npm install -g cordova
+gulp buildnw
+cordova platform add android
+cordova plugin add cordova-plugin-whitelist
+ionic build android, ios
 
 
 # mobile app ios

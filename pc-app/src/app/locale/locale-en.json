@@ -134,5 +134,10 @@
 	"sat":"Saturday",
 	"sun":"Sunday",
 	"first_semester":"First semester",
-	"second_semester":"Second semester"
+	"second_semester":"Second semester",
+	"change_password":"Change Password",
+	"logout":"Logout",
+	"old_password":"Old password",
+	"new_password": "New password",
+	"confirm_new_pass": "Confirmar nueva contraseña"
 }

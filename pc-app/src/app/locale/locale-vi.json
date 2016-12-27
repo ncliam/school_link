@@ -136,5 +136,10 @@
 	"sat":"Thứ 7",
 	"sun":"Chủ nhật",
 	"first_semester":"Học kỳ 1",
-	"second_semester":"Học kỳ 2"
+	"second_semester":"Học kỳ 2",
+	"change_password":"Đổi mật khẩu",
+	"logout":"Đăng xuất",
+	"old_password":"Mật khẩu cũ",
+	"new_password": "Mật khẩu mới",
+	"confirm_new_pass": "Xác nhận mật khẩu mới"
 }

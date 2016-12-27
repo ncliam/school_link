@@ -47,7 +47,7 @@
         </div>
       </div>
       <div ng-show="tab ==='hk'"  class="w100 fl black-muted-bg" >
-        <div class="fl w20 title-test " style="font-weight: bold">{{'student' | translate}}</div>
+        <div class="fl w30 title-test " style="font-weight: bold">{{'student' | translate}}</div>
         <div class="fl w10 text-center" style="padding: 10px 15px; font-weight: bold">
           {{'mark_hl' | translate}}
         </div>
@@ -101,7 +101,7 @@
             </tr>
             <tr style="border-top: 1px solid gray;" ng-repeat="student in listStudent">
               <td style="padding: 0px !important;">
-                <div class="fl w20 br2 pb5" style="text-align: left; padding-left: 5px;">{{student.display_name}}</div>
+                <div class="fl w30 br2 pb5" style="text-align: left; padding-left: 5px;">{{student.display_name}}</div>
                 <div ng-show="tab ==='bd'" class="fl w25 text-center br1 ">
                   <div class="fl w20 text-center br1 pb5" ng-repeat="mark in listMarkOne[student.id]">
                     <input ng-disabled="!editSave" ng-change="mark.edit = true" ng-model="mark.mark" type="number" step="0.1" class="form-control input-mark">
