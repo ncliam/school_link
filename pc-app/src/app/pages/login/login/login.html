@@ -30,8 +30,8 @@
       </div>
       <div ng-show="form ==='forget'">
         <div class="form-group">
-          <label for="inputEmail3" style="margin: 0px;">Số điện thoại:</label>
-          <input type="text" class="form-control" ng-model="user.mobile" placeholder="Số điện thoại">
+          <label for="inputEmail3" style="margin: 0px;">{{'mobile' | translate}}:</label>
+          <input type="text" class="form-control" ng-model="user.mobile" placeholder="{{'mobile' | translate}}">
         </div>
         <div class="form-group" style="margin-top: 30px;">
           <div class="w25 fl">&nbsp;</div>
@@ -43,17 +43,18 @@
       </div>
       <div ng-show="form ==='confirm'">
         <div class="form-group">
+          <label for="inputEmail3" style="margin: 0px;">{{'code_confirm' | translate}}:</label>
+          <input type="text" class="form-control" ng-model="user.code">
+        </div>
+        <div class="form-group">
           <label for="inputEmail3" style="margin: 0px;">{{'new_password' | translate}}:</label>
           <input type="password" class="form-control" ng-model="user.password_register">
         </div>
         <div class="form-group">
-          <label for="inputEmail3" style="margin: 0px;">{{'button_confirm' | translate}:</label>
+          <label for="inputEmail3" style="margin: 0px;">{{'confirm_new_pass' | translate}}:</label>
           <input type="password" class="form-control" ng-model="user.passwordConfirm">
         </div>
-        <div class="form-group">
-          <label for="inputEmail3" style="margin: 0px;">{{'code_confirm' | translate}:</label>
-          <input type="text" class="form-control" ng-model="user.code">
-        </div>
+
         <div class="form-group" style="margin-top: 30px;">
           <div class="w25 fl">&nbsp;</div>
           <div class="w75 fl">

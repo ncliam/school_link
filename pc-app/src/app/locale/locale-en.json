@@ -139,5 +139,6 @@
 	"logout":"Logout",
 	"old_password":"Old password",
 	"new_password": "New password",
-	"confirm_new_pass": "Confirmar nueva contraseña"
+	"confirm_new_pass": "Confirm new password",
+	"mobile":"Mobile"
 }
