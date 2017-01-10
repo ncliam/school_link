@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers')
 .controller('MessageCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $Imchat, localStorageService, $rootScope,
-  $time, MultipleViewsManager, $resUser, $state, $Error, $ionicSideMenuDelegate, $ionicModal, SchoolService, $location, $SchoolClass, $translate) {
+  $time, MultipleViewsManager, $resUser, $state, $Error, $ionicSideMenuDelegate, $ionicModal, SchoolService, $location, $SchoolClass, $translate, $pouchDb) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -61,7 +61,6 @@ angular.module('starter.controllers')
     };
 
     var _init = function(){
-      
       if($scope.add_new_channel){
         $state.go("app.channel");
       } else{
@@ -98,6 +97,7 @@ angular.module('starter.controllers')
                 $scope.listChannelLocal[channel[1].uuid] = {};
               }
             });
+            _initChannelLocalDb($scope.listChannel, null);
              _saveChannelLocal($scope.listChannelLocal);
             $scope.listChannel.forEach(function(channel){
               $Imchat.getHistoryByUuid({uuid:channel[1].uuid}, function(history){
@@ -136,9 +136,67 @@ angular.module('starter.controllers')
           $Error.callbackError(error);
         })
       }
-
     };
-    _init();
+
+    var _initChannelLocalDb = function(listChannel, channelFirst){
+      $pouchDb.getAllDocs("channels").then(function(allChannelLc){
+        var newChannels = [];
+        var lengtDb = allChannelLc.length +1;
+        var count = 0;
+        allChannelLc.forEach(function(channelLc){
+          count++;
+          if(!channelLc.index){
+            channelLc.index = count;
+          }
+        })
+        listChannel.forEach(function(channel){
+          lengtDb++;
+          var existChannel = _.find(allChannelLc, function(channelLc){
+            return channelLc._id === channel[1].uuid;
+          });
+          if(!existChannel){
+            newChannels.push({
+              _id: channel[1].uuid,
+              channel: channel,
+              listMessage: [],
+              index: lengtDb
+            })
+            channel.index = lengtDb;
+          } else{
+            channel.index = existChannel.index;
+          }
+        });
+        $scope.listChannel = _.sortBy(listChannel, function(channel){
+          return channel.index;
+        });
+        $pouchDb.bulkDocs("channels", newChannels).then(function(result){
+          $pouchDb.getAllDocs("channels").then(function(allChannelLcDb){
+            if(channelFirst){
+              _updateLocationChannelLocal(channelFirst);
+            }
+          })
+        });
+      });
+    };
+
+    var _updateLocationChannelLocal = function(channel){
+      $pouchDb.getAllDocs("channels").then(function(allChannelLc){
+        allChannelLc.forEach(function(channelLc){
+          if(channelLc._id === channel[1].uuid){
+            channelLc.index =1;
+          } else{
+            channelLc.index++;
+          }
+        });
+        $pouchDb.bulkDocs("channels", allChannelLc).then(function(result){
+          /*$pouchDb.getAllDocs("channels").then(function(allChannelLcDb){
+            listChannelLocalDatabase = allChannelLcDb;
+          })*/
+        });
+      });
+    };
+
+     _init();
 
     MultipleViewsManager.updated('add_new_channel', function (data) {
       var user = localStorageService.get("user_add_channel");
@@ -186,6 +244,12 @@ angular.module('starter.controllers')
              }, function(error){
               $Error.callbackError(error);
              });
+          } else{
+            $scope.listChannel = _.reject($scope.listChannel, function(channel){
+              return channel[1].uuid === existChannel[1].uuid;
+            });
+            $scope.listChannel.unshift(existChannel);
+            _updateLocationChannelLocal(existChannel);
           }
           _saveChannelLocal($scope.listChannelLocal);
         } else if(newMessage.type === "meta"){
@@ -210,7 +274,8 @@ angular.module('starter.controllers')
                 uuid: newMessage.uuid
               }
             ]
-            $scope.listChannel.push(existChannel);
+            $scope.listChannel.unshift(existChannel);
+            _initChannelLocalDb($scope.listChannel, existChannel);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }
           if(existChannel[1].users.length ===2){

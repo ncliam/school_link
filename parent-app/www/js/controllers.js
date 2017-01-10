@@ -121,6 +121,7 @@ angular.module('starter.controllers', [])
         localStorageService.remove("partner_user");
         localStorageService.set("user", $scope.user);
         _updateUserLc();
+        $pouchDb.destroyDatabase("channels");
         $LoginService.logout({}, function(result){
         }, function(error){});
         $state.go("app.login");
@@ -167,7 +168,7 @@ angular.module('starter.controllers', [])
                 localStorageService.set("class", success[0].class_ids);
                 _updateChildrenForUser(student.children, success[0].class_ids);
 
-                $state.go("app.message");
+                $state.go("app.notification");
               }, function(error){})
             }
           })

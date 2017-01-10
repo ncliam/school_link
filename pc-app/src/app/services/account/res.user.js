@@ -136,7 +136,7 @@
         email:info.email,
         login:info.login,
         name:info.name,
-        password : "123456"
+        password : "abc123"
       };
       args["in_group_" + accessTeacher.id] = true;
       var path ="/api/callKw";

@@ -65,7 +65,7 @@
           return channel[1].type || channel[1].state === "folded";
         });
         if($scope.listChannel.length > 0){
-          _initChannelToDb($scope.listChannel);
+          _initChannelToDb($scope.listChannel, null);
           var listUserId = [];
           $scope.listChannel.forEach(function(channel){
             channel[1].users.forEach(function(user){
@@ -99,10 +99,19 @@
   	};
   	_init();
 
-    var _initChannelToDb = function(listChannel){
+    var _initChannelToDb = function(listChannel, channelFirst){
       $pouchDb.getAllDocs(channelDataName).then(function(allChannelLc){
         var newChannels = [];
+        var lengtDb = allChannelLc.length +1;
+        var count = 0;
+        allChannelLc.forEach(function(channelLc){
+          count++;
+          if(!channelLc.index){
+            channelLc.index = count;
+          }
+        })
         listChannel.forEach(function(channel){
+          lengtDb++;
           var existChannel = _.find(allChannelLc, function(channelLc){
             return channelLc._id === channel[1].uuid;
           });
@@ -110,11 +119,38 @@
             newChannels.push({
               _id: channel[1].uuid,
               channel: channel,
-              listMessage: []
+              listMessage: [],
+              index: lengtDb
             })
+            channel.index = lengtDb;
+          } else{
+            channel.index = existChannel.index;
           }
         });
+        $scope.listChannel = _.sortBy(listChannel, function(channel){
+          return channel.index;
+        });
         $pouchDb.bulkDocs(channelDataName, newChannels).then(function(result){
+          $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
+            listChannelLocalDatabase = allChannelLcDb;
+            if(channelFirst){
+              _updateLocationChannelLocal(channelFirst);
+            }
+          })
+        });
+      });
+    };
+
+    var _updateLocationChannelLocal = function(channel){
+      $pouchDb.getAllDocs(channelDataName).then(function(allChannelLc){
+        allChannelLc.forEach(function(channelLc){
+          if(channelLc._id === channel[1].uuid){
+            channelLc.index =1;
+          } else{
+            channelLc.index++;
+          }
+        });
+        $pouchDb.bulkDocs(channelDataName, allChannelLc).then(function(result){
           $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
             listChannelLocalDatabase = allChannelLcDb;
           })
@@ -128,11 +164,11 @@
           chooseChannelLocalDatabase._rev = result.rev;
         });
       }
-    }
+    };
 
     var _saveChannelLocal = function(listChannel){
-      localStorageService.set("channels", listChannel)
-    }
+      localStorageService.set("channels", listChannel);
+    };
 
     // listen event new message
     MultipleViewsManager.updated('new_message', function (data) {
@@ -173,6 +209,12 @@
              }, function(error){
                 $Error.callbackError(error);
              });
+          } else{
+            $scope.listChannel = _.reject($scope.listChannel, function(channel){
+              return channel[1].uuid === existChannel[1].uuid;
+            });
+            $scope.listChannel.unshift(existChannel);
+            _updateLocationChannelLocal(existChannel);
           }
           _saveChannelLocal($scope.listChannelLocal);
         } else if(newMessage.type === "meta"){
@@ -247,16 +289,17 @@
               $scope.chooseChannel(existChannel);
             }
           } else{
-            $scope.listChannel.push([
+            var newChannel = [
               localStorageService.get("new_message")[0].channel,
               {
                 state: "open",
                 users: newMessage.users,
                 uuid: newMessage.uuid
               }
-            ]);
+            ]
+            $scope.listChannel.unshift(newChannel);
 
-            _initChannelToDb($scope.listChannel);
+            _initChannelToDb($scope.listChannel, newChannel);
           }
         }
       }

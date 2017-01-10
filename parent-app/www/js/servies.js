@@ -9,9 +9,9 @@
   ])
   .run(runFunction)
   .config(config)
-  .constant('SERVICE_API_URL', 'http://117.4.242.84:3003/api/callKw')
-  .constant('SERVICE_API_URL_LOGIN', 'http://117.4.242.84:3003/api/login')
-  .constant('SERVICE_API_URL_SEARCH', 'http://117.4.242.84:3003/api/search');
+  .constant('SERVICE_API_URL', 'http://192.168.100.5:3003/api/callKw')
+  .constant('SERVICE_API_URL_LOGIN', 'http://192.168.100.5:3003/api/login')
+  .constant('SERVICE_API_URL_SEARCH', 'http://192.168.100.5:3003/api/search');
   function runFunction($http){
     /*var user= {
       username: "admin",

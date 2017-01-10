@@ -10,6 +10,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 .run(function($ionicPlatform, $rootScope, localStorageService, $state, $Longpolling, $pouchDb, MultipleViewsManager, $translate, $ionicHistory) {
     $ionicPlatform.ready(function() {
         $pouchDb.initDB("res.user");
+        $pouchDb.initDB("channels");
         //$pouchDb.destroyDatabase("res.user");
         localStorageService.remove("doPoll");
         $pouchDb.getAllDocs("res.user").then(function(allUser){

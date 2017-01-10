@@ -2,7 +2,7 @@
   <div class="panel-heading tac" style="height: auto;">
     <a style="color: #ffffff; margin-right: 8px; float: left;" ng-click="backList()"><i style="font-size: 20px;" class="ion-ios-undo"></i></a>
       <label style="color: #fff;margin: 0px;">{{'new_notification' | translate}}</label>
-    <a style="color: #ffffff; margin-right: 8px; float: right; cursor: pointer; margin-top: -5px;" ng-click="createNewNotification()"><i style="font-size: 24px;" class="ion-paper-airplane"></i></a>
+   <!--  <a style="color: #ffffff; margin-right: 8px; float: right; cursor: pointer; margin-top: -5px;" ng-click="createNewNotification()"><i style="font-size: 24px;" class="ion-paper-airplane"></i></a> -->
   </div>
   <div class="panel-body" style="min-height: 600px;">
   	<div class="row">
@@ -35,5 +35,6 @@
 		    <text-angular name="htmlcontent" id="htmlcontent" ta-target-toolbars='toolbarMain,toolbarFooter' ng-model="newNotification.body"></text-angular>
 		  </div>
 		</div>
+    <button style="background: #0FAFE4; border-color:#0FAFE4; float: right;margin-top: 10px;" type="button" class="btn btn-success btn-with-icon" ng-click="createNewNotification()">{{'button_send' | translate}}</button>
   </div>
 </div>

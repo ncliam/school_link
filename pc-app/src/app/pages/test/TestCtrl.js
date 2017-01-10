@@ -264,6 +264,8 @@
             $Error.callbackError(error);
           })
         }
+      } else{
+        $scope.searchExam();
       }
     }
 

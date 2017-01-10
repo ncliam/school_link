@@ -47,6 +47,16 @@
       encodingVisible: false,
     };
 
+    $scope.read = function (workbook) {
+      /* DO SOMETHING WITH workbook HERE */
+      console.log(workbook);
+    }
+
+    $scope.error = function (e) {
+      /* DO SOMETHING WHEN ERROR IS THROWN */
+      console.log(e);
+    }
+
     var _init = function(){
       $Schoolarity.getAllSchoolarity({}, function(result){
         $scope.listSchoolarity  = result.records;

@@ -142,5 +142,6 @@
 	"old_password":"Mật khẩu cũ",
 	"new_password": "Mật khẩu mới",
 	"confirm_new_pass": "Xác nhận mật khẩu mới",
-	"mobile":"Số điện thoại"
+	"mobile":"Số điện thoại",
+	"button_send":"Gửi"
 }

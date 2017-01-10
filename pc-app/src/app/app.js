@@ -25,6 +25,7 @@ angular.module('BlurAdmin', [
   'angularSpinner',
   'ngCsvImport',
   'multipleSelect',
+  'angular-js-xlsx',
 
   'BlurAdmin.theme',
   'BlurAdmin.pages',

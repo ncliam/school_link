@@ -74,7 +74,9 @@
     "angular-spinner": "^0.8.1",
     "angular-csv-import": "^0.0.37",
     "angularMultipleSelect": "angular-multiple-select#^1.1.2",
-    "moment-timezone": "^0.5.10"
+    "moment-timezone": "^0.5.10",
+    "js-xlsx": "^0.8.0",
+    "angular-js-xlsx": "^0.0.2"
   },
   "resolutions": {
     "angular": "~1.4.8"

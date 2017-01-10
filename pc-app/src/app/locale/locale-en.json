@@ -140,5 +140,6 @@
 	"old_password":"Old password",
 	"new_password": "New password",
 	"confirm_new_pass": "Confirm new password",
-	"mobile":"Mobile"
+	"mobile":"Mobile",
+	"button_send":"Send"
 }

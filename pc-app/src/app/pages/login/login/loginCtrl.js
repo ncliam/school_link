@@ -108,7 +108,6 @@
       $pouchDb.initDB("res.user");
       var channelDataName = "channel" + userLogin.uid;
       $pouchDb.initDB(channelDataName);
-
       _initDatabaseUser();
     };
 
