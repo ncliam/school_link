@@ -13,7 +13,7 @@
   	var _self = this;
     //_self.host = "http://52.24.18.179";
     //_self.host = "http://192.168.1.97";
-    _self.host = "http://192.168.100.5";
+    _self.host = "http://117.4.242.84";
     _self.port= "3003";
     this.postRequest = function(path, param, callbackSuccess, callbackError){
       var url = _self.host + ":" + _self.port + path;
