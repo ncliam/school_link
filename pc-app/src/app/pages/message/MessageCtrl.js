@@ -218,30 +218,32 @@
           }
           _saveChannelLocal($scope.listChannelLocal);
         } else if(newMessage.type === "meta"){
-         /* $Imchat.updateState({uuid: newMessage.uuid}, function(update){
-            $scope.listChannel.push([
-              $scope.listChannel[0][0],
-              {
-                status: "open",
-                users: newMessage.users,
-                uuid: newMessage.uuid
-              }
-            ])
-          }, function(error){})*/
+          var existChannel = _.find($scope.listChannel, function(channel){
+            return channel[1].uuid === newMessage.to_id[1];
+          });
+          if(existChannel){
+            $scope.listChannel = _.reject($scope.listChannel, function(channel){
+              return channel[1].uuid === existChannel[1].uuid;
+            });
+            $scope.listChannel.unshift(existChannel);
+            _updateLocationChannelLocal(existChannel);
+          }
         } else{
           
         }
       } else{
         if(!newMessage.state){
           $Imchat.updateState({uuid: newMessage.uuid}, function(update){
-            $scope.listChannel.push([
+            var newChannel = [
               localStorageService.get("new_message")[0].channel,
               {
                 state: "open",
                 users: newMessage.users,
                 uuid: newMessage.uuid
               }
-            ]);
+            ];
+            $scope.listChannel.unshift(newChannel);
+            _updateLocationChannelLocal(newChannel);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }, function(error){$Error.callbackError(error);});
         } else if(newMessage.state === "open"){
