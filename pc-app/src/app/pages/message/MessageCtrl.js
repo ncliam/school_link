@@ -91,12 +91,51 @@
             });
             $scope.chooseChannel($scope.listChannel[0]);
           }, function(error){$Error.callbackError(error);});
+          $scope.listChannel.forEach(function(channel){
+            if(!$scope.listChannelLocal[channel[1].uuid]){
+              $scope.listChannelLocal[channel[1].uuid] = {};
+            }
+          });
+          _saveChannelLocal($scope.listChannelLocal);
+          $scope.listChannel.forEach(function(channel){
+            $Imchat.getHistoryByUuid({uuid:channel[1].uuid}, function(history){
+              $scope.listMessage = history.reverse();
+              if($scope.listMessage.length > 0){
+                channel.last_message = {
+                  text: $scope.listMessage[$scope.listMessage.length -1].message,
+                  date: $scope.listMessage[$scope.listMessage.length -1].showDate,
+                  sort_date: $scope.listMessage[$scope.listMessage.length -1].create_date,
+                };
+                if(channel.last_message.text.length > 40){
+                  channel.last_message.text =channel.last_message.text.substring(0, 37) + "...";
+                }
+                $scope.listChannelLocal[channel[1].uuid].last_message = channel.last_message;
+              }
+              _saveChannelLocal($scope.listChannelLocal);
+              _sortListChannelByDate();
+            },function(error){
+
+            });
+          });
         }
       }, function(error){
         $Error.callbackError(error);
       });
      
   	};
+    var _sortListChannelByDate = function(){
+      var flag = true;
+      $scope.listChannel.forEach(function(channel){
+        if(!channel.last_message || !channel.last_message.sort_date){
+          flag = false;
+        }
+      });
+      if(flag){
+        $scope.listChannel = _.sortBy($scope.listChannel, function(channel){
+          return -(new Date(channel.last_message.sort_date));
+        });
+      }
+    }
   	_init();
 
     var _initChannelToDb = function(listChannel, channelFirst){
@@ -131,26 +170,6 @@
           return channel.index;
         });
         $pouchDb.bulkDocs(channelDataName, newChannels).then(function(result){
-          $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
-            listChannelLocalDatabase = allChannelLcDb;
-            if(channelFirst){
-              _updateLocationChannelLocal(channelFirst);
-            }
-          })
-        });
-      });
-    };
-
-    var _updateLocationChannelLocal = function(channel){
-      $pouchDb.getAllDocs(channelDataName).then(function(allChannelLc){
-        allChannelLc.forEach(function(channelLc){
-          if(channelLc._id === channel[1].uuid){
-            channelLc.index =1;
-          } else{
-            channelLc.index++;
-          }
-        });
-        $pouchDb.bulkDocs(channelDataName, allChannelLc).then(function(result){
           $pouchDb.getAllDocs(channelDataName).then(function(allChannelLcDb){
             listChannelLocalDatabase = allChannelLcDb;
           })
@@ -214,7 +233,6 @@
               return channel[1].uuid === existChannel[1].uuid;
             });
             $scope.listChannel.unshift(existChannel);
-            _updateLocationChannelLocal(existChannel);
           }
           _saveChannelLocal($scope.listChannelLocal);
         } else if(newMessage.type === "meta"){
@@ -226,7 +244,6 @@
               return channel[1].uuid === existChannel[1].uuid;
             });
             $scope.listChannel.unshift(existChannel);
-            _updateLocationChannelLocal(existChannel);
           }
         } else{
           
@@ -243,7 +260,6 @@
               }
             ];
             $scope.listChannel.unshift(newChannel);
-            _updateLocationChannelLocal(newChannel);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }, function(error){$Error.callbackError(error);});
         } else if(newMessage.state === "open"){

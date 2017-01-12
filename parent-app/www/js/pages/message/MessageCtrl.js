@@ -97,7 +97,6 @@ angular.module('starter.controllers')
                 $scope.listChannelLocal[channel[1].uuid] = {};
               }
             });
-            _initChannelLocalDb($scope.listChannel, null);
              _saveChannelLocal($scope.listChannelLocal);
             $scope.listChannel.forEach(function(channel){
               $Imchat.getHistoryByUuid({uuid:channel[1].uuid}, function(history){
@@ -115,6 +114,7 @@ angular.module('starter.controllers')
                   channel.last_message = {
                     text: $scope.listMessage[$scope.listMessage.length -1].message,
                     date: $scope.listMessage[$scope.listMessage.length -1].showDate,
+                    sort_date: $scope.listMessage[$scope.listMessage.length -1].create_date,
                   };
                   if(channel.last_message.text.length > 40){
                     channel.last_message.text =channel.last_message.text.substring(0, 37) + "...";
@@ -122,6 +122,7 @@ angular.module('starter.controllers')
                   $scope.listChannelLocal[channel[1].uuid].last_message = channel.last_message;
                 }
                 _saveChannelLocal($scope.listChannelLocal);
+                _sortListChannelByDate();
               },function(error){
 
               })
@@ -137,8 +138,21 @@ angular.module('starter.controllers')
         })
       }
     };
+    var _sortListChannelByDate = function(){
+      var flag = true;
+      $scope.listChannel.forEach(function(channel){
+        if(!channel.last_message || !channel.last_message.sort_date){
+          flag = false;
+        }
+      });
+      if(flag){
+        $scope.listChannel = _.sortBy($scope.listChannel, function(channel){
+          return -(new Date(channel.last_message.sort_date));
+        });
+      }
+    }
 
-    var _initChannelLocalDb = function(listChannel, channelFirst){
+    var _initChannelLocalDb = function(listChannel){
       $pouchDb.getAllDocs("channels").then(function(allChannelLc){
         var newChannels = [];
         var lengtDb = allChannelLc.length +1;
@@ -171,9 +185,9 @@ angular.module('starter.controllers')
         });
         $pouchDb.bulkDocs("channels", newChannels).then(function(result){
           $pouchDb.getAllDocs("channels").then(function(allChannelLcDb){
-            if(channelFirst){
+           /* if(channelFirst){
               _updateLocationChannelLocal(channelFirst);
-            }
+            }*/
           })
         });
       });
@@ -249,7 +263,7 @@ angular.module('starter.controllers')
               return channel[1].uuid === existChannel[1].uuid;
             });
             $scope.listChannel.unshift(existChannel);
-            _updateLocationChannelLocal(existChannel);
+            //_updateLocationChannelLocal(existChannel);
           }
           _saveChannelLocal($scope.listChannelLocal);
         } else if(newMessage.type === "meta"){
@@ -275,7 +289,6 @@ angular.module('starter.controllers')
               }
             ]
             $scope.listChannel.unshift(existChannel);
-            _initChannelLocalDb($scope.listChannel, existChannel);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }
           if(existChannel[1].users.length ===2){
