@@ -291,9 +291,9 @@ angular.module('starter.controllers')
             $scope.listChannel.unshift(existChannel);
             listChannelForSearch = JSON.parse(JSON.stringify($scope.listChannel));
           }
-          if(existChannel[1].users.length ===2){
+          /*if(existChannel[1].users.length ===2){
             $scope.chooseChannel(existChannel);
-          }
+          }*/
           localStorageService.remove("user_add_channel");
         } else if(newMessage.state ==="close"){
           _updateStateAndAddToChannel(newMessage, newMessage.users);
