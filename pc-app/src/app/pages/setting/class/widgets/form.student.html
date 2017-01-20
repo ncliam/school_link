@@ -3,20 +3,20 @@
 	  <i style="color: #000000;" class="ion-ios-search-strong" ng-click="startSearch()"></i>
 	  <input ng-model="keySearch.value" ng-keydown="$event.which === 13 && startSearch()" id="searchInput" type="text" placeholder="{{'search.student' | translate}}" style="width: 90%; color: #000000;">
 	</div>
-	<div>
-      <ng-csv-import 
-        class="import"
-        content="csv.content"
-        header="csv.header" 
-        header-visible="csv.headerVisible" 
-        separator="csv.separator"
-        separator-visible="csv.separatorVisible"
-        result="csv.result"
-        encoding="csv.encoding"
-        encoding-visible="csv.encodingVisible"
-        callback="chooseFile" style="margin-left: 20px; float: left"></ng-csv-import>
-    </div>
-    <js-xls onread="read" onerror="error"></js-xls>
+	<!-- <div>
+	      <ng-csv-import 
+	        class="import"
+	        content="csv.content"
+	        header="csv.header" 
+	        header-visible="csv.headerVisible" 
+	        separator="csv.separator"
+	        separator-visible="csv.separatorVisible"
+	        result="csv.result"
+	        encoding="csv.encoding"
+	        encoding-visible="csv.encodingVisible"
+	        callback="chooseFile" style="margin-left: 20px; float: left"></ng-csv-import>
+	    </div> -->
+    <js-xls onread="read" onerror="error" style="margin-left: 10px; float: left;"></js-xls>
 </div>
 <div style="padding-left: 5px; padding-right: 5px; margin-top: 10px; float: left; width: 100%;">
 	<div class="horizontal-scroll">

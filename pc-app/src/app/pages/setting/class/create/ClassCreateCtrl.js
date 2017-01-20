@@ -36,6 +36,9 @@
     var modalListStudent;
     var modalListStudentFileCsv;
     var modalConfirmSave;
+    var listStudent = [];
+    var listParent = [];
+    $scope.listStudentForShow = [];
     $scope.csv = {
       content: null,
       header: true,
@@ -49,7 +52,55 @@
 
     $scope.read = function (workbook) {
       /* DO SOMETHING WITH workbook HERE */
-      console.log(workbook);
+      var data = workbook.Sheets.student;
+      listStudent = [];
+      listParent = [];
+      var groupData = _.groupBy(Object.keys(data), function(key){
+        return parseInt(key.substring(1, key.length));
+      });
+
+      $scope.openPopupListStudentFileCsv();
+      Object.keys(groupData).forEach(function(key){
+        if(key > 1){
+          var studentShow = {
+            name: data["B" + key].h || "",
+            last_name: data["A" + key].h || "",
+            home_town: data["C" + key].h || "",
+            home_address: data["D" + key].h || "",
+            birthday: data["E" + key].h || ""
+          };
+          
+          listStudent.push({
+            index: data["H" + key].v,
+            name: data["B" + key].h || false,
+            last_name: data["A" + key].h || false,
+            home_town: data["C" + key].h || false,
+            home_address: data["D" + key].h || false,
+            birthday: data["E" + key].h || false,
+            student: true
+          });
+          if(data["F" + key]){
+            listParent.push({
+              name: data["F" + key].h || false,
+              mobile: data["G" + key].v || false,
+              street: data["D" + key].h || false,
+              active: true,
+              customer: true,
+              index: data["H" + key].v,
+              email: false
+            });
+            studentShow.parent_name = data["F" + key].h;
+          } else{
+            studentShow.parent_name = ""; 
+          }
+          if(data["G" + key]){
+            studentShow.parent_mobile = data["G" + key].v;
+          } else{
+            studentShow.parent_mobile = "";
+          }
+          $scope.listStudentForShow.push(studentShow);
+        }
+      });
     }
 
     $scope.error = function (e) {
@@ -167,31 +218,6 @@
     };
 
     $scope.createListStudent = function(){
-      var listParent = [];
-      var listStudent = [];
-      $scope.csv.result.forEach(function(line){
-        if(line.parent_name && line.parent_name.length > 0){
-          listParent.push({
-            name: line.parent_name || false,
-            mobile: line.parent_mobile || false,
-            street: line.home_address || false,
-            active: true,
-            customer: true,
-            index: line.index,
-            email: false
-          });
-        }
-        listStudent.push({
-          index: line.index,
-          name: line.name || false,
-          last_name: line.last_name || false,
-          home_town: line.home_town || false,
-          home_address: line.home_address || false,
-          birthday: line.birthday.length > 0 ? moment(line.birthday, 'DD-MM-YYYY').format('YYYY-MM-DD'): false,
-          student: true/*,
-          parent_ids: [[6, false, info.parent_ids]]*/
-        });
-      });
       $Parent.createListParent({listParent: listParent}, function(resultParent){
         for(var i = 0; i< listParent.length; i++){
           listParent[i].id = resultParent[i];
@@ -206,6 +232,10 @@
           for(var i =0; i< listStudent.length; i++){
             listStudent[i].id = resultStudent[i];
           };
+          listStudent.forEach(function(student){
+            student.display_name = student.last_name + student.name;
+            student.birthdayShow = student.birthday;
+          })
           $scope.listStudent = $scope.listStudent.concat(listStudent);
           modalListStudentFileCsv.dismiss('cancel');
         }, function(error){$Error.callbackError(error);});
